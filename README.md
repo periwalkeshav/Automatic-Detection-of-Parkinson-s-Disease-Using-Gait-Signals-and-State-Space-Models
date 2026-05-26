@@ -1,7 +1,4 @@
-# Automatic-Detection-of-Parkinson-s-Disease-Using-Gait-Signals-and-State-Space-Models
-Automatic Detection of Parkinson’s Disease Using Gait Signals and State Space Models
-
-# Project Time Series: Gait PD Detection
+# Project Time Series: Automatic Detection of Parkinson’s Disease Using Gait Signals and State Space Models
 
 This folder contains the non-Mamba foundation for the project described in
 `../Meeting_1_TSI_Project_SS26.pptx` and the screenshot notes.
