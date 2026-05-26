@@ -1,0 +1,15 @@
+,missing_values,percent_missing,used_for_required_summary,handling
+ID,0,0.0,True,Complete required field; use as reported
+Study,0,0.0,False,Not required for this deliverable; retain NA and exclude from analysis
+Group,0,0.0,True,Complete required field; use as reported
+Subjnum,0,0.0,False,Not required for this deliverable; retain NA and exclude from analysis
+Gender,0,0.0,True,Complete required field; use as reported
+Age,0,0.0,True,Complete required field; use as reported
+Height (meters),3,1.8,False,Not required for this deliverable; retain NA and exclude from analysis
+Weight (kg),3,1.8,False,Not required for this deliverable; retain NA and exclude from analysis
+HoehnYahr,55,33.1,False,Not required for this deliverable; retain NA and exclude from analysis
+UPDRS,31,18.7,False,Not required for this deliverable; retain NA and exclude from analysis
+UPDRSM,31,18.7,False,Not required for this deliverable; retain NA and exclude from analysis
+TUAG,13,7.8,False,Not required for this deliverable; retain NA and exclude from analysis
+Speed_01 (m/sec),1,0.6,False,Not required for this deliverable; retain NA and exclude from analysis
+Speed_10,146,88.0,False,Not required for this deliverable; retain NA and exclude from analysis

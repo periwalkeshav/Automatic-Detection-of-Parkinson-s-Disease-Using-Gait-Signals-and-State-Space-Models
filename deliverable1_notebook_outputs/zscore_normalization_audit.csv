@@ -1,0 +1,7 @@
+scope,input_features,retained_nonconstant_features,max_abs_scaled_mean,max_abs_scaled_std_minus_one,preprocessing
+Right foot,360,320,1.0591527654923992e-15,4.440892098500626e-16,No endpoint removal
+Left foot,360,312,8.93729534823251e-16,6.661338147750939e-16,No endpoint removal
+Combined feet,720,632,1.0591527654923992e-15,6.661338147750939e-16,No endpoint removal
+Right foot,360,316,1.5976109324356003e-15,4.440892098500626e-16,Remove 5 s at each endpoint
+Left foot,360,312,1.2578826869003024e-15,5.551115123125783e-16,Remove 5 s at each endpoint
+Combined feet,720,628,1.5976109324356003e-15,5.551115123125783e-16,Remove 5 s at each endpoint

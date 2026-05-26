@@ -1,0 +1,3 @@
+preprocessing,subjects,mean_windows_per_subject,min_windows,max_windows,left_features,right_features,combined_features
+No endpoint removal,100,43.9,16,104,360,360,720
+Remove 5 s at each endpoint,100,39.9,12,100,360,360,720
