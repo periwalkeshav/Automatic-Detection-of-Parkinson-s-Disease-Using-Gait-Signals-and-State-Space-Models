@@ -1,0 +1,2204 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/j2t83itg",
+    "id": "j2t83itg",
+    "slide": 21,
+    "layoutId": "/ppt/slideLayouts/slideLayout6.xml",
+    "layoutName": "Textfolie | zweispaltig",
+    "masterLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "FAU - Grau",
+    "colors": {
+      "accent1": "#7F7F7F",
+      "accent2": "#204251",
+      "accent3": "#2F586E",
+      "accent4": "#8C9FB1",
+      "accent5": "#C2D0DC",
+      "accent6": "#C7C7C7",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#8C9FB1",
+      "lt2": "#FFFFFF",
+      "hlink": "#2F586E",
+      "folHlink": "#000000"
+    },
+    "fontScheme": {
+      "name": "FAU",
+      "majorFont": {
+        "latinTypeface": "Arial"
+      },
+      "minorFont": {
+        "latinTypeface": "Arial"
+      }
+    },
+    "typefaces": [
+      "Arial"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "/ppt/slideLayouts/slideLayout6.xml",
+      "name": "Textfolie | zweispaltig",
+      "parentLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+      "elements": [
+        {
+          "order": 1,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout6.xml/3",
+          "id": "3",
+          "name": "Datumsplatzhalter 2",
+          "bbox": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "order": 2,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout6.xml/4",
+          "id": "4",
+          "name": "Fußzeilenplatzhalter 3",
+          "bbox": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "order": 3,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout6.xml/5",
+          "id": "5",
+          "name": "Foliennummernplatzhalter 4",
+          "bbox": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "order": 4,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout6.xml/7",
+          "id": "7",
+          "name": "Textplatzhalter 6",
+          "bbox": [
+            54.42,
+            171.25,
+            574.25,
+            479.75
+          ]
+        },
+        {
+          "order": 5,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout6.xml/8",
+          "id": "8",
+          "name": "Textplatzhalter 6",
+          "bbox": [
+            651.58,
+            171.25,
+            574.25,
+            479.75
+          ]
+        },
+        {
+          "order": 6,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout6.xml/6",
+          "id": "6",
+          "name": "Titel 5",
+          "bbox": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "order": 7,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout6.xml/11",
+          "id": "11",
+          "name": "Textplatzhalter 9",
+          "bbox": [
+            54.42,
+            72.19,
+            718.57,
+            26.23
+          ],
+          "resolvedTextStyle": {
+            "wrap": "square",
+            "autoFit": "resizeShapeToFitText"
+          }
+        },
+        {
+          "order": 8,
+          "kind": "image",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout6.xml/12",
+          "id": "12",
+          "name": "Bildplatzhalter 6",
+          "bbox": [
+            829.41,
+            31.62,
+            113.39,
+            40.57
+          ],
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle",
+            "autoFit": "shrinkText",
+            "insets": {
+              "right": 0
+            }
+          }
+        },
+        {
+          "order": 9,
+          "kind": "image",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout6.xml/13",
+          "id": "13",
+          "name": "Grafik 12",
+          "bbox": [
+            980.77,
+            31.62,
+            115.72,
+            40.57
+          ],
+          "contentType": "image/png",
+          "asset": {
+            "assetId": "/ppt/media/image2.png",
+            "contentType": "image/png",
+            "byteLength": 28539
+          },
+          "fillImage": {
+            "assetId": "/ppt/media/image2.png",
+            "contentType": "image/png",
+            "byteLength": 28539
+          }
+        }
+      ]
+    },
+    {
+      "scope": "master",
+      "id": "/ppt/slideMasters/slideMaster1.xml",
+      "type": "master",
+      "elements": [
+        {
+          "order": 1,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/2",
+          "id": "2",
+          "name": "Titelplatzhalter 1",
+          "bbox": [
+            54.42,
+            31.62,
+            718.57,
+            34.9
+          ],
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "anchor": 1,
+            "vertical": 1,
+            "verticalAlignment": "top",
+            "wrap": "square",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 2,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/3",
+          "id": "3",
+          "name": "Textplatzhalter 2",
+          "bbox": [
+            54.42,
+            171.25,
+            1171.42,
+            479.75
+          ],
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "anchor": 1,
+            "vertical": 1,
+            "verticalAlignment": "top",
+            "autoFit": "shrinkText",
+            "insets": {
+              "top": 0,
+              "right": 37.8,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 3,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/4",
+          "id": "4",
+          "name": "Datumsplatzhalter 3",
+          "bbox": [
+            1093.69,
+            696.55,
+            89.2,
+            12.93
+          ],
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "anchor": 1,
+            "vertical": 1,
+            "verticalAlignment": "top",
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 4,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/5",
+          "id": "5",
+          "name": "Fußzeilenplatzhalter 4",
+          "bbox": [
+            54.42,
+            696.55,
+            574.25,
+            12.93
+          ],
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "anchor": 1,
+            "vertical": 1,
+            "verticalAlignment": "top",
+            "wrap": "square",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 5,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/6",
+          "id": "6",
+          "name": "Foliennummernplatzhalter 5",
+          "bbox": [
+            1205.47,
+            696.55,
+            20.36,
+            12.93
+          ],
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "anchor": 1,
+            "vertical": 1,
+            "verticalAlignment": "top",
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 6,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/7",
+          "id": "7",
+          "name": "Rechteck 6",
+          "bbox": [
+            54.43,
+            125.64,
+            1225.83,
+            7.56
+          ],
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#8C9FB1"
+        },
+        {
+          "order": 7,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/9",
+          "id": "9",
+          "name": "Rechteck 8",
+          "bbox": [
+            54.3,
+            686.46,
+            1225.7,
+            1.13
+          ],
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#8C9FB1"
+        },
+        {
+          "order": 8,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/10",
+          "id": "10",
+          "name": "Gerader Verbinder 9",
+          "bbox": [
+            -41,
+            31.18,
+            35,
+            0
+          ],
+          "rotation": 0,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 9,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/11",
+          "id": "11",
+          "name": "Textfeld 10",
+          "bbox": [
+            -37.13,
+            16.81,
+            27.26,
+            13.11
+          ],
+          "rotation": 0,
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 10,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/16",
+          "id": "16",
+          "name": "Gerader Verbinder 15",
+          "bbox": [
+            -41,
+            133.18,
+            35,
+            0
+          ],
+          "rotation": 0,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 11,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/17",
+          "id": "17",
+          "name": "Textfeld 16",
+          "bbox": [
+            -37.13,
+            118.81,
+            27.26,
+            13.11
+          ],
+          "rotation": 0,
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 12,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/19",
+          "id": "19",
+          "name": "Gerader Verbinder 18",
+          "bbox": [
+            -41,
+            171,
+            35,
+            0
+          ],
+          "rotation": 0,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 13,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/20",
+          "id": "20",
+          "name": "Textfeld 19",
+          "bbox": [
+            -37.13,
+            156.64,
+            27.26,
+            13.11
+          ],
+          "rotation": 0,
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 14,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/22",
+          "id": "22",
+          "name": "Gerader Verbinder 21",
+          "bbox": [
+            -41,
+            360,
+            35,
+            0
+          ],
+          "rotation": 0,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 15,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/23",
+          "id": "23",
+          "name": "Textfeld 22",
+          "bbox": [
+            -37.13,
+            345.64,
+            27.26,
+            13.11
+          ],
+          "rotation": 0,
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 16,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/25",
+          "id": "25",
+          "name": "Gerader Verbinder 24",
+          "bbox": [
+            -41,
+            651,
+            35,
+            0
+          ],
+          "rotation": 0,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 17,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/26",
+          "id": "26",
+          "name": "Textfeld 25",
+          "bbox": [
+            -37.13,
+            636.64,
+            27.26,
+            13.11
+          ],
+          "rotation": 0,
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 18,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/28",
+          "id": "28",
+          "name": "Gerader Verbinder 27",
+          "bbox": [
+            -41,
+            696.33,
+            35,
+            0
+          ],
+          "rotation": 0,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 19,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/29",
+          "id": "29",
+          "name": "Textfeld 28",
+          "bbox": [
+            -37.13,
+            681.97,
+            27.26,
+            13.11
+          ],
+          "rotation": 0,
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 20,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/31",
+          "id": "31",
+          "name": "Gerader Verbinder 30",
+          "bbox": [
+            29.57,
+            -17.04,
+            35,
+            0
+          ],
+          "rotation": 0,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 21,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/32",
+          "id": "32",
+          "name": "Textfeld 31",
+          "bbox": [
+            33.44,
+            -31.41,
+            27.26,
+            13.11
+          ],
+          "rotation": 0,
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 22,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/34",
+          "id": "34",
+          "name": "Gerader Verbinder 33",
+          "bbox": [
+            603.99,
+            -17.04,
+            35,
+            0
+          ],
+          "rotation": 0,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 23,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/35",
+          "id": "35",
+          "name": "Textfeld 34",
+          "bbox": [
+            607.85,
+            -31.41,
+            27.26,
+            13.11
+          ],
+          "rotation": 0,
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 24,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/37",
+          "id": "37",
+          "name": "Gerader Verbinder 36",
+          "bbox": [
+            633.83,
+            -24.22,
+            35,
+            0
+          ],
+          "rotation": 270,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 25,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/38",
+          "id": "38",
+          "name": "Textfeld 37",
+          "bbox": [
+            644.26,
+            -30.78,
+            27.26,
+            13.11
+          ],
+          "rotation": 270,
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 26,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/40",
+          "id": "40",
+          "name": "Gerader Verbinder 39",
+          "bbox": [
+            622.5,
+            -24.22,
+            35,
+            0
+          ],
+          "rotation": 270,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 27,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/42",
+          "id": "42",
+          "name": "Gerader Verbinder 41",
+          "bbox": [
+            1201.82,
+            -17.04,
+            35,
+            0
+          ],
+          "rotation": 0,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 28,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/43",
+          "id": "43",
+          "name": "Textfeld 42",
+          "bbox": [
+            1205.69,
+            -31.41,
+            27.26,
+            13.11
+          ],
+          "rotation": 0,
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 29,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/44",
+          "id": "44",
+          "name": "Freihandform: Form 43",
+          "bbox": [
+            1112.45,
+            31.43,
+            113.39,
+            43.29
+          ],
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#041E42",
+          "lineWidth": 1
+        }
+      ]
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/mhk3q5o7",
+      "id": "2",
+      "name": "Text Placeholder 1",
+      "bbox": [
+        54.42,
+        171.25,
+        574.25,
+        479.75
+      ],
+      "resolvedFontSize": 21.33,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "vertical": 1,
+        "fontSize": 21.33,
+        "typeface": "Arial",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "shrinkText",
+        "insets": {
+          "top": 0,
+          "right": 37.8,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      }
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/b2hwfyxo",
+      "id": "3",
+      "name": "Text Placeholder 2",
+      "bbox": [
+        651.58,
+        171.25,
+        574.25,
+        479.75
+      ],
+      "resolvedFontSize": 21.33,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "vertical": 1,
+        "fontSize": 21.33,
+        "typeface": "Arial",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "shrinkText",
+        "insets": {
+          "top": 0,
+          "right": 37.8,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      }
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/4byhgn29",
+      "id": "4",
+      "name": "Title 3",
+      "bbox": [
+        54.42,
+        31.62,
+        718.57,
+        34.9
+      ],
+      "resolvedFontSize": 32,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "vertical": 1,
+        "fontSize": 32,
+        "typeface": "Arial",
+        "color": "#041E42",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      }
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/twra5gbq",
+      "id": "5",
+      "name": "Text Placeholder 4",
+      "bbox": [
+        54.42,
+        72.19,
+        718.57,
+        26.23
+      ],
+      "resolvedFontSize": 21.33,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "vertical": 1,
+        "fontSize": 21.33,
+        "typeface": "Arial",
+        "color": "#041E42",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "insets": {
+          "top": 0,
+          "right": 37.8,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      }
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/m58z25kb",
+      "id": "6",
+      "name": "Picture Placeholder 5",
+      "bbox": [
+        829.41,
+        31.62,
+        113.39,
+        40.57
+      ],
+      "resolvedFontSize": 10.67,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 10.67,
+        "typeface": "Arial",
+        "color": "accent6",
+        "alignment": "center",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      }
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/bq1oryts",
+      "id": "7",
+      "name": "Rectangle 6",
+      "bbox": [
+        0,
+        0,
+        1279.68,
+        105.6
+      ],
+      "geometry": "rect",
+      "text": "  Key Findings & Next Steps",
+      "textPreview": "Key Findings & Next Steps",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Arial",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "wrap": "none",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "  Key Findings & Next Steps"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "  Key Findings & Next Steps",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "  Key Findings & Next Steps",
+              "fontSize": 29.33,
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#003366"
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/47y1kre1",
+      "id": "8",
+      "name": "Rectangle 7",
+      "bbox": [
+        28.8,
+        105.6,
+        240,
+        30.72
+      ],
+      "geometry": "rect",
+      "text": "06 · Discussion",
+      "textPreview": "06 · Discussion",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Arial",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "06 · Discussion"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "06 · Discussion",
+          "resolvedTextStyle": {
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "06 · Discussion",
+              "fontSize": 12,
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#003366"
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/tsvu9kni",
+      "id": "9",
+      "name": "TextBox 8",
+      "bbox": [
+        28.8,
+        144,
+        576,
+        38.4
+      ],
+      "geometry": "rect",
+      "text": "Observations from Deliverable 1",
+      "textPreview": "Observations from Deliverable 1",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Arial",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Observations from Deliverable 1"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Observations from Deliverable 1",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Observations from Deliverable 1",
+              "fontSize": 17.33,
+              "color": "#003366",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/90je9cvi",
+      "id": "10",
+      "name": "TextBox 9",
+      "bbox": [
+        28.8,
+        187.2,
+        576,
+        460.8
+      ],
+      "geometry": "rect",
+      "text": "Demographics:\n  • N=80 in Fold 1 (40 PD, 40 HC) — balanced\n  • Full dataset: 166 subjects (93 PD, 73 HC)\n  • H&Y severity: 19/14/7 (imbalanced → SMOTE)\n\nSignal analysis:\n  • PD subjects show higher CV in force signals\n  • Irregular peak spacing visible in raw traces\n  • Consistent with Yogev 2005 variability findings\n\nFeature extraction:\n  • TSFresh: ~750+ features per channel window\n  • Manual: 15 interpretable features per channel\n  • Combined feet gave richest feature set\n\nPCA / t-SNE:\n  • [Fill in after running: separation observed?]\n  • [Cohort confound visible in panel B?]\n  • [Combined feet better than single foot?]",
+      "textPreview": "Demographics: |   • N=80 in Fold 1 (40 PD, 40 HC) — balanced |   • Full dataset: 166 subjects (93 PD, 73 HC) |   • H&Y severity: 19/14/7 ...",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Arial",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 19,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Demographics:"
+          },
+          {
+            "index": 2,
+            "text": "  • N=80 in Fold 1 (40 PD, 40 HC) — balanced"
+          },
+          {
+            "index": 3,
+            "text": "  • Full dataset: 166 subjects (93 PD, 73 HC)"
+          },
+          {
+            "index": 4,
+            "text": "  • H&Y severity: 19/14/7 (imbalanced → SMOTE)"
+          },
+          {
+            "index": 5,
+            "text": ""
+          },
+          {
+            "index": 6,
+            "text": "Signal analysis:"
+          },
+          {
+            "index": 7,
+            "text": "  • PD subjects show higher CV in force signals"
+          },
+          {
+            "index": 8,
+            "text": "  • Irregular peak spacing visible in raw traces"
+          },
+          {
+            "index": 9,
+            "text": "  • Consistent with Yogev 2005 variability findings"
+          },
+          {
+            "index": 10,
+            "text": ""
+          },
+          {
+            "index": 11,
+            "text": "Feature extraction:"
+          },
+          {
+            "index": 12,
+            "text": "  • TSFresh: ~750+ features per channel window"
+          },
+          {
+            "index": 13,
+            "text": "  • Manual: 15 interpretable features per channel"
+          },
+          {
+            "index": 14,
+            "text": "  • Combined feet gave richest feature set"
+          },
+          {
+            "index": 15,
+            "text": ""
+          },
+          {
+            "index": 16,
+            "text": "PCA / t-SNE:"
+          },
+          {
+            "index": 17,
+            "text": "  • [Fill in after running: separation observed?]"
+          },
+          {
+            "index": 18,
+            "text": "  • [Cohort confound visible in panel B?]"
+          },
+          {
+            "index": 19,
+            "text": "  • [Combined feet better than single foot?]"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Demographics:",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Demographics:",
+              "fontSize": 14,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "  • N=80 in Fold 1 (40 PD, 40 HC) — balanced",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "  • N=80 in Fold 1 (40 PD, 40 HC) — balanced",
+              "fontSize": 14,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "  • Full dataset: 166 subjects (93 PD, 73 HC)",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "  • Full dataset: 166 subjects (93 PD, 73 HC)",
+              "fontSize": 14,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 4,
+          "text": "  • H&Y severity: 19/14/7 (imbalanced → SMOTE)",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "  • H&Y severity: 19/14/7 (imbalanced → SMOTE)",
+              "fontSize": 14,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 6,
+          "text": "Signal analysis:",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Signal analysis:",
+              "fontSize": 14,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 7,
+          "text": "  • PD subjects show higher CV in force signals",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "  • PD subjects show higher CV in force signals",
+              "fontSize": 14,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 8,
+          "text": "  • Irregular peak spacing visible in raw traces",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "  • Irregular peak spacing visible in raw traces",
+              "fontSize": 14,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 9,
+          "text": "  • Consistent with Yogev 2005 variability findings",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "  • Consistent with Yogev 2005 variability findings",
+              "fontSize": 14,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 11,
+          "text": "Feature extraction:",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Feature extraction:",
+              "fontSize": 14,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 12,
+          "text": "  • TSFresh: ~750+ features per channel window",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "  • TSFresh: ~750+ features per channel window",
+              "fontSize": 14,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 13,
+          "text": "  • Manual: 15 interpretable features per channel",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "  • Manual: 15 interpretable features per channel",
+              "fontSize": 14,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 14,
+          "text": "  • Combined feet gave richest feature set",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "  • Combined feet gave richest feature set",
+              "fontSize": 14,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 16,
+          "text": "PCA / t-SNE:",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "PCA / t-SNE:",
+              "fontSize": 14,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 17,
+          "text": "  • [Fill in after running: separation observed?]",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "  • [Fill in after running: separation observed?]",
+              "fontSize": 14,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 18,
+          "text": "  • [Cohort confound visible in panel B?]",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "  • [Cohort confound visible in panel B?]",
+              "fontSize": 14,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 19,
+          "text": "  • [Combined feet better than single foot?]",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "  • [Combined feet better than single foot?]",
+              "fontSize": 14,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/gfmlkjm1",
+      "id": "11",
+      "name": "TextBox 10",
+      "bbox": [
+        633.6,
+        144,
+        595.2,
+        38.4
+      ],
+      "geometry": "rect",
+      "text": "Next Steps (Deliverable 2+)",
+      "textPreview": "Next Steps (Deliverable 2+)",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Arial",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Next Steps (Deliverable 2+)"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Next Steps (Deliverable 2+)",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Next Steps (Deliverable 2+)",
+              "fontSize": 17.33,
+              "color": "#003366",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/rytsvu9k",
+      "id": "12",
+      "name": "TextBox 11",
+      "bbox": [
+        633.6,
+        187.2,
+        595.2,
+        460.8
+      ],
+      "geometry": "rect",
+      "text": "Baseline Models:\n  • TSFresh features + Random Forest (5-fold CV)\n  • TSFresh features + SVM linear & RBF (5-fold CV)\n  • Evaluation: Accuracy, F1, AUC, precision, recall\n\nMamba / SSM Models:\n  • Input: raw VGRF time series (multivariate)\n  • Window: 5s / 2.5s step (matched to TSFresh)\n  • Architecture: bidirectional Mamba encoder\n    → binary head (PD/HC)\n    → severity head (H&Y 2/2.5/3)\n  • Inspired by HARMamba (Li et al. 2024)\n    and MedMamba (He et al. 2026)\n\nEvaluation Strategy:\n  • SMOTE applied on training folds only\n  • Cross-cohort testing (train Ga+Si, test Ju)\n  • Target: beat Naimi et al. 88% severity accuracy",
+      "textPreview": "Baseline Models: |   • TSFresh features + Random Forest (5-fold CV) |   • TSFresh features + SVM linear & RBF (5-fold CV) |   • Evaluatio...",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Arial",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 18,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Baseline Models:"
+          },
+          {
+            "index": 2,
+            "text": "  • TSFresh features + Random Forest (5-fold CV)"
+          },
+          {
+            "index": 3,
+            "text": "  • TSFresh features + SVM linear & RBF (5-fold CV)"
+          },
+          {
+            "index": 4,
+            "text": "  • Evaluation: Accuracy, F1, AUC, precision, recall"
+          },
+          {
+            "index": 5,
+            "text": ""
+          },
+          {
+            "index": 6,
+            "text": "Mamba / SSM Models:"
+          },
+          {
+            "index": 7,
+            "text": "  • Input: raw VGRF time series (multivariate)"
+          },
+          {
+            "index": 8,
+            "text": "  • Window: 5s / 2.5s step (matched to TSFresh)"
+          },
+          {
+            "index": 9,
+            "text": "  • Architecture: bidirectional Mamba encoder"
+          },
+          {
+            "index": 10,
+            "text": "    → binary head (PD/HC)"
+          },
+          {
+            "index": 11,
+            "text": "    → severity head (H&Y 2/2.5/3)"
+          },
+          {
+            "index": 12,
+            "text": "  • Inspired by HARMamba (Li et al. 2024)"
+          },
+          {
+            "index": 13,
+            "text": "    and MedMamba (He et al. 2026)"
+          },
+          {
+            "index": 14,
+            "text": ""
+          },
+          {
+            "index": 15,
+            "text": "Evaluation Strategy:"
+          },
+          {
+            "index": 16,
+            "text": "  • SMOTE applied on training folds only"
+          },
+          {
+            "index": 17,
+            "text": "  • Cross-cohort testing (train Ga+Si, test Ju)"
+          },
+          {
+            "index": 18,
+            "text": "  • Target: beat Naimi et al. 88% severity accuracy"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Baseline Models:",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Baseline Models:",
+              "fontSize": 14,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "  • TSFresh features + Random Forest (5-fold CV)",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "  • TSFresh features + Random Forest (5-fold CV)",
+              "fontSize": 14,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "  • TSFresh features + SVM linear & RBF (5-fold CV)",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "  • TSFresh features + SVM linear & RBF (5-fold CV)",
+              "fontSize": 14,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 4,
+          "text": "  • Evaluation: Accuracy, F1, AUC, precision, recall",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "  • Evaluation: Accuracy, F1, AUC, precision, recall",
+              "fontSize": 14,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 6,
+          "text": "Mamba / SSM Models:",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Mamba / SSM Models:",
+              "fontSize": 14,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 7,
+          "text": "  • Input: raw VGRF time series (multivariate)",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "  • Input: raw VGRF time series (multivariate)",
+              "fontSize": 14,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 8,
+          "text": "  • Window: 5s / 2.5s step (matched to TSFresh)",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "  • Window: 5s / 2.5s step (matched to TSFresh)",
+              "fontSize": 14,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 9,
+          "text": "  • Architecture: bidirectional Mamba encoder",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "  • Architecture: bidirectional Mamba encoder",
+              "fontSize": 14,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 10,
+          "text": "    → binary head (PD/HC)",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "    → binary head (PD/HC)",
+              "fontSize": 14,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 11,
+          "text": "    → severity head (H&Y 2/2.5/3)",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "    → severity head (H&Y 2/2.5/3)",
+              "fontSize": 14,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 12,
+          "text": "  • Inspired by HARMamba (Li et al. 2024)",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "  • Inspired by HARMamba (Li et al. 2024)",
+              "fontSize": 14,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 13,
+          "text": "    and MedMamba (He et al. 2026)",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "    and MedMamba (He et al. 2026)",
+              "fontSize": 14,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 15,
+          "text": "Evaluation Strategy:",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Evaluation Strategy:",
+              "fontSize": 14,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 16,
+          "text": "  • SMOTE applied on training folds only",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "  • SMOTE applied on training folds only",
+              "fontSize": 14,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 17,
+          "text": "  • Cross-cohort testing (train Ga+Si, test Ju)",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "  • Cross-cohort testing (train Ga+Si, test Ju)",
+              "fontSize": 14,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 18,
+          "text": "  • Target: beat Naimi et al. 88% severity accuracy",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "  • Target: beat Naimi et al. 88% severity accuracy",
+              "fontSize": 14,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/yd0z6103",
+      "id": "13",
+      "name": "Rectangle 12",
+      "bbox": [
+        0,
+        686.4,
+        1279.68,
+        33.6
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Arial",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#DDE3EA"
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9s36hcrm",
+      "id": "14",
+      "name": "TextBox 13",
+      "bbox": [
+        14.4,
+        688.32,
+        960,
+        26.88
+      ],
+      "geometry": "rect",
+      "text": "Deliverable 1 — PD Gait Analysis  |  FAU Erlangen-Nürnberg",
+      "textPreview": "Deliverable 1 — PD Gait Analysis  |  FAU Erlangen-Nürnberg",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Arial",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Deliverable 1 — PD Gait Analysis  |  FAU Erlangen-Nürnberg"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Deliverable 1 — PD Gait Analysis  |  FAU Erlangen-Nürnberg",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Deliverable 1 — PD Gait Analysis  |  FAU Erlangen-Nürnberg",
+              "fontSize": 10.67,
+              "color": "#444444"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/g7adsji5",
+      "id": "15",
+      "name": "TextBox 14",
+      "bbox": [
+        1200,
+        688.32,
+        67.2,
+        26.88
+      ],
+      "geometry": "rect",
+      "text": "20/18",
+      "textPreview": "20/18",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Arial",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "20/18"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "20/18",
+          "resolvedTextStyle": {
+            "alignment": "right"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "20/18",
+              "fontSize": 10.67,
+              "color": "#444444"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    }
+  ],
+  "composeRuns": []
+}

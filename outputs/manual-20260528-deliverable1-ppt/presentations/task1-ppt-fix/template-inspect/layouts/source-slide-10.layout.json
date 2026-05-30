@@ -1,0 +1,2223 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/29gr2p8n",
+    "id": "29gr2p8n",
+    "slide": 11,
+    "layoutId": "/ppt/slideLayouts/slideLayout6.xml",
+    "layoutName": "Textfolie | zweispaltig",
+    "masterLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "FAU - Grau",
+    "colors": {
+      "accent1": "#7F7F7F",
+      "accent2": "#204251",
+      "accent3": "#2F586E",
+      "accent4": "#8C9FB1",
+      "accent5": "#C2D0DC",
+      "accent6": "#C7C7C7",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#8C9FB1",
+      "lt2": "#FFFFFF",
+      "hlink": "#2F586E",
+      "folHlink": "#000000"
+    },
+    "fontScheme": {
+      "name": "FAU",
+      "majorFont": {
+        "latinTypeface": "Arial"
+      },
+      "minorFont": {
+        "latinTypeface": "Arial"
+      }
+    },
+    "typefaces": [
+      "Arial"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "/ppt/slideLayouts/slideLayout6.xml",
+      "name": "Textfolie | zweispaltig",
+      "parentLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+      "elements": [
+        {
+          "order": 1,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout6.xml/3",
+          "id": "3",
+          "name": "Datumsplatzhalter 2",
+          "bbox": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "order": 2,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout6.xml/4",
+          "id": "4",
+          "name": "Fußzeilenplatzhalter 3",
+          "bbox": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "order": 3,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout6.xml/5",
+          "id": "5",
+          "name": "Foliennummernplatzhalter 4",
+          "bbox": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "order": 4,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout6.xml/7",
+          "id": "7",
+          "name": "Textplatzhalter 6",
+          "bbox": [
+            54.42,
+            171.25,
+            574.25,
+            479.75
+          ]
+        },
+        {
+          "order": 5,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout6.xml/8",
+          "id": "8",
+          "name": "Textplatzhalter 6",
+          "bbox": [
+            651.58,
+            171.25,
+            574.25,
+            479.75
+          ]
+        },
+        {
+          "order": 6,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout6.xml/6",
+          "id": "6",
+          "name": "Titel 5",
+          "bbox": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "order": 7,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout6.xml/11",
+          "id": "11",
+          "name": "Textplatzhalter 9",
+          "bbox": [
+            54.42,
+            72.19,
+            718.57,
+            26.23
+          ],
+          "resolvedTextStyle": {
+            "wrap": "square",
+            "autoFit": "resizeShapeToFitText"
+          }
+        },
+        {
+          "order": 8,
+          "kind": "image",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout6.xml/12",
+          "id": "12",
+          "name": "Bildplatzhalter 6",
+          "bbox": [
+            829.41,
+            31.62,
+            113.39,
+            40.57
+          ],
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle",
+            "autoFit": "shrinkText",
+            "insets": {
+              "right": 0
+            }
+          }
+        },
+        {
+          "order": 9,
+          "kind": "image",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout6.xml/13",
+          "id": "13",
+          "name": "Grafik 12",
+          "bbox": [
+            980.77,
+            31.62,
+            115.72,
+            40.57
+          ],
+          "contentType": "image/png",
+          "asset": {
+            "assetId": "/ppt/media/image2.png",
+            "contentType": "image/png",
+            "byteLength": 28539
+          },
+          "fillImage": {
+            "assetId": "/ppt/media/image2.png",
+            "contentType": "image/png",
+            "byteLength": 28539
+          }
+        }
+      ]
+    },
+    {
+      "scope": "master",
+      "id": "/ppt/slideMasters/slideMaster1.xml",
+      "type": "master",
+      "elements": [
+        {
+          "order": 1,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/2",
+          "id": "2",
+          "name": "Titelplatzhalter 1",
+          "bbox": [
+            54.42,
+            31.62,
+            718.57,
+            34.9
+          ],
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "anchor": 1,
+            "vertical": 1,
+            "verticalAlignment": "top",
+            "wrap": "square",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 2,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/3",
+          "id": "3",
+          "name": "Textplatzhalter 2",
+          "bbox": [
+            54.42,
+            171.25,
+            1171.42,
+            479.75
+          ],
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "anchor": 1,
+            "vertical": 1,
+            "verticalAlignment": "top",
+            "autoFit": "shrinkText",
+            "insets": {
+              "top": 0,
+              "right": 37.8,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 3,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/4",
+          "id": "4",
+          "name": "Datumsplatzhalter 3",
+          "bbox": [
+            1093.69,
+            696.55,
+            89.2,
+            12.93
+          ],
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "anchor": 1,
+            "vertical": 1,
+            "verticalAlignment": "top",
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 4,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/5",
+          "id": "5",
+          "name": "Fußzeilenplatzhalter 4",
+          "bbox": [
+            54.42,
+            696.55,
+            574.25,
+            12.93
+          ],
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "anchor": 1,
+            "vertical": 1,
+            "verticalAlignment": "top",
+            "wrap": "square",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 5,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/6",
+          "id": "6",
+          "name": "Foliennummernplatzhalter 5",
+          "bbox": [
+            1205.47,
+            696.55,
+            20.36,
+            12.93
+          ],
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "anchor": 1,
+            "vertical": 1,
+            "verticalAlignment": "top",
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 6,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/7",
+          "id": "7",
+          "name": "Rechteck 6",
+          "bbox": [
+            54.43,
+            125.64,
+            1225.83,
+            7.56
+          ],
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#8C9FB1"
+        },
+        {
+          "order": 7,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/9",
+          "id": "9",
+          "name": "Rechteck 8",
+          "bbox": [
+            54.3,
+            686.46,
+            1225.7,
+            1.13
+          ],
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#8C9FB1"
+        },
+        {
+          "order": 8,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/10",
+          "id": "10",
+          "name": "Gerader Verbinder 9",
+          "bbox": [
+            -41,
+            31.18,
+            35,
+            0
+          ],
+          "rotation": 0,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 9,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/11",
+          "id": "11",
+          "name": "Textfeld 10",
+          "bbox": [
+            -37.13,
+            16.81,
+            27.26,
+            13.11
+          ],
+          "rotation": 0,
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 10,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/16",
+          "id": "16",
+          "name": "Gerader Verbinder 15",
+          "bbox": [
+            -41,
+            133.18,
+            35,
+            0
+          ],
+          "rotation": 0,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 11,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/17",
+          "id": "17",
+          "name": "Textfeld 16",
+          "bbox": [
+            -37.13,
+            118.81,
+            27.26,
+            13.11
+          ],
+          "rotation": 0,
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 12,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/19",
+          "id": "19",
+          "name": "Gerader Verbinder 18",
+          "bbox": [
+            -41,
+            171,
+            35,
+            0
+          ],
+          "rotation": 0,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 13,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/20",
+          "id": "20",
+          "name": "Textfeld 19",
+          "bbox": [
+            -37.13,
+            156.64,
+            27.26,
+            13.11
+          ],
+          "rotation": 0,
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 14,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/22",
+          "id": "22",
+          "name": "Gerader Verbinder 21",
+          "bbox": [
+            -41,
+            360,
+            35,
+            0
+          ],
+          "rotation": 0,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 15,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/23",
+          "id": "23",
+          "name": "Textfeld 22",
+          "bbox": [
+            -37.13,
+            345.64,
+            27.26,
+            13.11
+          ],
+          "rotation": 0,
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 16,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/25",
+          "id": "25",
+          "name": "Gerader Verbinder 24",
+          "bbox": [
+            -41,
+            651,
+            35,
+            0
+          ],
+          "rotation": 0,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 17,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/26",
+          "id": "26",
+          "name": "Textfeld 25",
+          "bbox": [
+            -37.13,
+            636.64,
+            27.26,
+            13.11
+          ],
+          "rotation": 0,
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 18,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/28",
+          "id": "28",
+          "name": "Gerader Verbinder 27",
+          "bbox": [
+            -41,
+            696.33,
+            35,
+            0
+          ],
+          "rotation": 0,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 19,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/29",
+          "id": "29",
+          "name": "Textfeld 28",
+          "bbox": [
+            -37.13,
+            681.97,
+            27.26,
+            13.11
+          ],
+          "rotation": 0,
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 20,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/31",
+          "id": "31",
+          "name": "Gerader Verbinder 30",
+          "bbox": [
+            29.57,
+            -17.04,
+            35,
+            0
+          ],
+          "rotation": 0,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 21,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/32",
+          "id": "32",
+          "name": "Textfeld 31",
+          "bbox": [
+            33.44,
+            -31.41,
+            27.26,
+            13.11
+          ],
+          "rotation": 0,
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 22,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/34",
+          "id": "34",
+          "name": "Gerader Verbinder 33",
+          "bbox": [
+            603.99,
+            -17.04,
+            35,
+            0
+          ],
+          "rotation": 0,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 23,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/35",
+          "id": "35",
+          "name": "Textfeld 34",
+          "bbox": [
+            607.85,
+            -31.41,
+            27.26,
+            13.11
+          ],
+          "rotation": 0,
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 24,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/37",
+          "id": "37",
+          "name": "Gerader Verbinder 36",
+          "bbox": [
+            633.83,
+            -24.22,
+            35,
+            0
+          ],
+          "rotation": 270,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 25,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/38",
+          "id": "38",
+          "name": "Textfeld 37",
+          "bbox": [
+            644.26,
+            -30.78,
+            27.26,
+            13.11
+          ],
+          "rotation": 270,
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 26,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/40",
+          "id": "40",
+          "name": "Gerader Verbinder 39",
+          "bbox": [
+            622.5,
+            -24.22,
+            35,
+            0
+          ],
+          "rotation": 270,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 27,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/42",
+          "id": "42",
+          "name": "Gerader Verbinder 41",
+          "bbox": [
+            1201.82,
+            -17.04,
+            35,
+            0
+          ],
+          "rotation": 0,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 28,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/43",
+          "id": "43",
+          "name": "Textfeld 42",
+          "bbox": [
+            1205.69,
+            -31.41,
+            27.26,
+            13.11
+          ],
+          "rotation": 0,
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 29,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/44",
+          "id": "44",
+          "name": "Freihandform: Form 43",
+          "bbox": [
+            1112.45,
+            31.43,
+            113.39,
+            43.29
+          ],
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#041E42",
+          "lineWidth": 1
+        }
+      ]
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9gr2p8nq",
+      "id": "2",
+      "name": "Text Placeholder 1",
+      "bbox": [
+        54.42,
+        171.25,
+        574.25,
+        479.75
+      ],
+      "resolvedFontSize": 21.33,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "vertical": 1,
+        "fontSize": 21.33,
+        "typeface": "Arial",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "shrinkText",
+        "insets": {
+          "top": 0,
+          "right": 37.8,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      }
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/gvy90je9",
+      "id": "3",
+      "name": "Text Placeholder 2",
+      "bbox": [
+        651.58,
+        171.25,
+        574.25,
+        479.75
+      ],
+      "resolvedFontSize": 21.33,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "vertical": 1,
+        "fontSize": 21.33,
+        "typeface": "Arial",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "shrinkText",
+        "insets": {
+          "top": 0,
+          "right": 37.8,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      }
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/r2p8nqxs",
+      "id": "4",
+      "name": "Title 3",
+      "bbox": [
+        54.42,
+        31.62,
+        718.57,
+        34.9
+      ],
+      "resolvedFontSize": 32,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "vertical": 1,
+        "fontSize": 32,
+        "typeface": "Arial",
+        "color": "#041E42",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      }
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2hwfyxob",
+      "id": "5",
+      "name": "Text Placeholder 4",
+      "bbox": [
+        54.42,
+        72.19,
+        718.57,
+        26.23
+      ],
+      "resolvedFontSize": 21.33,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "vertical": 1,
+        "fontSize": 21.33,
+        "typeface": "Arial",
+        "color": "#041E42",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "wrap": "square",
+        "autoFit": "shrinkText",
+        "insets": {
+          "top": 0,
+          "right": 37.8,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      }
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/94fu18jq",
+      "id": "6",
+      "name": "Picture Placeholder 5",
+      "bbox": [
+        829.41,
+        31.62,
+        113.39,
+        40.57
+      ],
+      "resolvedFontSize": 10.67,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 10.67,
+        "typeface": "Arial",
+        "color": "accent6",
+        "alignment": "center",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      }
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/kjm1cfa9",
+      "id": "7",
+      "name": "Rectangle 6",
+      "bbox": [
+        0,
+        0,
+        1279.68,
+        105.6
+      ],
+      "geometry": "rect",
+      "text": "  Feature Extraction Pipeline",
+      "textPreview": "Feature Extraction Pipeline",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Arial",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "wrap": "none",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "  Feature Extraction Pipeline"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "  Feature Extraction Pipeline",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "  Feature Extraction Pipeline",
+              "fontSize": 29.33,
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#003366"
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/rqd4vmtw",
+      "id": "8",
+      "name": "TextBox 7",
+      "bbox": [
+        14.4,
+        100.8,
+        1152,
+        33.6
+      ],
+      "geometry": "rect",
+      "text": "Windowed extraction → per-subject statistics → z-score normalisation",
+      "textPreview": "Windowed extraction → per-subject statistics → z-score normalisation",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Arial",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Windowed extraction → per-subject statistics → z-score normalisation"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Windowed extraction → per-subject statistics → z-score normalisation",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Windowed extraction → per-subject statistics → z-score normalisation",
+              "fontSize": 14.67,
+              "color": "#555555",
+              "italic": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/25kb6xkf",
+      "id": "9",
+      "name": "Rectangle 8",
+      "bbox": [
+        28.8,
+        105.6,
+        240,
+        30.72
+      ],
+      "geometry": "rect",
+      "text": "03 · Feature Extraction",
+      "textPreview": "03 · Feature Extraction",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Arial",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "03 · Feature Extraction"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "03 · Feature Extraction",
+          "resolvedTextStyle": {
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "03 · Feature Extraction",
+              "fontSize": 12,
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#003366"
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/4fu18jqh",
+      "id": "10",
+      "name": "TextBox 9",
+      "bbox": [
+        28.8,
+        144,
+        576,
+        38.4
+      ],
+      "geometry": "rect",
+      "text": "TSFresh (Primary Approach)",
+      "textPreview": "TSFresh (Primary Approach)",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Arial",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "TSFresh (Primary Approach)"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "TSFresh (Primary Approach)",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "TSFresh (Primary Approach)",
+              "fontSize": 17.33,
+              "color": "#003366",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/x0nuxc3y",
+      "id": "11",
+      "name": "TextBox 10",
+      "bbox": [
+        28.8,
+        187.2,
+        576,
+        432
+      ],
+      "geometry": "rect",
+      "text": "• Library: tsfresh (EfficientFCParameters)\n• ~750+ features per channel per window\n• Window: 5 seconds (500 samples)\n• Step: 2.5 seconds (50% overlap)\n• Channels: 9 (L1–L8 + TotalLeft) per foot\n\nPer-subject aggregation:\n  → Mean across windows\n  → Std across windows\n  → Skewness across windows\n  → Kurtosis across windows\n\nFinal matrix: 80 subjects × ~3,000 features\nApplied: z-score normalisation (StandardScaler)",
+      "textPreview": "• Library: tsfresh (EfficientFCParameters) | • ~750+ features per channel per window | • Window: 5 seconds (500 samples) | • Step: 2.5 se...",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Arial",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 14,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• Library: tsfresh (EfficientFCParameters)"
+          },
+          {
+            "index": 2,
+            "text": "• ~750+ features per channel per window"
+          },
+          {
+            "index": 3,
+            "text": "• Window: 5 seconds (500 samples)"
+          },
+          {
+            "index": 4,
+            "text": "• Step: 2.5 seconds (50% overlap)"
+          },
+          {
+            "index": 5,
+            "text": "• Channels: 9 (L1–L8 + TotalLeft) per foot"
+          },
+          {
+            "index": 6,
+            "text": ""
+          },
+          {
+            "index": 7,
+            "text": "Per-subject aggregation:"
+          },
+          {
+            "index": 8,
+            "text": "  → Mean across windows"
+          },
+          {
+            "index": 9,
+            "text": "  → Std across windows"
+          },
+          {
+            "index": 10,
+            "text": "  → Skewness across windows"
+          },
+          {
+            "index": 11,
+            "text": "  → Kurtosis across windows"
+          },
+          {
+            "index": 12,
+            "text": ""
+          },
+          {
+            "index": 13,
+            "text": "Final matrix: 80 subjects × ~3,000 features"
+          },
+          {
+            "index": 14,
+            "text": "Applied: z-score normalisation (StandardScaler)"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• Library: tsfresh (EfficientFCParameters)",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Library: tsfresh (EfficientFCParameters)",
+              "fontSize": 14.67,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "• ~750+ features per channel per window",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• ~750+ features per channel per window",
+              "fontSize": 14.67,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "• Window: 5 seconds (500 samples)",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Window: 5 seconds (500 samples)",
+              "fontSize": 14.67,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 4,
+          "text": "• Step: 2.5 seconds (50% overlap)",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Step: 2.5 seconds (50% overlap)",
+              "fontSize": 14.67,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 5,
+          "text": "• Channels: 9 (L1–L8 + TotalLeft) per foot",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Channels: 9 (L1–L8 + TotalLeft) per foot",
+              "fontSize": 14.67,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 7,
+          "text": "Per-subject aggregation:",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Per-subject aggregation:",
+              "fontSize": 14.67,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 8,
+          "text": "  → Mean across windows",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "  → Mean across windows",
+              "fontSize": 14.67,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 9,
+          "text": "  → Std across windows",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "  → Std across windows",
+              "fontSize": 14.67,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 10,
+          "text": "  → Skewness across windows",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "  → Skewness across windows",
+              "fontSize": 14.67,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 11,
+          "text": "  → Kurtosis across windows",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "  → Kurtosis across windows",
+              "fontSize": 14.67,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 13,
+          "text": "Final matrix: 80 subjects × ~3,000 features",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Final matrix: 80 subjects × ~3,000 features",
+              "fontSize": 14.67,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 14,
+          "text": "Applied: z-score normalisation (StandardScaler)",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Applied: z-score normalisation (StandardScaler)",
+              "fontSize": 14.67,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/m94fu18j",
+      "id": "12",
+      "name": "TextBox 11",
+      "bbox": [
+        633.6,
+        144,
+        576,
+        38.4
+      ],
+      "geometry": "rect",
+      "text": "Manual Features (Alternative Approach)",
+      "textPreview": "Manual Features (Alternative Approach)",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Arial",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Manual Features (Alternative Approach)"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Manual Features (Alternative Approach)",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Manual Features (Alternative Approach)",
+              "fontSize": 17.33,
+              "color": "#003366",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/fu18jqh0",
+      "id": "13",
+      "name": "TextBox 12",
+      "bbox": [
+        633.6,
+        187.2,
+        576,
+        432
+      ],
+      "geometry": "rect",
+      "text": "15 features per channel per window:\n  · Mean, Std, Min, Max\n  · Skewness, Kurtosis\n  · Q25, Q75 (interquartile range)\n  · Mean |Δ|, Std Δ  (first diff)\n  · Range, CV (coefficient of variation)\n  · Signal energy (mean x²)\n  · Dominant frequency (FFT)\n  · Low-frequency energy\n\nAdvantages over TSFresh:\n  → Faster (seconds vs. hours)\n  → Interpretable (domain knowledge)\n  → Less prone to overfitting\n\nFinal matrix: 80 subjects × 60–120 features\nApplied: z-score normalisation (StandardScaler)",
+      "textPreview": "15 features per channel per window: |   · Mean, Std, Min, Max |   · Skewness, Kurtosis |   · Q25, Q75 (interquartile range) |   · Mean |Δ...",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Arial",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 17,
+        "lines": [
+          {
+            "index": 1,
+            "text": "15 features per channel per window:"
+          },
+          {
+            "index": 2,
+            "text": "  · Mean, Std, Min, Max"
+          },
+          {
+            "index": 3,
+            "text": "  · Skewness, Kurtosis"
+          },
+          {
+            "index": 4,
+            "text": "  · Q25, Q75 (interquartile range)"
+          },
+          {
+            "index": 5,
+            "text": "  · Mean |Δ|, Std Δ  (first diff)"
+          },
+          {
+            "index": 6,
+            "text": "  · Range, CV (coefficient of variation)"
+          },
+          {
+            "index": 7,
+            "text": "  · Signal energy (mean x²)"
+          },
+          {
+            "index": 8,
+            "text": "  · Dominant frequency (FFT)"
+          },
+          {
+            "index": 9,
+            "text": "  · Low-frequency energy"
+          },
+          {
+            "index": 10,
+            "text": ""
+          },
+          {
+            "index": 11,
+            "text": "Advantages over TSFresh:"
+          },
+          {
+            "index": 12,
+            "text": "  → Faster (seconds vs. hours)"
+          },
+          {
+            "index": 13,
+            "text": "  → Interpretable (domain knowledge)"
+          },
+          {
+            "index": 14,
+            "text": "  → Less prone to overfitting"
+          },
+          {
+            "index": 15,
+            "text": ""
+          },
+          {
+            "index": 16,
+            "text": "Final matrix: 80 subjects × 60–120 features"
+          },
+          {
+            "index": 17,
+            "text": "Applied: z-score normalisation (StandardScaler)"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "15 features per channel per window:",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "15 features per channel per window:",
+              "fontSize": 14.67,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "  · Mean, Std, Min, Max",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "  · Mean, Std, Min, Max",
+              "fontSize": 14.67,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "  · Skewness, Kurtosis",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "  · Skewness, Kurtosis",
+              "fontSize": 14.67,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 4,
+          "text": "  · Q25, Q75 (interquartile range)",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "  · Q25, Q75 (interquartile range)",
+              "fontSize": 14.67,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 5,
+          "text": "  · Mean |Δ|, Std Δ  (first diff)",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "  · Mean |Δ|, Std Δ  (first diff)",
+              "fontSize": 14.67,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 6,
+          "text": "  · Range, CV (coefficient of variation)",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "  · Range, CV (coefficient of variation)",
+              "fontSize": 14.67,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 7,
+          "text": "  · Signal energy (mean x²)",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "  · Signal energy (mean x²)",
+              "fontSize": 14.67,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 8,
+          "text": "  · Dominant frequency (FFT)",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "  · Dominant frequency (FFT)",
+              "fontSize": 14.67,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 9,
+          "text": "  · Low-frequency energy",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "  · Low-frequency energy",
+              "fontSize": 14.67,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 11,
+          "text": "Advantages over TSFresh:",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Advantages over TSFresh:",
+              "fontSize": 14.67,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 12,
+          "text": "  → Faster (seconds vs. hours)",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "  → Faster (seconds vs. hours)",
+              "fontSize": 14.67,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 13,
+          "text": "  → Interpretable (domain knowledge)",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "  → Interpretable (domain knowledge)",
+              "fontSize": 14.67,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 14,
+          "text": "  → Less prone to overfitting",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "  → Less prone to overfitting",
+              "fontSize": 14.67,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 16,
+          "text": "Final matrix: 80 subjects × 60–120 features",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Final matrix: 80 subjects × 60–120 features",
+              "fontSize": 14.67,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 17,
+          "text": "Applied: z-score normalisation (StandardScaler)",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Applied: z-score normalisation (StandardScaler)",
+              "fontSize": 14.67,
+              "color": "#1A1A1A"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/83itgfml",
+      "id": "14",
+      "name": "Rectangle 13",
+      "bbox": [
+        28.8,
+        633.6,
+        1219.2,
+        40.32
+      ],
+      "geometry": "rect",
+      "text": "  Three feature sets computed independently: (1) Left foot only  ·  (2) Right foot only  ·  (3) Combined (concatenation)",
+      "textPreview": "Three feature sets computed independently: (1) Left foot only  ·  (2) Right foot only  ·  (3) Combined (concatenation)",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Arial",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "  Three feature sets computed independently: (1) Left foot only  ·  (2) Right foot only  ·  (3) Combined (concatenation)"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "  Three feature sets computed independently: (1) Left foot only  ·  (2) Right foot only  ·  (3) Combined (concatenation)",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "  Three feature sets computed independently: (1) Left foot only  ·  (2) Right foot only  ·  (3) Combined (concatenation)",
+              "fontSize": 14.67,
+              "color": "#003366",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#E8F0FE",
+      "lineColor": "#316A9B",
+      "lineWidth": 1.33
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/xobm58z2",
+      "id": "15",
+      "name": "Rectangle 14",
+      "bbox": [
+        0,
+        686.4,
+        1279.68,
+        33.6
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "Arial",
+        "color": "lt1",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      },
+      "fillColor": "#DDE3EA"
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/qxs72x4n",
+      "id": "16",
+      "name": "TextBox 15",
+      "bbox": [
+        14.4,
+        688.32,
+        960,
+        26.88
+      ],
+      "geometry": "rect",
+      "text": "Deliverable 1 — PD Gait Analysis  |  FAU Erlangen-Nürnberg",
+      "textPreview": "Deliverable 1 — PD Gait Analysis  |  FAU Erlangen-Nürnberg",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Arial",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Deliverable 1 — PD Gait Analysis  |  FAU Erlangen-Nürnberg"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Deliverable 1 — PD Gait Analysis  |  FAU Erlangen-Nürnberg",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Deliverable 1 — PD Gait Analysis  |  FAU Erlangen-Nürnberg",
+              "fontSize": 10.67,
+              "color": "#444444"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/fil0rqd4",
+      "id": "17",
+      "name": "TextBox 16",
+      "bbox": [
+        1200,
+        688.32,
+        67.2,
+        26.88
+      ],
+      "geometry": "rect",
+      "text": "10/18",
+      "textPreview": "10/18",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Arial",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "10/18"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "10/18",
+          "resolvedTextStyle": {
+            "alignment": "right"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "10/18",
+              "fontSize": 10.67,
+              "color": "#444444"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    }
+  ],
+  "composeRuns": []
+}

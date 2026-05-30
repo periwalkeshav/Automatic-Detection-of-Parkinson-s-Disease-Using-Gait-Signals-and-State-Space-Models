@@ -1,0 +1,2656 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/bat47y1k",
+    "id": "bat47y1k",
+    "slide": 20,
+    "layoutId": "/ppt/slideLayouts/slideLayout4.xml",
+    "layoutName": "Kapiteltrenner",
+    "masterLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "FAU - Grau",
+    "colors": {
+      "accent1": "#7F7F7F",
+      "accent2": "#204251",
+      "accent3": "#2F586E",
+      "accent4": "#8C9FB1",
+      "accent5": "#C2D0DC",
+      "accent6": "#C7C7C7",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#8C9FB1",
+      "lt2": "#FFFFFF",
+      "hlink": "#2F586E",
+      "folHlink": "#000000"
+    },
+    "fontScheme": {
+      "name": "FAU",
+      "majorFont": {
+        "latinTypeface": "Arial"
+      },
+      "minorFont": {
+        "latinTypeface": "Arial"
+      }
+    },
+    "typefaces": [
+      "Arial"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "/ppt/slideLayouts/slideLayout4.xml",
+      "name": "Kapiteltrenner",
+      "parentLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+      "elements": [
+        {
+          "order": 1,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/2",
+          "id": "2",
+          "name": "Titel 1",
+          "bbox": [
+            54.42,
+            301.84,
+            1171.42,
+            116.33
+          ],
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          }
+        },
+        {
+          "order": 2,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/3",
+          "id": "3",
+          "name": "Datumsplatzhalter 2",
+          "bbox": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "order": 3,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/4",
+          "id": "4",
+          "name": "Fußzeilenplatzhalter 3",
+          "bbox": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "order": 4,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/5",
+          "id": "5",
+          "name": "Foliennummernplatzhalter 4",
+          "bbox": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "order": 5,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/57",
+          "id": "57",
+          "name": "Rechteck 56",
+          "bbox": [
+            54.3,
+            686.46,
+            1225.7,
+            1.13
+          ],
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#2F586E"
+        },
+        {
+          "order": 6,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/59",
+          "id": "59",
+          "name": "Rechteck 58",
+          "bbox": [
+            54.43,
+            125.64,
+            1225.83,
+            7.56
+          ],
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#2F586E"
+        },
+        {
+          "order": 7,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/61",
+          "id": "61",
+          "name": "Gerader Verbinder 60",
+          "bbox": [
+            -41,
+            31.18,
+            35,
+            0
+          ],
+          "rotation": 0,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 8,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/62",
+          "id": "62",
+          "name": "Textfeld 61",
+          "bbox": [
+            -37.13,
+            16.81,
+            27.26,
+            13.11
+          ],
+          "rotation": 0,
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 9,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/64",
+          "id": "64",
+          "name": "Gerader Verbinder 63",
+          "bbox": [
+            -41,
+            133.18,
+            35,
+            0
+          ],
+          "rotation": 0,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 10,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/65",
+          "id": "65",
+          "name": "Textfeld 64",
+          "bbox": [
+            -37.13,
+            118.81,
+            27.26,
+            13.11
+          ],
+          "rotation": 0,
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 11,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/67",
+          "id": "67",
+          "name": "Gerader Verbinder 66",
+          "bbox": [
+            -41,
+            171,
+            35,
+            0
+          ],
+          "rotation": 0,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 12,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/68",
+          "id": "68",
+          "name": "Textfeld 67",
+          "bbox": [
+            -37.13,
+            156.64,
+            27.26,
+            13.11
+          ],
+          "rotation": 0,
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 13,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/70",
+          "id": "70",
+          "name": "Gerader Verbinder 69",
+          "bbox": [
+            -41,
+            360,
+            35,
+            0
+          ],
+          "rotation": 0,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 14,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/71",
+          "id": "71",
+          "name": "Textfeld 70",
+          "bbox": [
+            -37.13,
+            345.64,
+            27.26,
+            13.11
+          ],
+          "rotation": 0,
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 15,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/73",
+          "id": "73",
+          "name": "Gerader Verbinder 72",
+          "bbox": [
+            -41,
+            651,
+            35,
+            0
+          ],
+          "rotation": 0,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 16,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/74",
+          "id": "74",
+          "name": "Textfeld 73",
+          "bbox": [
+            -37.13,
+            636.64,
+            27.26,
+            13.11
+          ],
+          "rotation": 0,
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 17,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/76",
+          "id": "76",
+          "name": "Gerader Verbinder 75",
+          "bbox": [
+            -41,
+            696.33,
+            35,
+            0
+          ],
+          "rotation": 0,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 18,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/77",
+          "id": "77",
+          "name": "Textfeld 76",
+          "bbox": [
+            -37.13,
+            681.97,
+            27.26,
+            13.11
+          ],
+          "rotation": 0,
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 19,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/79",
+          "id": "79",
+          "name": "Gerader Verbinder 78",
+          "bbox": [
+            29.57,
+            -17.04,
+            35,
+            0
+          ],
+          "rotation": 0,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 20,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/80",
+          "id": "80",
+          "name": "Textfeld 79",
+          "bbox": [
+            33.44,
+            -31.41,
+            27.26,
+            13.11
+          ],
+          "rotation": 0,
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 21,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/82",
+          "id": "82",
+          "name": "Gerader Verbinder 81",
+          "bbox": [
+            603.99,
+            -17.04,
+            35,
+            0
+          ],
+          "rotation": 0,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 22,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/83",
+          "id": "83",
+          "name": "Textfeld 82",
+          "bbox": [
+            607.85,
+            -31.41,
+            27.26,
+            13.11
+          ],
+          "rotation": 0,
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 23,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/85",
+          "id": "85",
+          "name": "Gerader Verbinder 84",
+          "bbox": [
+            633.83,
+            -24.22,
+            35,
+            0
+          ],
+          "rotation": 270,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 24,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/86",
+          "id": "86",
+          "name": "Textfeld 85",
+          "bbox": [
+            644.26,
+            -30.78,
+            27.26,
+            13.11
+          ],
+          "rotation": 270,
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 25,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/87",
+          "id": "87",
+          "name": "Gerader Verbinder 86",
+          "bbox": [
+            622.5,
+            -24.22,
+            35,
+            0
+          ],
+          "rotation": 270,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 26,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/89",
+          "id": "89",
+          "name": "Gerader Verbinder 88",
+          "bbox": [
+            1201.82,
+            -17.04,
+            35,
+            0
+          ],
+          "rotation": 0,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 27,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/90",
+          "id": "90",
+          "name": "Textfeld 89",
+          "bbox": [
+            1205.69,
+            -31.41,
+            27.26,
+            13.11
+          ],
+          "rotation": 0,
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 28,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/92",
+          "id": "92",
+          "name": "Freihandform: Form 139",
+          "bbox": [
+            54.51,
+            31.42,
+            7.56,
+            12.02
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#041E42",
+          "lineWidth": 1
+        },
+        {
+          "order": 29,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/93",
+          "id": "93",
+          "name": "Freihandform: Form 140",
+          "bbox": [
+            63.24,
+            34.54,
+            5.2,
+            8.87
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#041E42",
+          "lineWidth": 1
+        },
+        {
+          "order": 30,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/94",
+          "id": "94",
+          "name": "Freihandform: Form 141",
+          "bbox": [
+            69.9,
+            30.9,
+            2.57,
+            12.51
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#041E42",
+          "lineWidth": 1
+        },
+        {
+          "order": 31,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/95",
+          "id": "95",
+          "name": "Freihandform: Form 142",
+          "bbox": [
+            74.33,
+            34.55,
+            7.9,
+            9.08
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#041E42",
+          "lineWidth": 1
+        },
+        {
+          "order": 32,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/96",
+          "id": "96",
+          "name": "Freihandform: Form 143",
+          "bbox": [
+            84.03,
+            30.77,
+            8.08,
+            12.89
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#041E42",
+          "lineWidth": 1
+        },
+        {
+          "order": 33,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/97",
+          "id": "97",
+          "name": "Freihandform: Form 144",
+          "bbox": [
+            94.81,
+            34.54,
+            5.2,
+            8.87
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#041E42",
+          "lineWidth": 1
+        },
+        {
+          "order": 34,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/98",
+          "id": "98",
+          "name": "Freihandform: Form 145",
+          "bbox": [
+            101.44,
+            30.9,
+            2.57,
+            12.51
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#041E42",
+          "lineWidth": 1
+        },
+        {
+          "order": 35,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/99",
+          "id": "99",
+          "name": "Freihandform: Form 146",
+          "bbox": [
+            105.93,
+            34.52,
+            7.31,
+            9.11
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#041E42",
+          "lineWidth": 1
+        },
+        {
+          "order": 36,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/100",
+          "id": "100",
+          "name": "Freihandform: Form 147",
+          "bbox": [
+            114.97,
+            30.77,
+            7.47,
+            12.67
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#041E42",
+          "lineWidth": 1
+        },
+        {
+          "order": 37,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/101",
+          "id": "101",
+          "name": "Freihandform: Form 148",
+          "bbox": [
+            124.76,
+            37.15,
+            4.24,
+            1.92
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#041E42",
+          "lineWidth": 1
+        },
+        {
+          "order": 38,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/102",
+          "id": "102",
+          "name": "Freihandform: Form 149",
+          "bbox": [
+            130.09,
+            31.42,
+            11.15,
+            11.99
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#041E42",
+          "lineWidth": 1
+        },
+        {
+          "order": 39,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/103",
+          "id": "103",
+          "name": "Freihandform: Form 150",
+          "bbox": [
+            143.04,
+            30.77,
+            2.01,
+            12.64
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#041E42",
+          "lineWidth": 1
+        },
+        {
+          "order": 40,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/104",
+          "id": "104",
+          "name": "Freihandform: Form 151",
+          "bbox": [
+            147.22,
+            34.55,
+            7.9,
+            9.08
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#041E42",
+          "lineWidth": 1
+        },
+        {
+          "order": 41,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/105",
+          "id": "105",
+          "name": "Freihandform: Form 152",
+          "bbox": [
+            156.23,
+            34.74,
+            8.3,
+            8.67
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#041E42",
+          "lineWidth": 1
+        },
+        {
+          "order": 42,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/106",
+          "id": "106",
+          "name": "Freihandform: Form 153",
+          "bbox": [
+            165.62,
+            34.55,
+            7.34,
+            9.08
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#041E42",
+          "lineWidth": 1
+        },
+        {
+          "order": 43,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/107",
+          "id": "107",
+          "name": "Freihandform: Form 154",
+          "bbox": [
+            175.53,
+            34.55,
+            7.47,
+            8.89
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#041E42",
+          "lineWidth": 1
+        },
+        {
+          "order": 44,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/108",
+          "id": "108",
+          "name": "Freihandform: Form 155",
+          "bbox": [
+            185.13,
+            30.77,
+            8.08,
+            12.89
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#041E42",
+          "lineWidth": 1
+        },
+        {
+          "order": 45,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/109",
+          "id": "109",
+          "name": "Freihandform: Form 156",
+          "bbox": [
+            195.42,
+            34.55,
+            7.9,
+            9.08
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#041E42",
+          "lineWidth": 1
+        },
+        {
+          "order": 46,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/110",
+          "id": "110",
+          "name": "Freihandform: Form 157",
+          "bbox": [
+            205.61,
+            34.54,
+            5.2,
+            8.87
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#041E42",
+          "lineWidth": 1
+        },
+        {
+          "order": 47,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/111",
+          "id": "111",
+          "name": "Freihandform: Form 158",
+          "bbox": [
+            212.08,
+            37.15,
+            4.24,
+            1.92
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#041E42",
+          "lineWidth": 1
+        },
+        {
+          "order": 48,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/161",
+          "id": "161",
+          "name": "Freihandform: Form 159",
+          "bbox": [
+            218.9,
+            31.42,
+            9.39,
+            12.2
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#041E42",
+          "lineWidth": 1
+        },
+        {
+          "order": 49,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/162",
+          "id": "162",
+          "name": "Freihandform: Form 160",
+          "bbox": [
+            231.01,
+            34.55,
+            7.43,
+            8.89
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#041E42",
+          "lineWidth": 1
+        },
+        {
+          "order": 50,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/163",
+          "id": "163",
+          "name": "Freihandform: Form 161",
+          "bbox": [
+            240.73,
+            30.9,
+            2.57,
+            12.51
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#041E42",
+          "lineWidth": 1
+        },
+        {
+          "order": 51,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/164",
+          "id": "164",
+          "name": "Freihandform: Form 162",
+          "bbox": [
+            244.73,
+            34.77,
+            8.43,
+            8.67
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#041E42",
+          "lineWidth": 1
+        },
+        {
+          "order": 52,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/165",
+          "id": "165",
+          "name": "Freihandform: Form 163",
+          "bbox": [
+            254.08,
+            34.55,
+            7.9,
+            9.08
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#041E42",
+          "lineWidth": 1
+        },
+        {
+          "order": 53,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/166",
+          "id": "166",
+          "name": "Freihandform: Form 165",
+          "bbox": [
+            264.27,
+            34.54,
+            5.2,
+            8.87
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#041E42",
+          "lineWidth": 1
+        },
+        {
+          "order": 54,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/167",
+          "id": "167",
+          "name": "Freihandform: Form 166",
+          "bbox": [
+            270.44,
+            34.52,
+            6.69,
+            9.11
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#041E42",
+          "lineWidth": 1
+        },
+        {
+          "order": 55,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/168",
+          "id": "168",
+          "name": "Freihandform: Form 168",
+          "bbox": [
+            279.02,
+            30.9,
+            2.57,
+            12.51
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#041E42",
+          "lineWidth": 1
+        },
+        {
+          "order": 56,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/169",
+          "id": "169",
+          "name": "Freihandform: Form 169",
+          "bbox": [
+            283.05,
+            31.98,
+            5.39,
+            11.65
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#041E42",
+          "lineWidth": 1
+        },
+        {
+          "order": 57,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/170",
+          "id": "170",
+          "name": "Freihandform: Form 170",
+          "bbox": [
+            290.02,
+            31.05,
+            7.34,
+            12.58
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#041E42",
+          "lineWidth": 1
+        },
+        {
+          "order": 58,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/171",
+          "id": "171",
+          "name": "Freihandform: Form 171",
+          "bbox": [
+            298.94,
+            31.98,
+            5.39,
+            11.65
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#041E42",
+          "lineWidth": 1
+        },
+        {
+          "order": 59,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/172",
+          "id": "172",
+          "name": "Freihandform: Form 172",
+          "bbox": [
+            53.61,
+            50.19,
+            8.95,
+            11.99
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "tx1",
+          "lineWidth": 1
+        },
+        {
+          "order": 60,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/173",
+          "id": "173",
+          "name": "Freihandform: Form 173",
+          "bbox": [
+            62.62,
+            53.29,
+            7.9,
+            9.08
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "tx1",
+          "lineWidth": 1
+        },
+        {
+          "order": 61,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/174",
+          "id": "174",
+          "name": "Freihandform: Form 174",
+          "bbox": [
+            72.29,
+            53.26,
+            7.31,
+            9.11
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "tx1",
+          "lineWidth": 1
+        },
+        {
+          "order": 62,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/175",
+          "id": "175",
+          "name": "Freihandform: Form 175",
+          "bbox": [
+            81.36,
+            49.51,
+            7.43,
+            12.67
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "tx1",
+          "lineWidth": 1
+        },
+        {
+          "order": 63,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/176",
+          "id": "176",
+          "name": "Freihandform: Form 176",
+          "bbox": [
+            91.4,
+            53.29,
+            7.43,
+            8.89
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "tx1",
+          "lineWidth": 1
+        },
+        {
+          "order": 64,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/177",
+          "id": "177",
+          "name": "Freihandform: Form 177",
+          "bbox": [
+            101.13,
+            49.64,
+            2.57,
+            12.51
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "tx1",
+          "lineWidth": 1
+        },
+        {
+          "order": 65,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/178",
+          "id": "178",
+          "name": "Freihandform: Form 178",
+          "bbox": [
+            105.28,
+            53.26,
+            6.69,
+            9.11
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "tx1",
+          "lineWidth": 1
+        },
+        {
+          "order": 66,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/179",
+          "id": "179",
+          "name": "Freihandform: Form 179",
+          "bbox": [
+            113.61,
+            53.26,
+            7.31,
+            9.11
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "tx1",
+          "lineWidth": 1
+        },
+        {
+          "order": 67,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/180",
+          "id": "180",
+          "name": "Freihandform: Form 180",
+          "bbox": [
+            122.69,
+            49.51,
+            7.43,
+            12.67
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "tx1",
+          "lineWidth": 1
+        },
+        {
+          "order": 68,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/181",
+          "id": "181",
+          "name": "Freihandform: Form 181",
+          "bbox": [
+            132.23,
+            53.29,
+            7.9,
+            9.08
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "tx1",
+          "lineWidth": 1
+        },
+        {
+          "order": 69,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/182",
+          "id": "182",
+          "name": "Freihandform: Form 182",
+          "bbox": [
+            147.53,
+            50.19,
+            7.53,
+            11.99
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "tx1",
+          "lineWidth": 1
+        },
+        {
+          "order": 70,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/183",
+          "id": "183",
+          "name": "Freihandform: Form 183",
+          "bbox": [
+            155.43,
+            53.29,
+            7.37,
+            9.08
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "tx1",
+          "lineWidth": 1
+        },
+        {
+          "order": 71,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/184",
+          "id": "184",
+          "name": "Freihandform: Form 184",
+          "bbox": [
+            165.37,
+            49.51,
+            7.62,
+            12.67
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "tx1",
+          "lineWidth": 1
+        },
+        {
+          "order": 72,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/185",
+          "id": "185",
+          "name": "Freihandform: Form 185",
+          "bbox": [
+            174.48,
+            53.51,
+            7.47,
+            8.89
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "tx1",
+          "lineWidth": 1
+        },
+        {
+          "order": 73,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/186",
+          "id": "186",
+          "name": "Freihandform: Form 186",
+          "bbox": [
+            184.54,
+            49.48,
+            2.01,
+            12.67
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "tx1",
+          "lineWidth": 1
+        },
+        {
+          "order": 74,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/187",
+          "id": "187",
+          "name": "Freihandform: Form 187",
+          "bbox": [
+            188.35,
+            50.72,
+            5.39,
+            11.65
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "tx1",
+          "lineWidth": 1
+        },
+        {
+          "order": 75,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/188",
+          "id": "188",
+          "name": "Freihandform: Form 188",
+          "bbox": [
+            195.32,
+            49.79,
+            7.34,
+            12.58
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "tx1",
+          "lineWidth": 1
+        },
+        {
+          "order": 76,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/189",
+          "id": "189",
+          "name": "Freihandform: Form 189",
+          "bbox": [
+            204.24,
+            50.72,
+            5.39,
+            11.65
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "tx1",
+          "lineWidth": 1
+        },
+        {
+          "order": 77,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/191",
+          "id": "191",
+          "name": "Freihandform: Form 87",
+          "bbox": [
+            1078.53,
+            31.57,
+            147.39,
+            56.27
+          ],
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#041E42",
+          "lineWidth": 0.3
+        },
+        {
+          "order": 78,
+          "kind": "image",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/192",
+          "id": "192",
+          "name": "Grafik 111",
+          "bbox": [
+            900.94,
+            31.57,
+            162.06,
+            56.82
+          ],
+          "contentType": "image/png",
+          "asset": {
+            "assetId": "/ppt/media/image1.png",
+            "contentType": "image/png",
+            "byteLength": 53812
+          },
+          "fillImage": {
+            "assetId": "/ppt/media/image1.png",
+            "contentType": "image/png",
+            "byteLength": 53812
+          }
+        },
+        {
+          "order": 79,
+          "kind": "image",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout4.xml/113",
+          "id": "113",
+          "name": "Bildplatzhalter 5",
+          "bbox": [
+            684.98,
+            31.57,
+            181.83,
+            56.27
+          ]
+        }
+      ]
+    },
+    {
+      "scope": "master",
+      "id": "/ppt/slideMasters/slideMaster1.xml",
+      "type": "master",
+      "elements": [
+        {
+          "order": 1,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/2",
+          "id": "2",
+          "name": "Titelplatzhalter 1",
+          "bbox": [
+            54.42,
+            31.62,
+            718.57,
+            34.9
+          ],
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "anchor": 1,
+            "vertical": 1,
+            "verticalAlignment": "top",
+            "wrap": "square",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 2,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/3",
+          "id": "3",
+          "name": "Textplatzhalter 2",
+          "bbox": [
+            54.42,
+            171.25,
+            1171.42,
+            479.75
+          ],
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "anchor": 1,
+            "vertical": 1,
+            "verticalAlignment": "top",
+            "autoFit": "shrinkText",
+            "insets": {
+              "top": 0,
+              "right": 37.8,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 3,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/4",
+          "id": "4",
+          "name": "Datumsplatzhalter 3",
+          "bbox": [
+            1093.69,
+            696.55,
+            89.2,
+            12.93
+          ],
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "anchor": 1,
+            "vertical": 1,
+            "verticalAlignment": "top",
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 4,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/5",
+          "id": "5",
+          "name": "Fußzeilenplatzhalter 4",
+          "bbox": [
+            54.42,
+            696.55,
+            574.25,
+            12.93
+          ],
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "anchor": 1,
+            "vertical": 1,
+            "verticalAlignment": "top",
+            "wrap": "square",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 5,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/6",
+          "id": "6",
+          "name": "Foliennummernplatzhalter 5",
+          "bbox": [
+            1205.47,
+            696.55,
+            20.36,
+            12.93
+          ],
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "anchor": 1,
+            "vertical": 1,
+            "verticalAlignment": "top",
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 6,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/7",
+          "id": "7",
+          "name": "Rechteck 6",
+          "bbox": [
+            54.43,
+            125.64,
+            1225.83,
+            7.56
+          ],
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#8C9FB1"
+        },
+        {
+          "order": 7,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/9",
+          "id": "9",
+          "name": "Rechteck 8",
+          "bbox": [
+            54.3,
+            686.46,
+            1225.7,
+            1.13
+          ],
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#8C9FB1"
+        },
+        {
+          "order": 8,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/10",
+          "id": "10",
+          "name": "Gerader Verbinder 9",
+          "bbox": [
+            -41,
+            31.18,
+            35,
+            0
+          ],
+          "rotation": 0,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 9,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/11",
+          "id": "11",
+          "name": "Textfeld 10",
+          "bbox": [
+            -37.13,
+            16.81,
+            27.26,
+            13.11
+          ],
+          "rotation": 0,
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 10,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/16",
+          "id": "16",
+          "name": "Gerader Verbinder 15",
+          "bbox": [
+            -41,
+            133.18,
+            35,
+            0
+          ],
+          "rotation": 0,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 11,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/17",
+          "id": "17",
+          "name": "Textfeld 16",
+          "bbox": [
+            -37.13,
+            118.81,
+            27.26,
+            13.11
+          ],
+          "rotation": 0,
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 12,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/19",
+          "id": "19",
+          "name": "Gerader Verbinder 18",
+          "bbox": [
+            -41,
+            171,
+            35,
+            0
+          ],
+          "rotation": 0,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 13,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/20",
+          "id": "20",
+          "name": "Textfeld 19",
+          "bbox": [
+            -37.13,
+            156.64,
+            27.26,
+            13.11
+          ],
+          "rotation": 0,
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 14,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/22",
+          "id": "22",
+          "name": "Gerader Verbinder 21",
+          "bbox": [
+            -41,
+            360,
+            35,
+            0
+          ],
+          "rotation": 0,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 15,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/23",
+          "id": "23",
+          "name": "Textfeld 22",
+          "bbox": [
+            -37.13,
+            345.64,
+            27.26,
+            13.11
+          ],
+          "rotation": 0,
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 16,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/25",
+          "id": "25",
+          "name": "Gerader Verbinder 24",
+          "bbox": [
+            -41,
+            651,
+            35,
+            0
+          ],
+          "rotation": 0,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 17,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/26",
+          "id": "26",
+          "name": "Textfeld 25",
+          "bbox": [
+            -37.13,
+            636.64,
+            27.26,
+            13.11
+          ],
+          "rotation": 0,
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 18,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/28",
+          "id": "28",
+          "name": "Gerader Verbinder 27",
+          "bbox": [
+            -41,
+            696.33,
+            35,
+            0
+          ],
+          "rotation": 0,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 19,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/29",
+          "id": "29",
+          "name": "Textfeld 28",
+          "bbox": [
+            -37.13,
+            681.97,
+            27.26,
+            13.11
+          ],
+          "rotation": 0,
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 20,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/31",
+          "id": "31",
+          "name": "Gerader Verbinder 30",
+          "bbox": [
+            29.57,
+            -17.04,
+            35,
+            0
+          ],
+          "rotation": 0,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 21,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/32",
+          "id": "32",
+          "name": "Textfeld 31",
+          "bbox": [
+            33.44,
+            -31.41,
+            27.26,
+            13.11
+          ],
+          "rotation": 0,
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 22,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/34",
+          "id": "34",
+          "name": "Gerader Verbinder 33",
+          "bbox": [
+            603.99,
+            -17.04,
+            35,
+            0
+          ],
+          "rotation": 0,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 23,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/35",
+          "id": "35",
+          "name": "Textfeld 34",
+          "bbox": [
+            607.85,
+            -31.41,
+            27.26,
+            13.11
+          ],
+          "rotation": 0,
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 24,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/37",
+          "id": "37",
+          "name": "Gerader Verbinder 36",
+          "bbox": [
+            633.83,
+            -24.22,
+            35,
+            0
+          ],
+          "rotation": 270,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 25,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/38",
+          "id": "38",
+          "name": "Textfeld 37",
+          "bbox": [
+            644.26,
+            -30.78,
+            27.26,
+            13.11
+          ],
+          "rotation": 270,
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 26,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/40",
+          "id": "40",
+          "name": "Gerader Verbinder 39",
+          "bbox": [
+            622.5,
+            -24.22,
+            35,
+            0
+          ],
+          "rotation": 270,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 27,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/42",
+          "id": "42",
+          "name": "Gerader Verbinder 41",
+          "bbox": [
+            1201.82,
+            -17.04,
+            35,
+            0
+          ],
+          "rotation": 0,
+          "geometry": "line",
+          "lineColor": "accent6"
+        },
+        {
+          "order": 28,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/43",
+          "id": "43",
+          "name": "Textfeld 42",
+          "bbox": [
+            1205.69,
+            -31.41,
+            27.26,
+            13.11
+          ],
+          "rotation": 0,
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "wrap": "none",
+            "autoFit": "resizeShapeToFitText",
+            "insets": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          }
+        },
+        {
+          "order": 29,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/44",
+          "id": "44",
+          "name": "Freihandform: Form 43",
+          "bbox": [
+            1112.45,
+            31.43,
+            113.39,
+            43.29
+          ],
+          "geometry": "custom",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "verticalAlignment": "middle"
+          },
+          "fillColor": "#041E42",
+          "lineWidth": 1
+        }
+      ]
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/qtcj6tov",
+      "id": "2",
+      "name": "Title 1",
+      "bbox": [
+        54.42,
+        301.84,
+        1171.42,
+        116.33
+      ],
+      "resolvedFontSize": 53.33,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "vertical": 1,
+        "fontSize": 53.33,
+        "typeface": "Arial",
+        "color": "tx1",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      }
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/je9cvixc",
+      "id": "3",
+      "name": "Picture Placeholder 2",
+      "bbox": [
+        684.98,
+        31.57,
+        181.83,
+        56.27
+      ],
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Arial",
+        "color": "tx1",
+        "alignment": "left",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      }
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/87ed8bat",
+      "id": "4",
+      "name": "TextBox 3",
+      "bbox": [
+        57.6,
+        268.8,
+        144,
+        96
+      ],
+      "geometry": "rect",
+      "text": "06",
+      "textPreview": "06",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Arial",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "06"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "06",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "06",
+              "fontSize": 80,
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/xs72x4na",
+      "id": "5",
+      "name": "TextBox 4",
+      "bbox": [
+        57.6,
+        355.2,
+        960,
+        76.8
+      ],
+      "geometry": "rect",
+      "text": "Key Findings & Next Steps",
+      "textPreview": "Key Findings & Next Steps",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Arial",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Key Findings & Next Steps"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Key Findings & Next Steps",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Key Findings & Next Steps",
+              "fontSize": 45.33,
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/q1orytsv",
+      "id": "6",
+      "name": "TextBox 5",
+      "bbox": [
+        57.6,
+        427.2,
+        960,
+        48
+      ],
+      "geometry": "rect",
+      "text": "Summary of Deliverable 1  ·  Implications for Mamba Modelling",
+      "textPreview": "Summary of Deliverable 1  ·  Implications for Mamba Modelling",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Arial",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Summary of Deliverable 1  ·  Implications for Mamba Modelling"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Summary of Deliverable 1  ·  Implications for Mamba Modelling",
+          "resolvedTextStyle": {
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Summary of Deliverable 1  ·  Implications for Mamba Modelling",
+              "fontSize": 20,
+              "color": "#AABBCC"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    }
+  ],
+  "composeRuns": []
+}
