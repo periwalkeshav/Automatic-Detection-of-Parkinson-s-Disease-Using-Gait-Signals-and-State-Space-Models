@@ -45,6 +45,7 @@ STEP_SECONDS = 2.5
 WINDOW_SAMPLES = int(WINDOW_SECONDS * SAMPLE_RATE)
 STEP_SAMPLES = int(STEP_SECONDS * SAMPLE_RATE)
 DEFAULT_TRIM_SECONDS = 5.0
+TSFRESH_N_JOBS = int(os.environ.get("TSFRESH_N_JOBS", "5"))
 
 LEFT_CHANNELS = [(f"L{i}", i) for i in range(1, 9)] + [("L_total", 17)]
 RIGHT_CHANNELS = [(f"R{i}", i) for i in range(1, 9)] + [("R_total", 18)]
@@ -222,7 +223,7 @@ def subject_tsfresh_features(subject: SubjectFile, fc_parameters: dict, trim_sec
         column_value="value",
         default_fc_parameters=fc_parameters,
         disable_progressbar=True,
-        n_jobs=0,
+        n_jobs=TSFRESH_N_JOBS,
     )
     right_features = extract_features(
         right_frame,
@@ -232,7 +233,7 @@ def subject_tsfresh_features(subject: SubjectFile, fc_parameters: dict, trim_sec
         column_value="value",
         default_fc_parameters=fc_parameters,
         disable_progressbar=True,
-        n_jobs=0,
+        n_jobs=TSFRESH_N_JOBS,
     )
     return pd.concat(
         [

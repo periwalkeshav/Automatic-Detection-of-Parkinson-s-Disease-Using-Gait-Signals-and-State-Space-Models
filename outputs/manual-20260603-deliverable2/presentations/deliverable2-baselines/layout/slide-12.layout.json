@@ -1,0 +1,901 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/rpov50",
+    "id": "rpov50",
+    "slide": 12,
+    "layoutId": "48d0ffd1-4390-40e1-bdc7-bb69a605e6c4",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "67b9902c-efde-42dd-b194-5d40e00ae723",
+    "masterLayoutName": "Master",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "Aptos",
+      "Arial"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "48d0ffd1-4390-40e1-bdc7-bb69a605e6c4",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "67b9902c-efde-42dd-b194-5d40e00ae723",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "67b9902c-efde-42dd-b194-5d40e00ae723",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/gbq1oryt",
+      "id": "1",
+      "bbox": [
+        0,
+        0,
+        1280,
+        104
+      ],
+      "geometry": "rect",
+      "fillColor": "#003A63",
+      "lineColor": "#003A63",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/nuxc3ylc",
+      "id": "2",
+      "bbox": [
+        28,
+        36,
+        850,
+        42
+      ],
+      "geometry": "rect",
+      "text": "Recommended Next Improvements",
+      "textPreview": "Recommended Next Improvements",
+      "resolvedFontSize": 28,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 28,
+        "typeface": "Arial",
+        "color": "#FFFFFF",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Recommended Next Improvements"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Recommended Next Improvements",
+          "resolvedTextStyle": {
+            "fontSize": 28,
+            "typeface": "Arial",
+            "color": "#FFFFFF",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Recommended Next Improvements",
+              "fontSize": 28,
+              "typeface": "Arial",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/y90je9cv",
+      "id": "3",
+      "bbox": [
+        28,
+        110,
+        260,
+        30
+      ],
+      "geometry": "rect",
+      "text": "Deliverable 2 - Baseline Models",
+      "textPreview": "Deliverable 2 - Baseline Models",
+      "resolvedFontSize": 12,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 12,
+        "typeface": "Aptos",
+        "color": "#FFFFFF",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 7,
+          "right": 8,
+          "bottom": 0,
+          "left": 12
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Deliverable 2 - Baseline Models"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Deliverable 2 - Baseline Models",
+          "resolvedTextStyle": {
+            "fontSize": 12,
+            "typeface": "Aptos",
+            "color": "#FFFFFF",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Deliverable 2 - Baseline Models",
+              "fontSize": 12,
+              "typeface": "Aptos",
+              "color": "#FFFFFF",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "#003A63",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/58z25kb6",
+      "id": "4",
+      "bbox": [
+        0,
+        126,
+        1280,
+        3
+      ],
+      "geometry": "rect",
+      "fillColor": "#2F586E",
+      "lineColor": "#2F586E",
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/gn29gr2p",
+      "id": "5",
+      "bbox": [
+        70,
+        175,
+        940,
+        235
+      ],
+      "geometry": "rect",
+      "text": "• Try a small hyperparameter grid for feature-vector neural models after the fold-safe baseline is locked.\n• Run full EfficientFCParameters extraction for all 100 fold subjects and compare it with the current curated TSFresh set.\n• Use TSFresh's relevance filter as a secondary feature-selection experiment; the quick probe improved RBF-SVM AUC but did not beat Linear-SVM accuracy.\n• Add cohort-stratified reporting because Ga, Si, and Ju were collected under different walking conditions.\n• Inspect fold-level errors to identify subjects repeatedly confused across models.\n• Keep Mamba separate for a later deliverable, after these non-Mamba baselines are locked.",
+      "textPreview": "• Try a small hyperparameter grid for feature-vector neural models after the fold-safe baseline is locked. | • Run full EfficientFCParame...",
+      "resolvedFontSize": 21,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 21,
+        "typeface": "Arial",
+        "color": "#1E2A32",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 10,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• Try a small hyperparameter grid for feature-vector neural models after the fold-safe baseline is"
+          },
+          {
+            "index": 2,
+            "text": "locked."
+          },
+          {
+            "index": 3,
+            "text": "• Run full EfficientFCParameters extraction for all 100 fold subjects and compare it with the current"
+          },
+          {
+            "index": 4,
+            "text": "curated TSFresh set."
+          },
+          {
+            "index": 5,
+            "text": "• Use TSFresh's relevance filter as a secondary feature-selection experiment; the quick probe"
+          },
+          {
+            "index": 6,
+            "text": "improved RBF-SVM AUC but did not beat Linear-SVM accuracy."
+          },
+          {
+            "index": 7,
+            "text": "• Add cohort-stratified reporting because Ga, Si, and Ju were collected under different walking"
+          },
+          {
+            "index": 8,
+            "text": "conditions."
+          },
+          {
+            "index": 9,
+            "text": "• Inspect fold-level errors to identify subjects repeatedly confused across models."
+          },
+          {
+            "index": 10,
+            "text": "• Keep Mamba separate for a later deliverable, after these non-Mamba baselines are locked."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• Try a small hyperparameter grid for feature-vector neural models after the fold-safe baseline is locked.",
+          "resolvedTextStyle": {
+            "fontSize": 21,
+            "typeface": "Arial",
+            "color": "#1E2A32",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Try a small hyperparameter grid for feature-vector neural models after the fold-safe baseline is locked.",
+              "fontSize": 21,
+              "typeface": "Arial",
+              "color": "#1E2A32"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "• Run full EfficientFCParameters extraction for all 100 fold subjects and compare it with the current curated TSFresh set.",
+          "resolvedTextStyle": {
+            "fontSize": 21,
+            "typeface": "Arial",
+            "color": "#1E2A32",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Run full EfficientFCParameters extraction for all 100 fold subjects and compare it with the current curated TSFresh set.",
+              "fontSize": 21,
+              "typeface": "Arial",
+              "color": "#1E2A32"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "• Use TSFresh's relevance filter as a secondary feature-selection experiment; the quick probe improved RBF-SVM AUC but did not beat Linear-SVM accuracy.",
+          "resolvedTextStyle": {
+            "fontSize": 21,
+            "typeface": "Arial",
+            "color": "#1E2A32",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Use TSFresh's relevance filter as a secondary feature-selection experiment; the quick probe improved RBF-SVM AUC but did not beat Linear-SVM accuracy.",
+              "fontSize": 21,
+              "typeface": "Arial",
+              "color": "#1E2A32"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 4,
+          "text": "• Add cohort-stratified reporting because Ga, Si, and Ju were collected under different walking conditions.",
+          "resolvedTextStyle": {
+            "fontSize": 21,
+            "typeface": "Arial",
+            "color": "#1E2A32",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Add cohort-stratified reporting because Ga, Si, and Ju were collected under different walking conditions.",
+              "fontSize": 21,
+              "typeface": "Arial",
+              "color": "#1E2A32"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 5,
+          "text": "• Inspect fold-level errors to identify subjects repeatedly confused across models.",
+          "resolvedTextStyle": {
+            "fontSize": 21,
+            "typeface": "Arial",
+            "color": "#1E2A32",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Inspect fold-level errors to identify subjects repeatedly confused across models.",
+              "fontSize": 21,
+              "typeface": "Arial",
+              "color": "#1E2A32"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 6,
+          "text": "• Keep Mamba separate for a later deliverable, after these non-Mamba baselines are locked.",
+          "resolvedTextStyle": {
+            "fontSize": 21,
+            "typeface": "Arial",
+            "color": "#1E2A32",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Keep Mamba separate for a later deliverable, after these non-Mamba baselines are locked.",
+              "fontSize": 21,
+              "typeface": "Arial",
+              "color": "#1E2A32"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/n29gr2p8",
+      "id": "6",
+      "bbox": [
+        70,
+        460,
+        1050,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#CBD5DE",
+      "lineColor": "#CBD5DE",
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/yhgn29gr",
+      "id": "7",
+      "bbox": [
+        70,
+        495,
+        420,
+        28
+      ],
+      "geometry": "rect",
+      "text": "Deliverable 2 artifacts generated",
+      "textPreview": "Deliverable 2 artifacts generated",
+      "resolvedFontSize": 20,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 20,
+        "typeface": "Aptos",
+        "color": "#003A63",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Deliverable 2 artifacts generated"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Deliverable 2 artifacts generated",
+          "resolvedTextStyle": {
+            "fontSize": 20,
+            "typeface": "Aptos",
+            "color": "#003A63",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Deliverable 2 artifacts generated",
+              "fontSize": 20,
+              "typeface": "Aptos",
+              "color": "#003A63",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/5kb6xkf6",
+      "id": "8",
+      "bbox": [
+        70,
+        535,
+        860,
+        135
+      ],
+      "geometry": "rect",
+      "text": "• results/tables/deliverable2_model_summary.csv\n• results/tables/deliverable2_fold_metrics.csv\n• results/tables/deliverable2_fold_safe_feature_audit.csv\n• results/tables/deliverable2_research_feature_notes.csv\n• results/tables/deliverable2_tsfresh_relevance_probe_summary.csv\n• Deliverable2_FoldSafe_Implementation.ipynb\n• results/figures/deliverable2_metric_summary.png\n• results/figures/deliverable2_best_confusion_matrices.png",
+      "textPreview": "• results/tables/deliverable2_model_summary.csv | • results/tables/deliverable2_fold_metrics.csv | • results/tables/deliverable2_fold_saf...",
+      "resolvedFontSize": 12,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 12,
+        "typeface": "Arial",
+        "color": "#1E2A32",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 8,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• results/tables/deliverable2_model_summary.csv"
+          },
+          {
+            "index": 2,
+            "text": "• results/tables/deliverable2_fold_metrics.csv"
+          },
+          {
+            "index": 3,
+            "text": "• results/tables/deliverable2_fold_safe_feature_audit.csv"
+          },
+          {
+            "index": 4,
+            "text": "• results/tables/deliverable2_research_feature_notes.csv"
+          },
+          {
+            "index": 5,
+            "text": "• results/tables/deliverable2_tsfresh_relevance_probe_summary.csv"
+          },
+          {
+            "index": 6,
+            "text": "• Deliverable2_FoldSafe_Implementation.ipynb"
+          },
+          {
+            "index": 7,
+            "text": "• results/figures/deliverable2_metric_summary.png"
+          },
+          {
+            "index": 8,
+            "text": "• results/figures/deliverable2_best_confusion_matrices.png"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• results/tables/deliverable2_model_summary.csv",
+          "resolvedTextStyle": {
+            "fontSize": 12,
+            "typeface": "Arial",
+            "color": "#1E2A32",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• results/tables/deliverable2_model_summary.csv",
+              "fontSize": 12,
+              "typeface": "Arial",
+              "color": "#1E2A32"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "• results/tables/deliverable2_fold_metrics.csv",
+          "resolvedTextStyle": {
+            "fontSize": 12,
+            "typeface": "Arial",
+            "color": "#1E2A32",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• results/tables/deliverable2_fold_metrics.csv",
+              "fontSize": 12,
+              "typeface": "Arial",
+              "color": "#1E2A32"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "• results/tables/deliverable2_fold_safe_feature_audit.csv",
+          "resolvedTextStyle": {
+            "fontSize": 12,
+            "typeface": "Arial",
+            "color": "#1E2A32",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• results/tables/deliverable2_fold_safe_feature_audit.csv",
+              "fontSize": 12,
+              "typeface": "Arial",
+              "color": "#1E2A32"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 4,
+          "text": "• results/tables/deliverable2_research_feature_notes.csv",
+          "resolvedTextStyle": {
+            "fontSize": 12,
+            "typeface": "Arial",
+            "color": "#1E2A32",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• results/tables/deliverable2_research_feature_notes.csv",
+              "fontSize": 12,
+              "typeface": "Arial",
+              "color": "#1E2A32"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 5,
+          "text": "• results/tables/deliverable2_tsfresh_relevance_probe_summary.csv",
+          "resolvedTextStyle": {
+            "fontSize": 12,
+            "typeface": "Arial",
+            "color": "#1E2A32",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• results/tables/deliverable2_tsfresh_relevance_probe_summary.csv",
+              "fontSize": 12,
+              "typeface": "Arial",
+              "color": "#1E2A32"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 6,
+          "text": "• Deliverable2_FoldSafe_Implementation.ipynb",
+          "resolvedTextStyle": {
+            "fontSize": 12,
+            "typeface": "Arial",
+            "color": "#1E2A32",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Deliverable2_FoldSafe_Implementation.ipynb",
+              "fontSize": 12,
+              "typeface": "Arial",
+              "color": "#1E2A32"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 7,
+          "text": "• results/figures/deliverable2_metric_summary.png",
+          "resolvedTextStyle": {
+            "fontSize": 12,
+            "typeface": "Arial",
+            "color": "#1E2A32",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• results/figures/deliverable2_metric_summary.png",
+              "fontSize": 12,
+              "typeface": "Arial",
+              "color": "#1E2A32"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 8,
+          "text": "• results/figures/deliverable2_best_confusion_matrices.png",
+          "resolvedTextStyle": {
+            "fontSize": 12,
+            "typeface": "Arial",
+            "color": "#1E2A32",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• results/figures/deliverable2_best_confusion_matrices.png",
+              "fontSize": 12,
+              "typeface": "Arial",
+              "color": "#1E2A32"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/czed8v6p",
+      "id": "9",
+      "bbox": [
+        0,
+        686,
+        1280,
+        34
+      ],
+      "geometry": "rect",
+      "fillColor": "#DDE5EC",
+      "lineColor": "#CBD5DE",
+      "lineWidth": 0.5
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2hwfyxob",
+      "id": "10",
+      "bbox": [
+        14,
+        694,
+        900,
+        18
+      ],
+      "geometry": "rect",
+      "text": "Deliverable 2 - PD Gait Baseline Models  |  FAU Erlangen-Nürnberg",
+      "textPreview": "Deliverable 2 - PD Gait Baseline Models  |  FAU Erlangen-Nürnberg",
+      "resolvedFontSize": 9,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 9,
+        "typeface": "Aptos",
+        "color": "#5F6B76",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Deliverable 2 - PD Gait Baseline Models  |  FAU Erlangen-Nürnberg"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Deliverable 2 - PD Gait Baseline Models  |  FAU Erlangen-Nürnberg",
+          "resolvedTextStyle": {
+            "fontSize": 9,
+            "typeface": "Aptos",
+            "color": "#5F6B76",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Deliverable 2 - PD Gait Baseline Models  |  FAU Erlangen-Nürnberg",
+              "fontSize": 9,
+              "typeface": "Aptos",
+              "color": "#5F6B76"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/r2p8nqxs",
+      "id": "11",
+      "bbox": [
+        1210,
+        694,
+        55,
+        18
+      ],
+      "geometry": "rect",
+      "text": "12/12",
+      "textPreview": "12/12",
+      "resolvedFontSize": 9,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 9,
+        "typeface": "Aptos",
+        "color": "#5F6B76",
+        "alignment": "right",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "12/12"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "12/12",
+          "resolvedTextStyle": {
+            "fontSize": 9,
+            "typeface": "Aptos",
+            "color": "#5F6B76",
+            "alignment": "right"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "12/12",
+              "fontSize": 9,
+              "typeface": "Aptos",
+              "color": "#5F6B76"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

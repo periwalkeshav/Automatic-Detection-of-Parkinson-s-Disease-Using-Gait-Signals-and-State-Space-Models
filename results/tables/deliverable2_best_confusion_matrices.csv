@@ -1,0 +1,5 @@
+scope,model,tn,fp,fn,tp
+combined,linear_svm,40,10,7,43
+enhanced,random_forest_fresh,42,8,9,41
+left,linear_svm_fresh,41,9,9,41
+right,random_forest,40,10,7,43

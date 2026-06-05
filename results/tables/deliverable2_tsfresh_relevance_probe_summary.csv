@@ -1,0 +1,13 @@
+family,scope,model,validation_accuracy_mean,validation_auc_mean,test_accuracy_mean,test_accuracy_std,test_sensitivity_mean,test_specificity_mean,test_precision_mean,test_f1_mean,test_auc_mean,test_auc_std
+fresh_prefilter,enhanced_fdr_0.05,linear_svm,0.840,0.888,0.780,0.084,0.820,0.740,0.763,0.780,0.892,0.090
+fresh_prefilter,enhanced_fdr_0.05,svm_rbf,0.870,0.904,0.750,0.079,0.760,0.740,0.752,0.742,0.866,0.093
+fresh_prefilter,enhanced_fdr_0.05,random_forest,0.800,0.879,0.740,0.129,0.760,0.720,0.729,0.733,0.878,0.078
+fresh_prefilter,enhanced_fdr_0.1,linear_svm,0.850,0.904,0.760,0.042,0.780,0.740,0.761,0.756,0.878,0.060
+fresh_prefilter,enhanced_fdr_0.1,random_forest,0.790,0.880,0.730,0.110,0.720,0.740,0.737,0.717,0.874,0.067
+fresh_prefilter,enhanced_fdr_0.1,svm_rbf,0.880,0.934,0.730,0.104,0.760,0.700,0.715,0.728,0.830,0.099
+fresh_prefilter,enhanced_fdr_0.2,random_forest,0.820,0.888,0.760,0.119,0.740,0.780,0.787,0.747,0.882,0.075
+fresh_prefilter,enhanced_fdr_0.2,linear_svm,0.830,0.908,0.750,0.106,0.740,0.760,0.756,0.721,0.890,0.076
+fresh_prefilter,enhanced_fdr_0.2,svm_rbf,0.880,0.916,0.730,0.091,0.740,0.720,0.735,0.723,0.850,0.091
+fresh_prefilter,enhanced_fdr_0.5,svm_rbf,0.870,0.930,0.780,0.084,0.820,0.740,0.766,0.772,0.886,0.085
+fresh_prefilter,enhanced_fdr_0.5,linear_svm,0.840,0.920,0.780,0.067,0.840,0.720,0.751,0.788,0.878,0.090
+fresh_prefilter,enhanced_fdr_0.5,random_forest,0.830,0.912,0.760,0.129,0.740,0.780,0.774,0.743,0.881,0.075

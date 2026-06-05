@@ -1,0 +1,8 @@
+1 cover with metric rail
+2 horizontal protocol flow
+3 feature audit table plus feature-set note
+4 selector comparison ranked table
+5 final model metrics table
+6 neural grid comparison
+7 rendered figure evidence
+8 reproducibility appendix

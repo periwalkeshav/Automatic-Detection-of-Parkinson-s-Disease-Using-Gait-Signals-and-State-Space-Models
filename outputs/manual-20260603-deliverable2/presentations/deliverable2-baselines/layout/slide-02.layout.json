@@ -1,0 +1,712 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/4jqn9y",
+    "id": "4jqn9y",
+    "slide": 2,
+    "layoutId": "48d0ffd1-4390-40e1-bdc7-bb69a605e6c4",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "67b9902c-efde-42dd-b194-5d40e00ae723",
+    "masterLayoutName": "Master",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "Aptos",
+      "Arial"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "48d0ffd1-4390-40e1-bdc7-bb69a605e6c4",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "67b9902c-efde-42dd-b194-5d40e00ae723",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "67b9902c-efde-42dd-b194-5d40e00ae723",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7u54zido",
+      "id": "1",
+      "bbox": [
+        54,
+        31,
+        270,
+        46
+      ],
+      "geometry": "rect",
+      "text": "Friedrich-Alexander-Universität\nTechnische Fakultät",
+      "textPreview": "Friedrich-Alexander-Universität | Technische Fakultät",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 13,
+        "typeface": "Aptos",
+        "color": "#003A63",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Friedrich-Alexander-Universität"
+          },
+          {
+            "index": 2,
+            "text": "Technische Fakultät"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Friedrich-Alexander-Universität",
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "typeface": "Aptos",
+            "color": "#003A63",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Friedrich-Alexander-Universität",
+              "fontSize": 13,
+              "typeface": "Aptos",
+              "color": "#003A63",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "Technische Fakultät",
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "typeface": "Aptos",
+            "color": "#003A63",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Technische Fakultät",
+              "fontSize": 13,
+              "typeface": "Aptos",
+              "color": "#003A63",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/t47y1kre",
+      "id": "2",
+      "bbox": [
+        905,
+        32,
+        190,
+        66
+      ],
+      "contentType": "image/png",
+      "imageFit": "contain",
+      "asset": {
+        "assetId": "ed2dfe94-d345-4bb2-8e38-588c68adb7c2",
+        "contentType": "image/png",
+        "byteLength": 28539
+      }
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/l0rqd4vm",
+      "id": "3",
+      "bbox": [
+        1100,
+        27,
+        130,
+        62
+      ],
+      "geometry": "rect",
+      "text": "FAU",
+      "textPreview": "FAU",
+      "resolvedFontSize": 42,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 42,
+        "typeface": "Aptos",
+        "color": "#003A63",
+        "bold": true,
+        "alignment": "center",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "FAU"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "FAU",
+          "resolvedTextStyle": {
+            "fontSize": 42,
+            "typeface": "Aptos",
+            "color": "#003A63",
+            "bold": true,
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "FAU",
+              "fontSize": 42,
+              "typeface": "Aptos",
+              "color": "#003A63",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/eloj2t83",
+      "id": "4",
+      "bbox": [
+        54,
+        126,
+        1170,
+        5
+      ],
+      "geometry": "rect",
+      "fillColor": "#2F586E",
+      "lineColor": "#2F586E",
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/36hcrmhk",
+      "id": "5",
+      "bbox": [
+        57,
+        255,
+        760,
+        52
+      ],
+      "geometry": "rect",
+      "text": "Deliverable 2 Requirements",
+      "textPreview": "Deliverable 2 Requirements",
+      "resolvedFontSize": 30,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 30,
+        "typeface": "Aptos",
+        "color": "#003A63",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Deliverable 2 Requirements"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Deliverable 2 Requirements",
+          "resolvedTextStyle": {
+            "fontSize": 30,
+            "typeface": "Aptos",
+            "color": "#003A63",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Deliverable 2 Requirements",
+              "fontSize": 30,
+              "typeface": "Aptos",
+              "color": "#003A63",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wra5gbq1",
+      "id": "6",
+      "bbox": [
+        58,
+        320,
+        1050,
+        245
+      ],
+      "geometry": "rect",
+      "text": "• Train Random Forest, SVM linear, and SVM RBF with validation-selected hyperparameters.\n• Extract training, validation, and test feature matrices separately inside each fold.\n• Normalize the feature matrix using z-score statistics learned from the training split.\n• Report left-foot, right-foot, and combined-foot classification results.\n• Add an enhanced feature view for the stronger TSFresh + gait/asymmetry/wavelet baseline comparison.\n• Include Accuracy, Sensitivity, Specificity, and AUC.\n• Add confusion matrices for the best-performing model in each view.\n• Include 1D-ResNet, LSTM, GRU, and PatchTST as feature-vector neural baselines.",
+      "textPreview": "• Train Random Forest, SVM linear, and SVM RBF with validation-selected hyperparameters. | • Extract training, validation, and test featu...",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 18,
+        "typeface": "Arial",
+        "color": "#1E2A32",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 8,
+        "lines": [
+          {
+            "index": 1,
+            "text": "• Train Random Forest, SVM linear, and SVM RBF with validation-selected hyperparameters."
+          },
+          {
+            "index": 2,
+            "text": "• Extract training, validation, and test feature matrices separately inside each fold."
+          },
+          {
+            "index": 3,
+            "text": "• Normalize the feature matrix using z-score statistics learned from the training split."
+          },
+          {
+            "index": 4,
+            "text": "• Report left-foot, right-foot, and combined-foot classification results."
+          },
+          {
+            "index": 5,
+            "text": "• Add an enhanced feature view for the stronger TSFresh + gait/asymmetry/wavelet baseline comparison."
+          },
+          {
+            "index": 6,
+            "text": "• Include Accuracy, Sensitivity, Specificity, and AUC."
+          },
+          {
+            "index": 7,
+            "text": "• Add confusion matrices for the best-performing model in each view."
+          },
+          {
+            "index": 8,
+            "text": "• Include 1D-ResNet, LSTM, GRU, and PatchTST as feature-vector neural baselines."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "• Train Random Forest, SVM linear, and SVM RBF with validation-selected hyperparameters.",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "typeface": "Arial",
+            "color": "#1E2A32",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Train Random Forest, SVM linear, and SVM RBF with validation-selected hyperparameters.",
+              "fontSize": 18,
+              "typeface": "Arial",
+              "color": "#1E2A32"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "• Extract training, validation, and test feature matrices separately inside each fold.",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "typeface": "Arial",
+            "color": "#1E2A32",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Extract training, validation, and test feature matrices separately inside each fold.",
+              "fontSize": 18,
+              "typeface": "Arial",
+              "color": "#1E2A32"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "• Normalize the feature matrix using z-score statistics learned from the training split.",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "typeface": "Arial",
+            "color": "#1E2A32",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Normalize the feature matrix using z-score statistics learned from the training split.",
+              "fontSize": 18,
+              "typeface": "Arial",
+              "color": "#1E2A32"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 4,
+          "text": "• Report left-foot, right-foot, and combined-foot classification results.",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "typeface": "Arial",
+            "color": "#1E2A32",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Report left-foot, right-foot, and combined-foot classification results.",
+              "fontSize": 18,
+              "typeface": "Arial",
+              "color": "#1E2A32"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 5,
+          "text": "• Add an enhanced feature view for the stronger TSFresh + gait/asymmetry/wavelet baseline comparison.",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "typeface": "Arial",
+            "color": "#1E2A32",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Add an enhanced feature view for the stronger TSFresh + gait/asymmetry/wavelet baseline comparison.",
+              "fontSize": 18,
+              "typeface": "Arial",
+              "color": "#1E2A32"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 6,
+          "text": "• Include Accuracy, Sensitivity, Specificity, and AUC.",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "typeface": "Arial",
+            "color": "#1E2A32",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Include Accuracy, Sensitivity, Specificity, and AUC.",
+              "fontSize": 18,
+              "typeface": "Arial",
+              "color": "#1E2A32"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 7,
+          "text": "• Add confusion matrices for the best-performing model in each view.",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "typeface": "Arial",
+            "color": "#1E2A32",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Add confusion matrices for the best-performing model in each view.",
+              "fontSize": 18,
+              "typeface": "Arial",
+              "color": "#1E2A32"
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 8,
+          "text": "• Include 1D-ResNet, LSTM, GRU, and PatchTST as feature-vector neural baselines.",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "typeface": "Arial",
+            "color": "#1E2A32",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "• Include 1D-ResNet, LSTM, GRU, and PatchTST as feature-vector neural baselines.",
+              "fontSize": 18,
+              "typeface": "Arial",
+              "color": "#1E2A32"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/lc7u54zi",
+      "id": "7",
+      "bbox": [
+        0,
+        686,
+        1280,
+        34
+      ],
+      "geometry": "rect",
+      "fillColor": "#DDE5EC",
+      "lineColor": "#CBD5DE",
+      "lineWidth": 0.5
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/epkzupwb",
+      "id": "8",
+      "bbox": [
+        14,
+        694,
+        900,
+        18
+      ],
+      "geometry": "rect",
+      "text": "Deliverable 2 - PD Gait Baseline Models  |  FAU Erlangen-Nürnberg",
+      "textPreview": "Deliverable 2 - PD Gait Baseline Models  |  FAU Erlangen-Nürnberg",
+      "resolvedFontSize": 9,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 9,
+        "typeface": "Aptos",
+        "color": "#5F6B76",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Deliverable 2 - PD Gait Baseline Models  |  FAU Erlangen-Nürnberg"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Deliverable 2 - PD Gait Baseline Models  |  FAU Erlangen-Nürnberg",
+          "resolvedTextStyle": {
+            "fontSize": 9,
+            "typeface": "Aptos",
+            "color": "#5F6B76",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Deliverable 2 - PD Gait Baseline Models  |  FAU Erlangen-Nürnberg",
+              "fontSize": 9,
+              "typeface": "Aptos",
+              "color": "#5F6B76"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/7adsji5s",
+      "id": "9",
+      "bbox": [
+        1210,
+        694,
+        55,
+        18
+      ],
+      "geometry": "rect",
+      "text": "2/12",
+      "textPreview": "2/12",
+      "resolvedFontSize": 9,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 9,
+        "typeface": "Aptos",
+        "color": "#5F6B76",
+        "alignment": "right",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "2/12"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "2/12",
+          "resolvedTextStyle": {
+            "fontSize": 9,
+            "typeface": "Aptos",
+            "color": "#5F6B76",
+            "alignment": "right"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "2/12",
+              "fontSize": 9,
+              "typeface": "Aptos",
+              "color": "#5F6B76"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

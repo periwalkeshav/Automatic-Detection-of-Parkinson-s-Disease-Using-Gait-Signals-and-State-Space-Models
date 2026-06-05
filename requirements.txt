@@ -8,3 +8,4 @@ tsfresh
 xlrd
 openpyxl
 PyWavelets
+torch

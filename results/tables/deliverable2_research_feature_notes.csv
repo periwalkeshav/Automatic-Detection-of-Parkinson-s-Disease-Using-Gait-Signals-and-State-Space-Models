@@ -1,0 +1,6 @@
+source,usable_idea,implemented_in_pipeline,notes
+PhysioNet Gait in Parkinson's Disease,"Use total-force signals, center-of-pressure, stride/swing timing, and stride-to-stride variability derived from the VGRF sensors",yes,"Implemented as gait timing, contact, COP, force symmetry, and variability features."
+Alam et al. 2017 PLOS ONE,"Use swing/stride variability, peak-force descriptors, COP descriptors, and SVM-style feature selection",yes,"Implemented through gait/COP/peak/contact descriptors plus train-fitted SelectKBest inside each fold."
+mittrayash GitHub project,"Compare classical models including Random Forest, Linear-SVM, RBF-SVM, and statistical feature compression",yes,"Implemented the required RF/SVM models and statistical TSFresh/window aggregation."
+mchlgmnk03 GitHub project,"Use time-frequency information with CWT/Morlet wavelets",yes,"Implemented Morlet CWT-derived wavelet power summaries as feature-vector inputs instead of CNN images."
+El Maachi et al. 1D-ConvNet paper,"Use neural models over gait-derived signals for PD detection",partial,"This deliverable uses feature-vector variants of 1D-ResNet/LSTM/GRU/PatchTST as requested; raw-signal deep models are no longer used in the corrected run."
