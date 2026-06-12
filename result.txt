@@ -1,0 +1,106 @@
+── Random Forest ──
+  Fold 1 | [Random Forest] foot=Left best_params={'max_depth': None, 'max_features': 0.3, 'min_samples_leaf': 1, 'n_estimators': 500, 'random_state': 42}  val_AUC=0.900  test_AUC=0.780
+  Fold 1 | [Random Forest] foot=Right best_params={'max_depth': None, 'max_features': 0.3, 'min_samples_leaf': 1, 'n_estimators': 200, 'random_state': 42}  val_AUC=0.625  test_AUC=0.780
+  Fold 1 | [Random Forest] foot=Combined best_params={'max_depth': None, 'max_features': 0.3, 'min_samples_leaf': 1, 'n_estimators': 200, 'random_state': 42}  val_AUC=0.830  test_AUC=0.870
+
+  ── SVM-Linear ──
+  Fold 1 | [SVM-Linear] foot=Left best_params={'C': 0.001, 'kernel': 'linear', 'probability': True}  val_AUC=0.960  test_AUC=0.780
+  Fold 1 | [SVM-Linear] foot=Right best_params={'C': 0.01, 'kernel': 'linear', 'probability': True}  val_AUC=0.660  test_AUC=0.750
+  Fold 1 | [SVM-Linear] foot=Combined best_params={'C': 0.001, 'kernel': 'linear', 'probability': True}  val_AUC=0.800  test_AUC=0.780
+
+  ── SVM-RBF ──
+  Fold 1 | [SVM-RBF] foot=Left best_params={'C': 10, 'gamma': 'scale', 'kernel': 'rbf', 'probability': True}  val_AUC=0.950  test_AUC=0.790
+  Fold 1 | [SVM-RBF] foot=Right best_params={'C': 10, 'gamma': 0.001, 'kernel': 'rbf', 'probability': True}  val_AUC=0.660  test_AUC=0.870
+  Fold 1 | [SVM-RBF] foot=Combined best_params={'C': 10, 'gamma': 'scale', 'kernel': 'rbf', 'probability': True}  val_AUC=0.750  test_AUC=0.750
+
+
+  ── 1D-ResNet ──
+  Fold 1 | [1D-ResNet] foot=Left best_lr=3e-04  val_AUC=0.720  test_AUC=0.730
+  Fold 1 | [1D-ResNet] foot=Right best_lr=1e-03  val_AUC=0.890  test_AUC=0.600
+  Fold 1 | [1D-ResNet] foot=Combined best_lr=1e-03  val_AUC=0.920  test_AUC=0.820
+
+  ── LSTM ──
+  Fold 1 | [LSTM] foot=Left best_lr=3e-04  val_AUC=0.630  test_AUC=0.820
+  Fold 1 | [LSTM] foot=Right best_lr=1e-03  val_AUC=0.920  test_AUC=0.730
+  Fold 1 | [LSTM] foot=Combined best_lr=3e-04  val_AUC=0.840  test_AUC=0.490
+
+  ── GRU ──
+  Fold 1 | [GRU] foot=Left best_lr=1e-03  val_AUC=0.770  test_AUC=0.770
+  Fold 1 | [GRU] foot=Right best_lr=1e-03  val_AUC=0.890  test_AUC=0.450
+  Fold 1 | [GRU] foot=Combined best_lr=1e-03  val_AUC=0.910  test_AUC=0.760
+
+  ── PatchTST ──
+  Fold 1 | [PatchTST] foot=Left best_lr=3e-04  val_AUC=0.800  test_AUC=0.710
+  Fold 1 | [PatchTST] foot=Right best_lr=1e-03  val_AUC=0.840  test_AUC=0.490
+  Fold 1 | [PatchTST] foot=Combined best_lr=1e-03  val_AUC=0.870  test_AUC=0.900
+
+
+
+   ── Random Forest ──
+  Fold 3 | [Random Forest] foot=Left best_params={'max_depth': None, 'max_features': 'sqrt', 'min_samples_leaf': 2, 'n_estimators': 200, 'random_state': 42}  val_AUC=0.860  test_AUC=0.670
+  Fold 3 | [Random Forest] foot=Right best_params={'max_depth': None, 'max_features': 'log2', 'min_samples_leaf': 2, 'n_estimators': 200, 'random_state': 42}  val_AUC=0.740  test_AUC=0.750
+  Fold 3 | [Random Forest] foot=Combined best_params={'max_depth': None, 'max_features': 'log2', 'min_samples_leaf': 1, 'n_estimators': 200, 'random_state': 42}  val_AUC=0.730  test_AUC=0.780
+
+  ── SVM-Linear ──
+  Fold 3 | [SVM-Linear] foot=Left best_params={'C': 0.001, 'kernel': 'linear', 'probability': True}  val_AUC=0.730  test_AUC=0.740
+  Fold 3 | [SVM-Linear] foot=Right best_params={'C': 0.001, 'kernel': 'linear', 'probability': True}  val_AUC=0.800  test_AUC=0.680
+  Fold 3 | [SVM-Linear] foot=Combined best_params={'C': 0.01, 'kernel': 'linear', 'probability': True}  val_AUC=0.810  test_AUC=0.650
+
+  ── SVM-RBF ──
+  Fold 3 | [SVM-RBF] foot=Left best_params={'C': 10, 'gamma': 0.01, 'kernel': 'rbf', 'probability': True}  val_AUC=0.870  test_AUC=0.670
+  Fold 3 | [SVM-RBF] foot=Right best_params={'C': 1, 'gamma': 0.001, 'kernel': 'rbf', 'probability': True}  val_AUC=0.830  test_AUC=0.730
+  Fold 3 | [SVM-RBF] foot=Combined best_params={'C': 1, 'gamma': 0.01, 'kernel': 'rbf', 'probability': True}  val_AUC=0.880  test_AUC=0.670
+
+  ── 1D-ResNet ──
+  Fold 3 | [1D-ResNet] foot=Left best_lr=3e-04  val_AUC=0.870  test_AUC=0.800
+  Fold 3 | [1D-ResNet] foot=Right best_lr=1e-03  val_AUC=0.670  test_AUC=0.630
+  Fold 3 | [1D-ResNet] foot=Combined best_lr=3e-04  val_AUC=0.900  test_AUC=0.720
+
+  ── LSTM ──
+  Fold 3 | [LSTM] foot=Left best_lr=3e-04  val_AUC=0.820  test_AUC=0.650
+  Fold 3 | [LSTM] foot=Right best_lr=1e-03  val_AUC=0.640  test_AUC=0.590
+  Fold 3 | [LSTM] foot=Combined best_lr=3e-04  val_AUC=0.630  test_AUC=0.420
+
+  ── GRU ──
+  Fold 3 | [GRU] foot=Left best_lr=3e-04  val_AUC=0.780  test_AUC=0.720
+  Fold 3 | [GRU] foot=Right best_lr=1e-03  val_AUC=0.630  test_AUC=0.710
+  Fold 3 | [GRU] foot=Combined best_lr=1e-03  val_AUC=0.660  test_AUC=0.620
+
+  ── PatchTST ──
+  Fold 3 | [PatchTST] foot=Left best_lr=3e-04  val_AUC=0.930  test_AUC=0.680
+  Fold 3 | [PatchTST] foot=Right best_lr=3e-04  val_AUC=0.650  test_AUC=0.490
+  Fold 3 | [PatchTST] foot=Combined best_lr=3e-04  val_AUC=0.790  test_AUC=0.710
+
+
+
+  ── Random Forest ──
+  Fold 4 | [Random Forest] foot=Left best_params={'max_depth': None, 'max_features': 'sqrt', 'min_samples_leaf': 1, 'n_estimators': 500, 'random_state': 42}  val_AUC=0.920  test_AUC=0.660
+  Fold 4 | [Random Forest] foot=Right best_params={'max_depth': None, 'max_features': 'sqrt', 'min_samples_leaf': 1, 'n_estimators': 500, 'random_state': 42}  val_AUC=0.860  test_AUC=0.700
+  Fold 4 | [Random Forest] foot=Combined best_params={'max_depth': None, 'max_features': 'log2', 'min_samples_leaf': 1, 'n_estimators': 200, 'random_state': 42}  val_AUC=0.930  test_AUC=0.780
+
+  ── SVM-Linear ──
+  Fold 4 | [SVM-Linear] foot=Left best_params={'C': 0.001, 'kernel': 'linear', 'probability': True}  val_AUC=0.830  test_AUC=0.710
+  Fold 4 | [SVM-Linear] foot=Right best_params={'C': 0.01, 'kernel': 'linear', 'probability': True}  val_AUC=0.880  test_AUC=0.660
+  Fold 4 | [SVM-Linear] foot=Combined best_params={'C': 0.001, 'kernel': 'linear', 'probability': True}  val_AUC=0.880  test_AUC=0.700
+
+  ── SVM-RBF ──
+  Fold 4 | [SVM-RBF] foot=Left best_params={'C': 0.1, 'gamma': 'auto', 'kernel': 'rbf', 'probability': True}  val_AUC=0.900  test_AUC=0.675
+  Fold 4 | [SVM-RBF] foot=Right best_params={'C': 10, 'gamma': 0.001, 'kernel': 'rbf', 'probability': True}  val_AUC=0.850  test_AUC=0.640
+  Fold 4 | [SVM-RBF] foot=Combined best_params={'C': 0.1, 'gamma': 0.001, 'kernel': 'rbf', 'probability': True}  val_AUC=0.890  test_AUC=0.695
+
+
+
+  ── Random Forest ──
+  Fold 5 | [Random Forest] foot=Left best_params={'max_depth': None, 'max_features': 'log2', 'min_samples_leaf': 2, 'n_estimators': 500, 'random_state': 42}  val_AUC=0.730  test_AUC=0.890
+  Fold 5 | [Random Forest] foot=Right best_params={'max_depth': None, 'max_features': 'log2', 'min_samples_leaf': 1, 'n_estimators': 500, 'random_state': 42}  val_AUC=0.920  test_AUC=0.805
+  Fold 5 | [Random Forest] foot=Combined best_params={'max_depth': None, 'max_features': 'log2', 'min_samples_leaf': 1, 'n_estimators': 1000, 'random_state': 42}  val_AUC=0.820  test_AUC=0.830
+
+  ── SVM-Linear ──
+  Fold 5 | [SVM-Linear] foot=Left best_params={'C': 0.001, 'kernel': 'linear', 'probability': True}  val_AUC=0.730  test_AUC=0.880
+  Fold 5 | [SVM-Linear] foot=Right best_params={'C': 0.001, 'kernel': 'linear', 'probability': True}  val_AUC=0.810  test_AUC=0.830
+  Fold 5 | [SVM-Linear] foot=Combined best_params={'C': 0.01, 'kernel': 'linear', 'probability': True}  val_AUC=0.810  test_AUC=0.870
+
+  ── SVM-RBF ──
+  Fold 5 | [SVM-RBF] foot=Left best_params={'C': 0.1, 'gamma': 'auto', 'kernel': 'rbf', 'probability': True}  val_AUC=0.730  test_AUC=0.870
+  Fold 5 | [SVM-RBF] foot=Right best_params={'C': 0.1, 'gamma': 0.001, 'kernel': 'rbf', 'probability': True}  val_AUC=0.920  test_AUC=0.800
+  Fold 5 | [SVM-RBF] foot=Combined best_params={'C': 10, 'gamma': 0.001, 'kernel': 'rbf', 'probability': True}  val_AUC=0.800  test_AUC=0.830
