@@ -1,0 +1,32 @@
+── Random Forest ──
+    VT  : 24250/27972 features retained
+    PCA : 30 components, 73.8% variance explained
+  Fold 1 | [Random Forest] foot=Left best_params={'class_weight': 'balanced', 'max_depth': None, 'max_features': 'log2', 'min_samples_leaf': 1, 'n_estimators': 500, 'random_state': 42}  val_AUC=0.830  test_AUC=0.590
+    VT  : 24212/27972 features retained
+    PCA : 30 components, 73.7% variance explained
+  Fold 1 | [Random Forest] foot=Right best_params={'class_weight': 'balanced', 'max_depth': None, 'max_features': 'log2', 'min_samples_leaf': 1, 'n_estimators': 1000, 'random_state': 42}  val_AUC=0.930  test_AUC=0.790
+    VT  : 48462/55944 features retained
+    PCA : 30 components, 72.3% variance explained
+  Fold 1 | [Random Forest] foot=Combined best_params={'class_weight': 'balanced', 'max_depth': None, 'max_features': 'log2', 'min_samples_leaf': 2, 'n_estimators': 200, 'random_state': 42}  val_AUC=0.920  test_AUC=0.610
+
+  ── SVM-Linear ──
+    VT  : 24250/27972 features retained
+    PCA : 30 components, 73.8% variance explained
+  Fold 1 | [SVM-Linear] foot=Left best_params={'C': 0.01, 'class_weight': 'balanced', 'kernel': 'linear', 'probability': True}  val_AUC=0.870  test_AUC=0.580
+    VT  : 24212/27972 features retained
+    PCA : 30 components, 73.7% variance explained
+  Fold 1 | [SVM-Linear] foot=Right best_params={'C': 0.01, 'class_weight': 'balanced', 'kernel': 'linear', 'probability': True}  val_AUC=0.940  test_AUC=0.780
+    VT  : 48462/55944 features retained
+    PCA : 30 components, 72.3% variance explained
+  Fold 1 | [SVM-Linear] foot=Combined best_params={'C': 0.01, 'class_weight': 'balanced', 'kernel': 'linear', 'probability': True}  val_AUC=0.930  test_AUC=0.620
+
+  ── SVM-RBF ──
+    VT  : 24250/27972 features retained
+    PCA : 30 components, 73.8% variance explained
+  Fold 1 | [SVM-RBF] foot=Left best_params={'C': 1, 'class_weight': 'balanced', 'gamma': 'scale', 'kernel': 'rbf', 'probability': True}  val_AUC=0.820  test_AUC=0.650
+    VT  : 24212/27972 features retained
+    PCA : 30 components, 73.7% variance explained
+  Fold 1 | [SVM-RBF] foot=Right best_params={'C': 1, 'class_weight': 'balanced', 'gamma': 'scale', 'kernel': 'rbf', 'probability': True}  val_AUC=0.870  test_AUC=0.760
+    VT  : 48462/55944 features retained
+    PCA : 30 components, 72.3% variance explained
+  Fold 1 | [SVM-RBF] foot=Combined best_params={'C': 1, 'class_weight': 'balanced', 'gamma': 'scale', 'kernel': 'rbf', 'probability': True}  val_AUC=0.920  test_AUC=0.650

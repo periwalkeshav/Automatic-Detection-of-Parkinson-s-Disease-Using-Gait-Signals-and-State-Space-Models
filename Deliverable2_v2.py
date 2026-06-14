@@ -3,78 +3,110 @@ Deliverables #1 & #2 — Parkinson's Disease Gait Classification
 ===============================================================
 Dataset   : PhysioNet GaitPaDB  — 5 pre-defined folds
             Data/splits/Fold_<1..5>/{training, validation, test}
-Features  : TSFresh ComprehensiveFCParameters per 5s/2.5s window,
+Features  : TSFresh EfficientFCParameters per 5s/2.5s window,
             aggregated per subject via mean/std/skewness/kurtosis.
-            Feature selection: VarianceThreshold (no label use, no leakage).
-Models    : Random Forest, SVM-Linear, SVM-RBF,
-            1D-ResNet, LSTM, GRU, PatchTST
+Models    : Random Forest, SVM-Linear, SVM-RBF, Logistic Regression
+            (ElasticNet).
+            Optional (behind RUN_DL): 1D-ResNet, LSTM, GRU, PatchTST.
 Foot      : Left, Right, Combined (concatenation)
 CV        : 5 pre-defined folds (no StratifiedKFold — folds are on disk)
-Metrics   : Accuracy, Sensitivity (PD recall), Specificity, AUC
+Metrics   : Accuracy, Sensitivity, Specificity, AUC
 
-Deliverable #1 additions
--------------------------
+RUN-MODE FLAGS  (this revision)
+--------------------------------
+  RUN_D1 = False   Skip Deliverable #1 plots (demographics, signal
+                   examples, PCA/t-SNE). Set True to regenerate them.
+  RUN_DL = False   Skip the deep-learning models entirely. Set True to
+                   also train 1D-ResNet / LSTM / GRU / PatchTST per fold.
+
+  Flags are used instead of literally deleting/commenting hundreds of
+  lines: every DL/D1 function definition stays intact (zero runtime cost
+  if unused) and either path is a one-line toggle. This run focuses
+  exclusively on the four CLASSICAL models and on fixing their accuracy.
+
+Deliverable #1 additions (only if RUN_D1=True)
+-------------------------------------------------
   - Dataset demographics table (N patients/controls, age mean±std, sex)
     parsed from GaitPaDB filename conventions.
   - Raw signal examples: one PD and one Control subject overlaid per channel.
   - PCA plots (PC1 vs PC2, coloured by diagnosis) for Left/Right/Combined,
     using Fold_1/training features (z-score normalised before PCA).
 
-Fold workflow (per fold, per model, per foot)
----------------------------------------------
-1. TRAINING   → fit VarianceThreshold (raw) + StandardScaler + PCA + classifier
-2. VALIDATION → transform with fitted scaler/selector,
-                sweep hyperparameter grid → pick best combo by AUC
-3. TEST       → transform with fitted scaler/selector,
-                evaluate best model → record metrics
+Fold workflow (per fold, per foot, per classical model)
+---------------------------------------------------------
+1. TRAINING   → fit VarianceThreshold + FRESH relevance filter + StandardScaler
+                (+ PCA for SVM-RBF only) on TRAINING data only.
+2. VALIDATION → transform with the fitted preprocessor,
+                sweep hyperparameter grid → pick best combo by AUC.
+3. REFIT      → refit best classifier on train + val combined.
+4. TEST       → evaluate refitted model → record metrics.
 
 Final reported metrics = mean ± std across the 5 test sets.
 
-This matches the sklearn cross-validation / grid-search workflow:
-  https://scikit-learn.org/stable/modules/cross_validation.html
-  https://scikit-learn.org/stable/_images/grid_search_workflow.png
-
 Key design decisions
 --------------------
-FEATURE SET
-  ComprehensiveFCParameters (~7056 features/window for 9 channels) includes
-  sample_entropy and approximate_entropy — established biomarkers for PD —
-  alongside spectral, nonlinear, autocorrelation, and distributional descriptors.
+CHANNELS (13 per foot)
+  8 FSR sensors + total force + COP_x + COP_y + heel_mean + toe_mean.
+  Derived channels capture postural instability and heel/toe loading
+  asymmetry — top-ranked PD biomarkers (Navita et al. 2025, Fig. 5).
 
-FEATURE SELECTION
-  Pipeline per fold: VarianceThreshold (raw features) → StandardScaler →
-  PCA(n_components = min(20, n_train-1)).
-  Order is critical: StandardScaler sets every non-constant feature to
-  variance 1.0, so running VT after scaling removes only perfectly constant
-  features (a near-no-op on TSFresh output). VT must run first on raw features.
-  PCA caps at n_train-1 to avoid rank deficiency and reduces ~25,000 dims to
-  a tractable space for the classifiers.
+SIGNAL PREPROCESSING
+  1. Trim TRIM_SEC=20s from each end — removes turning/acceleration artefacts.
+  2. Median filter (kernel 11) per channel — removes sensor impulse noise.
+  3. Compute derived channels (COP, heel, toe) from the 8 FSR sensors.
 
-CLASSICAL ML PIPELINE (per fold)
-  a. Fit scaler + selector on training subjects.
-  b. Transform train / val / test.
-  c. For each param combo: train on training set, score on validation set.
-  d. Refit best combo on training set (already done in step c — keep that model).
-  e. Evaluate on test set.
+FEATURE SELECTION  (the main fix in this revision)
+----------------------------------------------------
+  PROBLEM: the aggregated TSFresh feature matrix has tens of thousands of
+  columns (EfficientFCParameters × 13 channels × 4 aggregation stats ×
+  1-2 feet), while each fold has only ~60 training subjects. Fitting PCA
+  directly on this space — as in the previous revision — lets PCA's
+  *unsupervised* variance-maximisation latch onto nuisance variance (e.g.
+  which GaitPaDB sub-study — Ga/Ju/Si — a subject came from, which uses
+  different sensor hardware/sampling) rather than PD-related signal. This
+  was the main driver of the mediocre AUCs (~0.65-0.79) in the previous run.
 
-DEEP LEARNING PIPELINE (per fold)
-  Same scaler + PCA (replaces SelectKBest for DL — PCA on training windows only)
-  applied to val/test. Hyperparameter sweep (lr, dropout) on validation loss.
+  NEW PIPELINE  (fit on TRAINING data only, per fold per foot, in
+  _prepare_features_for_fold — computed ONCE and reused by all 4 models):
+    1. VarianceThreshold(threshold=1e-10)
+         Drop exact-constant columns (numerical hygiene only).
+    2. FRESH relevance filter  (tsfresh.select_features)
+         Per-feature Mann-Whitney U test vs. the PD/Control label, with
+         Benjamini-Hochberg FDR control (fdr_level=FRESH_FDR_LEVEL). This
+         is the *supervised* step that was missing: it keeps only features
+         that are statistically associated with diagnosis, collapsing
+         tens of thousands of columns down to tens/hundreds. Bounded to
+         [MIN_SELECTED_FEATURES, MAX_SELECTED_FEATURES] via an F-test
+         fallback/cap (see _fresh_select_indices).
+    3. StandardScaler — fit on the FRESH-selected training features.
+    4. PCA(N_PCA_COMPONENTS) — fit on top of (2)+(3); used ONLY for
+         SVM-RBF, where a compact well-conditioned input space makes the
+         RBF kernel's distance metric meaningful again. Random Forest,
+         SVM-Linear, and Logistic Regression use the FRESH-selected +
+         scaled features directly (no PCA) — they handle the residual
+         dimensionality via per-split feature subsampling / L1-L2
+         regularisation, and benefit from the extra (non-PCA-mixed)
+         features for interpretability.
 
-FEATURE CACHE
-  Extracted TSFresh features are expensive. Cache key = SHA-256 of
-  (data_dir, fold_id, split_tag, WIN_SEC, STEP_SEC, FC_PARAMS class name).
-  Stored under OUT_DIR/feature_cache/<key>.npz.
+  Expected cost: FRESH selection on ~40k-80k columns with n_jobs=1 takes
+  roughly 30-90s per (fold, foot) → ~10-25 min total across 5 folds × 3
+  feet. Increase FEATURE_SELECTION_N_JOBS on multi-core machines.
 
-DEMOGRAPHICS PARSING
-  GaitPaDB filenames follow the convention:
-    <ID><Type><Gender><Age>_<trial>.txt
-  e.g. "GaCo01MF57_01.txt" → Control, Male, age 57
-       "GaPt02FF65_01.txt" → Patient, Female, age 65
-  Type : "Co" = Control, "Pt" = Patient
-  Gender: character at index 6 — 'M' = Male, 'F' = Female
-  Age  : two-digit integer at the end of the ID field (characters 7–8)
-  Adjust _parse_demographics() if your dataset uses different conventions.
+SIGNAL PREPROCESSING / SUBJECT-LEVEL FEATURE CACHE
+  The 5 GaitPaDB folds reuse the SAME underlying subject recordings across
+  training/validation/test splits — e.g. subject "GaCo02" might appear in
+  Fold_1/training, Fold_3/validation, and Fold_5/test. Since the raw
+  recording for a given subject is identical wherever it appears, and
+  TSFresh extraction is deterministic given the extraction configuration,
+  caching is keyed by SUBJECT ID (+ extraction config) rather than by
+  (fold, split).
+
+  This means each subject's expensive TSFresh extraction runs AT MOST ONCE
+  across the entire pipeline. Cache key encodes: subject_id, WIN_SEC,
+  STEP_SEC, TRIM_SEC, MEDIAN_FILTER_LEN, N_CHANNELS, FC_PARAMS class name.
+  Any change to these parameters busts the cache automatically.
+  An in-memory dict additionally avoids re-reading the same .npz from disk
+  when a subject appears in multiple splits within a single run.
 """
 
 import warnings
@@ -89,16 +121,18 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from pathlib import Path
 from scipy.stats import skew, kurtosis as kurt
+from scipy.signal import medfilt
 from sklearn.decomposition import PCA
 
-from tsfresh import extract_features
+from tsfresh import extract_features, select_features
 from tsfresh.feature_extraction import EfficientFCParameters
 from tsfresh.utilities.dataframe_functions import impute
 
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
+from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
-from sklearn.feature_selection import VarianceThreshold
+from sklearn.feature_selection import VarianceThreshold, f_classif
 from sklearn.model_selection import ParameterGrid
 from sklearn.manifold import TSNE
 from sklearn.metrics import (accuracy_score, confusion_matrix,
@@ -113,10 +147,15 @@ torch.manual_seed(42)
 
 
 # ─────────────────────────────────────────────────────────────────
-# 0.  PATHS & CONSTANTS
+# 0.  RUN-MODE FLAGS & PATHS & CONSTANTS
 # ─────────────────────────────────────────────────────────────────
+# See module docstring "RUN-MODE FLAGS". Both default to False so this
+# revision focuses purely on classical-ML accuracy.
+RUN_D1 = False
+RUN_DL = False
+
 DATA_ROOT   = Path("Data/splits")
-N_FOLDS     = 5                       # Fold_1 … Fold_5 on disk
+N_FOLDS     = 5
 OUT_DIR     = Path("results");        OUT_DIR.mkdir(exist_ok=True)
 FIG_DIR     = OUT_DIR / "figures";    FIG_DIR.mkdir(exist_ok=True)
 CACHE_DIR   = OUT_DIR / "feature_cache"; CACHE_DIR.mkdir(exist_ok=True)
@@ -127,29 +166,64 @@ STEP_SEC     = 2.5
 WIN_SAMPLES  = int(WIN_SEC  * FS)     # 500 samples / window
 STEP_SAMPLES = int(STEP_SEC * FS)     # 250 samples step
 
-# GaitPaDB column layout (0-indexed after np.loadtxt):
+# GaitPaDB raw column layout (0-indexed after np.loadtxt):
 #   col  0     : time
-#   cols 1–8   : Left  VGRF  L1..L8  (8 individual sensors)
-#   cols 9–16  : Right VGRF  R1..R8  (8 individual sensors)
-#   col 17     : Total force under left foot
-#   col 18     : Total force under right foot
+#   cols 1–8   : Left  VGRF  L1..L8  (8 individual pressure sensors)
+#   cols 9–16  : Right VGRF  R1..R8  (8 individual pressure sensors)
+#   col 17     : Total force under left foot  [= sum(L1..L8) ± float rounding]
+#   col 18     : Total force under right foot [= sum(R1..R8) ± float rounding]
 #
-# We use all 9 channels per foot: 8 individual sensors + total force.
-# The total force provides a strong aggregate gait rhythm signal and captures
-# stance/swing phase transitions clearly — a well-established PD biomarker.
-L_COLS = list(range(1, 9)) + [17]   # L1–L8 + left total  → 9 channels
-R_COLS = list(range(9, 17)) + [18]  # R1–R8 + right total → 9 channels
-N_CHANNELS = 9   # channels per foot
+# L_COLS / R_COLS are kept as documentation; load_subject extracts columns
+# explicitly to also compute the 4 derived channels.
+L_COLS = list(range(1, 9)) + [17]   # L1–L8 + left total  (reference)
+R_COLS = list(range(9, 17)) + [18]  # R1–R8 + right total (reference)
 
-K_BEST_FEATURES  = 500    # kept for reference — SelectKBest removed (see below)
-N_PCA_COMPONENTS = 30     # PCA components for DL input (reduced from 50;
-                           # with ~15 training subjects, 50 components causes
-                           # the PCA to explain very little signal — 20 is safer)
-D_MODEL          = 32     # hidden dim for all DL models
+# ── Signal preprocessing constants ───────────────────────────────
+TRIM_SEC          = 20.0
+TRIM_SAMPLES      = int(TRIM_SEC * FS)
+MEDIAN_FILTER_LEN = 11               # must be odd
+
+# ── Sensor layout for Centre-of-Pressure computation ─────────────
+SENSOR_X = np.array([-500, -700, -300, -700, -300, -700, -300, -500],
+                    dtype=np.float32)
+SENSOR_Y = np.array([-800, -400, -400,    0,    0,  400,  400,  800],
+                    dtype=np.float32)
+
+# ── Channel count after derived features ─────────────────────────
+# Per foot: 8 FSR + 1 total + COP_x + COP_y + heel_mean + toe_mean = 13
+N_CHANNELS = 13
+
+# ── Channel names for TSFresh (must align with N_CHANNELS = 13) ──
+L_CHANNEL_NAMES = (
+    [f"L{i+1}" for i in range(8)] +
+    ["L_total", "L_cop_x", "L_cop_y", "L_heel", "L_toe"]
+)
+R_CHANNEL_NAMES = (
+    [f"R{i+1}" for i in range(8)] +
+    ["R_total", "R_cop_x", "R_cop_y", "R_heel", "R_toe"]
+)
+assert len(L_CHANNEL_NAMES) == N_CHANNELS, "L_CHANNEL_NAMES length mismatch"
+assert len(R_CHANNEL_NAMES) == N_CHANNELS, "R_CHANNEL_NAMES length mismatch"
+
+# PCA components — used only for SVM-RBF (after FRESH selection) and for
+# DL (if RUN_DL=True). Random Forest / SVM-Linear / Logistic Regression use
+# the FRESH-selected + scaled features directly (no PCA).
+N_PCA_COMPONENTS = 30
+
+# ── FRESH supervised feature-selection constants ──────────────────
+# See module docstring "FEATURE SELECTION" for rationale.
+FRESH_FDR_LEVEL          = 0.05   # Benjamini-Hochberg FDR level
+MIN_SELECTED_FEATURES    = 30     # floor: fall back to top-K by F-test p-value
+MAX_SELECTED_FEATURES    = 300    # ceiling: cap to top-K by p-value if exceeded
+FEATURE_SELECTION_N_JOBS = 10      # increase on multi-core machines
+
+D_MODEL_SMALL    = 32
+D_MODEL_LARGE    = 64
+D_MODEL          = D_MODEL_SMALL    # default; swept per-model in DL HP grid
 DEVICE           = "cuda" if torch.cuda.is_available() else "cpu"
 print(f"Device: {DEVICE}")
+print(f"RUN_D1={RUN_D1}  RUN_DL={RUN_DL}")
 
-# FAU brand colours
 FAU_BLUE = "#003865"
 FAU_TEAL = "#00b1eb"
 FAU_RED  = "#c8102e"
@@ -159,59 +233,136 @@ FC_PARAMS = EfficientFCParameters()
 
 
 # ─────────────────────────────────────────────────────────────────
-# 1.  FEATURE CACHE
+# 1.  SUBJECT-LEVEL FEATURE CACHE
 # ─────────────────────────────────────────────────────────────────
-def _cache_key(data_dir: Path, fold_id: int, split_tag: str) -> str:
+_MEMORY_CACHE: dict = {}   # subject_id -> (L_features, R_features)
+
+
+def _subject_cache_key(subject_id: str) -> str:
     fingerprint = "|".join([
-        str(data_dir.resolve()),
-        f"fold={fold_id}",
-        split_tag,
+        subject_id,
         f"win={WIN_SEC}",
         f"step={STEP_SEC}",
-        f"channels={N_CHANNELS}",   # busts cache if channel set changes
+        f"trim={TRIM_SEC}",
+        f"medfilt={MEDIAN_FILTER_LEN}",
+        f"channels={N_CHANNELS}",
         type(FC_PARAMS).__name__,
     ])
     return hashlib.sha256(fingerprint.encode()).hexdigest()[:12]
 
 
-def _cache_path(data_dir: Path, fold_id: int, split_tag: str, kind: str) -> Path:
-    key = _cache_key(data_dir, fold_id, split_tag)
-    return CACHE_DIR / f"{kind}_fold{fold_id}_{split_tag}_{key}.npz"
+def _subject_cache_path(subject_id: str) -> Path:
+    return CACHE_DIR / f"subject_{subject_id}_{_subject_cache_key(subject_id)}.npz"
 
 
-def load_cache(data_dir: Path, fold_id: int, split_tag: str, kind: str):
-    path = _cache_path(data_dir, fold_id, split_tag, kind)
+def load_subject_window_features(subject_id: str):
+    """
+    Return (L_features, R_features) — each (N_windows, F_tsfresh) — from the
+    on-disk cache for this subject under the current extraction config,
+    or None on a cache miss / invalid cache file.
+    """
+    path = _subject_cache_path(subject_id)
     if not path.exists():
         return None
     try:
-        arrays = dict(np.load(str(path), allow_pickle=False))
-        print(f"  [CACHE HIT]  {path.name}")
-        return arrays
+        data = np.load(str(path), allow_pickle=False)
+        return data["L_features"], data["R_features"]
     except Exception as exc:
-        print(f"  [CACHE WARN] Could not load {path.name}: {exc}. Re-extracting …")
+        print(f"  [CACHE WARN] {path.name}: {exc}. Re-extracting …")
         return None
 
 
-def save_cache(data_dir: Path, fold_id: int, split_tag: str, kind: str, **arrays):
-    path = _cache_path(data_dir, fold_id, split_tag, kind)
+def save_subject_window_features(subject_id: str,
+                                  L_features: np.ndarray,
+                                  R_features: np.ndarray) -> None:
+    path = _subject_cache_path(subject_id)
     try:
-        np.savez_compressed(str(path), **arrays)
-        print(f"  [CACHE SAVE] {path.name}")
+        np.savez_compressed(str(path),
+                            L_features=L_features, R_features=R_features)
     except Exception as exc:
-        print(f"  [CACHE WARN] Could not save cache: {exc}")
+        print(f"  [CACHE WARN] Could not save cache for {subject_id}: {exc}")
+
+
+def get_subject_window_features(subject_id: str,
+                                 L_raw: np.ndarray, R_raw: np.ndarray):
+    """
+    Return (L_features, R_features) — each (N_windows, F_tsfresh) — for one
+    subject, using the in-memory cache first, then the on-disk cache, and
+    only running TSFresh extraction on a full cache miss. The result is
+    written to both caches so subsequent lookups are instant.
+    """
+    cached = _MEMORY_CACHE.get(subject_id)
+    if cached is not None:
+        return cached
+
+    cached = load_subject_window_features(subject_id)
+    if cached is not None:
+        _MEMORY_CACHE[subject_id] = cached
+        return cached
+
+    L_feat = _window_features(L_raw, L_CHANNEL_NAMES)
+    R_feat = _window_features(R_raw, R_CHANNEL_NAMES)
+    save_subject_window_features(subject_id, L_feat, R_feat)
+    _MEMORY_CACHE[subject_id] = (L_feat, R_feat)
+    return L_feat, R_feat
 
 
 # ─────────────────────────────────────────────────────────────────
 # 2.  DATA LOADING
 # ─────────────────────────────────────────────────────────────────
+def _compute_derived_channels(fsr: np.ndarray) -> np.ndarray:
+    """
+    Compute 4 derived channels from 8 FSR sensors (T, 8) → (T, 4).
+
+    COP_x, COP_y  — Centre of Pressure (weighted sensor positions).
+                    Captures postural instability — top PD biomarker.
+    heel_mean     — Mean force under heel sensor (index 0, Y=−800).
+    toe_mean      — Mean force under toe sensor (index 7, Y=+800).
+    """
+    eps       = 1e-6
+    total     = fsr.sum(axis=1, keepdims=True) + eps
+    cop_x     = (fsr * SENSOR_X).sum(axis=1, keepdims=True) / total
+    cop_y     = (fsr * SENSOR_Y).sum(axis=1, keepdims=True) / total
+    heel_mean = fsr[:, [0]].mean(axis=1, keepdims=True)
+    toe_mean  = fsr[:, [7]].mean(axis=1, keepdims=True)
+    return np.concatenate([cop_x, cop_y, heel_mean, toe_mean], axis=1)
+
+
 def load_subject(path: Path):
-    """Return (left, right) arrays of shape (T, 8), or (None, None)."""
+    """
+    Load one GaitPaDB recording and return (left, right) arrays of shape (T, 13).
+
+    Preprocessing:
+      1. Trim TRIM_SEC from each end (removes turn/acceleration artefacts).
+      2. Median filter per channel (removes sensor impulse noise).
+      3. Compute COP_x, COP_y, heel_mean, toe_mean → 13 channels per foot.
+
+    Returns (None, None) if the recording is too short after trimming.
+    """
     data = np.loadtxt(str(path))
     if data.ndim == 1:
         data = data.reshape(1, -1)
+
+    if TRIM_SAMPLES > 0 and data.shape[0] > 2 * TRIM_SAMPLES + WIN_SAMPLES:
+        data = data[TRIM_SAMPLES : -TRIM_SAMPLES]
+
     if data.shape[0] < WIN_SAMPLES:
         return None, None
-    return data[:, L_COLS].copy(), data[:, R_COLS].copy()
+
+    if MEDIAN_FILTER_LEN > 1:
+        data = np.apply_along_axis(
+            medfilt, 0, data, kernel_size=MEDIAN_FILTER_LEN)
+
+    L_fsr     = data[:, list(range(1, 9))].astype(np.float32)
+    R_fsr     = data[:, list(range(9, 17))].astype(np.float32)
+    L_tot     = data[:, [17]].astype(np.float32)
+    R_tot     = data[:, [18]].astype(np.float32)
+    L_derived = _compute_derived_channels(L_fsr)
+    R_derived = _compute_derived_channels(R_fsr)
+
+    L = np.concatenate([L_fsr, L_tot, L_derived], axis=1)   # (T, 13)
+    R = np.concatenate([R_fsr, R_tot, R_derived], axis=1)   # (T, 13)
+    return L, R
 
 
 def parse_label(filename: str) -> int:
@@ -225,7 +376,7 @@ def load_split(directory: Path):
     for path in sorted(directory.glob("*.txt")):
         L, R = load_subject(path)
         if L is None:
-            print(f"  [SKIP] {path.name}  (empty or too short)")
+            print(f"  [SKIP] {path.name}  (empty or too short after trimming)")
             continue
         name = path.stem.split("_")[0]
         subjects.append(name)
@@ -240,6 +391,8 @@ def load_split(directory: Path):
 # ─────────────────────────────────────────────────────────────────
 def _build_tsfresh_df(signal_2d: np.ndarray, channel_names: list) -> pd.DataFrame:
     T, C = signal_2d.shape
+    assert C == len(channel_names), (
+        f"Signal has {C} channels but channel_names has {len(channel_names)} entries")
     blocks, win_id, start = [], 0, 0
     while start + WIN_SAMPLES <= T:
         w  = signal_2d[start : start + WIN_SAMPLES]
@@ -259,7 +412,8 @@ def _build_tsfresh_df(signal_2d: np.ndarray, channel_names: list) -> pd.DataFram
 
 
 def _window_features(signal_2d: np.ndarray, channel_names: list) -> np.ndarray:
-    """(N_windows, F_tsfresh) array for one subject."""
+    """(N_windows, F_tsfresh) array for one subject. NOT cached itself —
+    callers should go through get_subject_window_features() for caching."""
     df    = _build_tsfresh_df(signal_2d, channel_names)
     feats = extract_features(
                 df,
@@ -274,66 +428,58 @@ def _window_features(signal_2d: np.ndarray, channel_names: list) -> np.ndarray:
                          nan=0.0, posinf=0.0, neginf=0.0)
 
 
-def subject_feature_vector(signal_2d: np.ndarray, channel_names: list) -> np.ndarray:
+def _aggregate_window_features(wf: np.ndarray) -> np.ndarray:
     """mean/std/skew/kurt aggregation → 1-D vector of length 4 × F_tsfresh."""
-    wf  = _window_features(signal_2d, channel_names)
     agg = np.concatenate([wf.mean(0), wf.std(0), skew(wf, 0), kurt(wf, 0)])
     return np.nan_to_num(agg, nan=0.0, posinf=0.0, neginf=0.0)
 
 
-def build_feature_matrix(left_raw: list, right_raw: list,
-                          data_dir: Path, fold_id: int, split_tag: str):
+def build_feature_matrix(subjects: list, left_raw: list, right_raw: list):
     """
     Per-subject aggregated feature matrices — shape (N, 4 × F_tsfresh).
     Returns X_left, X_right, X_both.
-    Results are cached; extraction is skipped on cache hit.
-    """
-    cached = load_cache(data_dir, fold_id, split_tag, "classical")
-    if cached is not None:
-        return cached["X_left"], cached["X_right"], cached["X_both"]
 
-    L_names = [f"L{i+1}" for i in range(8)] + ["L_total"]
-    R_names = [f"R{i+1}" for i in range(8)] + ["R_total"]
+    Uses the subject-level feature cache (get_subject_window_features):
+    TSFresh extraction for a given subject runs at most once across the
+    whole pipeline, regardless of how many folds/splits it appears in.
+    """
     X_L, X_R = [], []
-    n = len(left_raw)
-    for i, (L, R) in enumerate(zip(left_raw, right_raw)):
-        print(f"    Subject {i+1}/{n} …", end="\r", flush=True)
-        X_L.append(subject_feature_vector(L, L_names))
-        X_R.append(subject_feature_vector(R, R_names))
+    n = len(subjects)
+    for i, (sid, L, R) in enumerate(zip(subjects, left_raw, right_raw)):
+        print(f"    Subject {i+1}/{n} ({sid}) …", end="\r", flush=True)
+        L_feat, R_feat = get_subject_window_features(sid, L, R)
+        X_L.append(_aggregate_window_features(L_feat))
+        X_R.append(_aggregate_window_features(R_feat))
     print()
-    X_L = np.array(X_L);  X_R = np.array(X_R)
+    X_L = np.array(X_L); X_R = np.array(X_R)
     X_B = np.concatenate([X_L, X_R], axis=1)
-    save_cache(data_dir, fold_id, split_tag, "classical",
-               X_left=X_L, X_right=X_R, X_both=X_B)
     return X_L, X_R, X_B
 
 
-def build_dl_dataset(left_raw: list, right_raw: list, labels: np.ndarray,
-                     data_dir: Path, fold_id: int, split_tag: str):
+def build_dl_dataset(subjects: list, left_raw: list, right_raw: list,
+                     labels: np.ndarray):
     """
     Raw window-feature sequences — shape (N, F_tsfresh, T_MAX).
     Returns X_left, X_right, X_both, y.
-    PCA is applied later, inside the fold loop. Results are cached.
-    """
-    cached = load_cache(data_dir, fold_id, split_tag, "dl")
-    if cached is not None:
-        return (cached["X_left"], cached["X_right"],
-                cached["X_both"], cached["y"])
 
-    L_names = [f"L{i+1}" for i in range(8)] + ["L_total"]
-    R_names = [f"R{i+1}" for i in range(8)] + ["R_total"]
+    Only used when RUN_DL=True. Uses the subject-level feature cache, so
+    subjects already extracted for the classical-ML pass are retrieved
+    instantly instead of re-running TSFresh.
+    T_MAX = max N_windows across subjects in THIS split; shorter sequences
+    are zero-padded.
+    """
     seqs_L, seqs_R = [], []
-    n = len(left_raw)
-    for i, (L, R) in enumerate(zip(left_raw, right_raw)):
-        print(f"    DL subject {i+1}/{n} …", end="\r", flush=True)
-        seqs_L.append(_window_features(L, L_names).T.astype(np.float32))
-        seqs_R.append(_window_features(R, R_names).T.astype(np.float32))
+    n = len(subjects)
+    for i, (sid, L, R) in enumerate(zip(subjects, left_raw, right_raw)):
+        print(f"    DL subject {i+1}/{n} ({sid}) …", end="\r", flush=True)
+        L_feat, R_feat = get_subject_window_features(sid, L, R)
+        seqs_L.append(L_feat.T.astype(np.float32))
+        seqs_R.append(R_feat.T.astype(np.float32))
     print()
 
     T_MAX = max(s.shape[1] for s in seqs_L + seqs_R)
 
     def _pad(seqs, T):
-        """Zero-pad each sequence to length T along the time axis."""
         out = []
         for s in seqs:
             if s.shape[1] < T:
@@ -347,39 +493,17 @@ def build_dl_dataset(left_raw: list, right_raw: list, labels: np.ndarray,
     X_R = _pad(seqs_R, T_MAX)
     X_B = np.concatenate([X_L, X_R], axis=1)
     y   = np.array(labels, dtype=np.int64)
-    save_cache(data_dir, fold_id, split_tag, "dl",
-               X_left=X_L, X_right=X_R, X_both=X_B, y=y)
     return X_L, X_R, X_B, y
 
 
 # ─────────────────────────────────────────────────────────────────
-# 4.  DELIVERABLE #1 — DATA ANALYSIS
-#
-#     (a) Demographics  — parse filename, print table, save CSV
-#     (b) Signal plots  — one PD vs one Control example per foot
-#     (c) PCA plots     — PC1 vs PC2 coloured by diagnosis
-#         (run once on Fold_1/training after feature extraction)
+# 4.  DELIVERABLE #1 — DATA ANALYSIS  (only used if RUN_D1=True)
 # ─────────────────────────────────────────────────────────────────
-
 def _parse_demographics(subjects: list, labels: np.ndarray) -> pd.DataFrame:
-    """
-    Parse age and sex from GaitPaDB subject IDs.
-
-    GaitPaDB naming convention (example):
-        GaCo01MF57   → Ga=dataset, Co=Control, 01=subj#, M=Male, F=?, 57=age
-        GaPt02FF65   → Ga=dataset, Pt=Patient, 02=subj#, F=Female, F=?, 65=age
-
-    Index  : 0-1 = "Ga", 2-3 = type ("Co"/"Pt"), 4-5 = subject number,
-             6   = gender ('M'/'F'), 7 = extra char, 8-9 = age (2 digits)
-
-    If a subject ID does not match the expected pattern, age is set to NaN
-    and sex to "Unknown" so the rest of the analysis still runs.
-    """
     rows = []
     for sid, lbl in zip(subjects, labels):
         diagnosis = "Patient" if lbl == 1 else "Control"
         try:
-            # Characters 6 = gender, 8:10 = age (two-digit)
             sex = "Male" if sid[6].upper() == "M" else "Female"
             age = int(sid[8:10])
         except (IndexError, ValueError):
@@ -390,16 +514,6 @@ def _parse_demographics(subjects: list, labels: np.ndarray) -> pd.DataFrame:
 
 
 def report_demographics(all_dirs: list):
-    """
-    Collect subjects from every provided directory, deduplicate by SubjectID,
-    then print and save a demographics summary table.
-
-    Parameters
-    ----------
-    all_dirs : list of Path
-        Typically all training + validation + test directories across all folds
-        so every subject appears exactly once (duplicates dropped).
-    """
     all_subjects, all_labels = [], []
     seen = set()
     for d in all_dirs:
@@ -416,8 +530,8 @@ def report_demographics(all_dirs: list):
     print("DATASET DEMOGRAPHICS")
     print("=" * 55)
     for diag in ["Patient", "Control"]:
-        sub = df[df["Diagnosis"] == diag]
-        n   = len(sub)
+        sub      = df[df["Diagnosis"] == diag]
+        n        = len(sub)
         age_vals = sub["Age"].dropna()
         age_str  = (f"{age_vals.mean():.1f} ± {age_vals.std():.1f}"
                     if len(age_vals) else "N/A")
@@ -431,15 +545,13 @@ def report_demographics(all_dirs: list):
     df.to_csv(OUT_DIR / "demographics.csv", index=False)
     print(f"  Saved → {OUT_DIR / 'demographics.csv'}")
 
-    # ── Summary bar chart: sex breakdown per group ─────────────────
     fig, axes = plt.subplots(1, 2, figsize=(9, 4))
     for ax, diag in zip(axes, ["Patient", "Control"]):
-        sub   = df[df["Diagnosis"] == diag]
+        sub    = df[df["Diagnosis"] == diag]
         counts = sub["Sex"].value_counts()
         ax.bar(counts.index, counts.values,
                color=[FAU_BLUE, FAU_TEAL, FAU_GRAY], alpha=0.9)
-        ax.set_title(f"{diag}  (N={len(sub)})",
-                     color=FAU_BLUE, fontweight="bold")
+        ax.set_title(f"{diag}  (N={len(sub)})", color=FAU_BLUE, fontweight="bold")
         ax.set_ylabel("Count"); ax.set_ylim(0, max(counts.values) + 2)
         for bar in ax.patches:
             ax.text(bar.get_x() + bar.get_width() / 2,
@@ -452,7 +564,6 @@ def report_demographics(all_dirs: list):
     fig.savefig(FIG_DIR / "demographics_sex.png", dpi=150, bbox_inches="tight")
     plt.close(fig)
 
-    # ── Age distribution per group ─────────────────────────────────
     fig, ax = plt.subplots(figsize=(7, 4))
     for diag, color in [("Patient", FAU_RED), ("Control", FAU_BLUE)]:
         ages = df[df["Diagnosis"] == diag]["Age"].dropna()
@@ -473,28 +584,26 @@ def report_demographics(all_dirs: list):
 def plot_signal_examples(left_raw: list, right_raw: list,
                           labels: np.ndarray, subjects: list):
     """
-    Plot raw VGRF signals for one PD subject and one Control subject side-by-side.
-    One figure for the left foot, one for the right.
-    Shows all N_CHANNELS channels stacked vertically (8 sensors + total force).
-    x-axis in seconds.
+    Plot raw VGRF signals for one PD and one Control subject side-by-side.
+    Shows all N_CHANNELS=13 channels (8 FSR + total + COP_x/y + heel/toe).
     """
     pd_idx  = np.where(labels == 1)[0]
     ctl_idx = np.where(labels == 0)[0]
     if len(pd_idx) == 0 or len(ctl_idx) == 0:
-        print("  [SKIP] Signal examples: need at least one PD and one Control subject.")
+        print("  [SKIP] Signal examples: need at least one PD and one Control.")
         return
 
     pd_i,  ctl_i  = pd_idx[0], ctl_idx[0]
-    t_sec_l = np.arange(left_raw[pd_i].shape[0])  / FS
-    t_sec_r = np.arange(right_raw[pd_i].shape[0]) / FS
 
-    # Channel labels: L1–L8 / R1–R8 for sensors, "Total" for the last channel
     def _ch_labels(prefix):
-        return [f"{prefix}{i+1}" for i in range(8)] + ["Total"]
+        return (
+            [f"{prefix}{i+1}" for i in range(8)] +
+            ["Total", "COP_x", "COP_y", "Heel", "Toe"]
+        )
 
-    for foot, arrays, t_sec, prefix in [
-            ("Left",  left_raw,  t_sec_l, "L"),
-            ("Right", right_raw, t_sec_r, "R")]:
+    for foot, arrays, prefix in [
+            ("Left",  left_raw,  "L"),
+            ("Right", right_raw, "R")]:
         ch_labels = _ch_labels(prefix)
         fig, axes = plt.subplots(N_CHANNELS, 2,
                                   figsize=(14, N_CHANNELS * 1.4), sharex=False)
@@ -504,7 +613,7 @@ def plot_signal_examples(left_raw: list, right_raw: list,
                     (ctl_i, "Control", FAU_BLUE)]):
                 sig  = arrays[idx]
                 t    = np.arange(sig.shape[0]) / FS
-                mask = t <= 10.0   # first 10 s for readability
+                mask = t <= 10.0
                 axes[ch, col].plot(t[mask], sig[mask, ch],
                                    color=color, linewidth=0.8)
                 axes[ch, col].set_ylabel(ch_labels[ch], fontsize=8)
@@ -528,28 +637,15 @@ def plot_signal_examples(left_raw: list, right_raw: list,
 def plot_pca_tsne(X_left: np.ndarray, X_right: np.ndarray,
                   X_both: np.ndarray, labels: np.ndarray,
                   method: str = "pca"):
-    """
-    Produce dimensionality-reduction scatter plots (PCA or t-SNE) for
-    Left, Right, and Combined features, coloured by diagnosis.
-
-    Parameters
-    ----------
-    X_left, X_right, X_both : (N_subjects, F) feature matrices
-    labels                  : (N_subjects,) binary labels
-    method                  : "pca" or "tsne"
-    """
     method = method.lower()
-    assert method in ("pca", "tsne"), "method must be 'pca' or 'tsne'"
+    assert method in ("pca", "tsne")
 
     fig, axes = plt.subplots(1, 3, figsize=(15, 5))
-    titles = ["Left foot", "Right foot", "Combined"]
-    colors = {0: FAU_BLUE, 1: FAU_RED}
+    titles     = ["Left foot", "Right foot", "Combined"]
+    colors     = {0: FAU_BLUE, 1: FAU_RED}
     diag_names = {0: "Control", 1: "Patient"}
 
-    for ax, X, title in zip(axes,
-                             [X_left, X_right, X_both],
-                             titles):
-        # z-score normalise before projection (required by both D1 and D2)
+    for ax, X, title in zip(axes, [X_left, X_right, X_both], titles):
         scaler = StandardScaler()
         Xs     = scaler.fit_transform(X)
         Xs     = np.nan_to_num(Xs, nan=0.0, posinf=0.0, neginf=0.0)
@@ -561,7 +657,6 @@ def plot_pca_tsne(X_left: np.ndarray, X_right: np.ndarray,
             xlabel = f"PC1 ({var[0]:.1f}%)"
             ylabel = f"PC2 ({var[1]:.1f}%)"
         else:
-            # t-SNE: first reduce with PCA to 50 dims for speed/stability
             n_pre  = min(50, Xs.shape[1], Xs.shape[0] - 1)
             Xpre   = PCA(n_components=n_pre, random_state=42).fit_transform(Xs)
             coords = TSNE(n_components=2, random_state=42,
@@ -583,8 +678,7 @@ def plot_pca_tsne(X_left: np.ndarray, X_right: np.ndarray,
         ax.axvline(0, color="grey", linewidth=0.5, alpha=0.4)
         ax.legend(fontsize=9)
 
-    tag = method.upper()
-    fig.suptitle(f"{tag} of TSFresh features — Fold 1 training set",
+    fig.suptitle(f"{method.upper()} of TSFresh features — Fold 1 training set",
                  fontsize=13, color=FAU_BLUE, fontweight="bold")
     fig.tight_layout()
     fname = f"{method}_plot.png"
@@ -612,86 +706,142 @@ def _safe_prob(clf, X):
 
 
 # ─────────────────────────────────────────────────────────────────
-# 6.  CLASSICAL ML — per-fold pipeline
+# 6.  CLASSICAL ML — supervised feature selection + per-fold pipeline
 #
-#  Flow (sklearn grid_search_workflow):
-#   ┌─────────────┐   fit scaler + selector   ┌──────────────────────┐
-#   │  Training   │ ─────────────────────────▶│  transform train/val │
-#   └─────────────┘                           └──────────────────────┘
-#          │  train clf on each param combo          │
-#          ▼                                         ▼
-#   ┌─────────────┐   score each combo        ┌──────────────────────┐
-#   │ Validation  │ ◀────────────────────────▶│  pick best by AUC    │
-#   └─────────────┘                           └──────────────────────┘
-#          │  refit best combo on training data      │
-#          ▼                                         ▼
-#   ┌─────────────┐   evaluate once only      ┌──────────────────────┐
-#   │    Test     │ ─────────────────────────▶│  record test metrics │
-#   └─────────────┘                           └──────────────────────┘
+#     See module docstring "FEATURE SELECTION" for full rationale.
+#     _prepare_features_for_fold() is called ONCE per (fold, foot) in
+#     main() and its outputs are reused across all 4 classical models —
+#     avoiding 4x redundant FRESH computation.
 # ─────────────────────────────────────────────────────────────────
-def _fit_preprocessor(X_tr, y_tr):
+def _fresh_select_indices(X: np.ndarray, y: np.ndarray) -> np.ndarray:
     """
-    Fit VarianceThreshold → StandardScaler → PCA on training data only.
-    Returns (selector, scaler, pca, X_tr_processed).
+    Supervised relevance filtering via TSFresh's FRESH algorithm:
+    per-feature Mann-Whitney U tests (binary target, real-valued features)
+    with Benjamini-Hochberg FDR control at FRESH_FDR_LEVEL. Operates on
+    TRAINING data only — must be called with (X_tr, y_tr).
 
-    Order matters:
-      1. VarianceThreshold on RAW features — StandardScaler amplifies every
-         non-zero-std feature to variance 1.0, so running VT after scaling
-         is a near-no-op (only perfectly constant features are removed).
-         Running VT first on the raw features correctly discards near-constant
-         features before any amplification happens.
-      2. StandardScaler after VT — centres/scales the surviving features.
-      3. PCA capped at (n_train - 1) — avoids rank deficiency and reduces the
-         ~25,000-dim space to a tractable subspace for the classifiers.
-         With ~15 training subjects, even 14 components capture the meaningful
-         variance while avoiding the curse of dimensionality.
+    Bounds the result to [MIN_SELECTED_FEATURES, MAX_SELECTED_FEATURES]:
+      - too FEW survive FDR control (common with 40k-80k candidates and
+        ~60 samples) → fall back to the MIN_SELECTED_FEATURES most
+        significant features by ANOVA F-test p-value.
+      - too MANY survive → cap to the MAX_SELECTED_FEATURES most
+        significant (by p-value) among the FRESH-selected set.
+
+    Returns: sorted np.ndarray of selected column indices into X.
     """
-    # Step 1: remove near-constant features on raw unscaled data
-    selector = VarianceThreshold(threshold=0.01)
-    X_tr_f   = selector.fit_transform(X_tr)
-    print(f"    VT  : {X_tr_f.shape[1]}/{X_tr.shape[1]} features retained")
+    n_features = X.shape[1]
+    col_names  = [f"f{i}" for i in range(n_features)]
+    X_df = pd.DataFrame(X, columns=col_names)
+    y_s  = pd.Series(y, index=X_df.index)
 
-    # Step 2: scale the filtered set
-    scaler  = StandardScaler()
-    X_tr_s  = scaler.fit_transform(X_tr_f)
+    try:
+        X_sel = select_features(
+            X_df, y_s,
+            ml_task   = "classification",
+            fdr_level = FRESH_FDR_LEVEL,
+            n_jobs    = FEATURE_SELECTION_N_JOBS,
+            show_warnings = False,
+        )
+        sel_idx = np.array(sorted(int(c[1:]) for c in X_sel.columns), dtype=int)
+    except Exception as exc:
+        print(f"    [FRESH WARN] selection failed ({exc}); "
+              f"falling back to F-test ranking")
+        sel_idx = np.array([], dtype=int)
 
-    # Step 3: PCA — cap at n_train-1 to avoid rank deficiency
-    n_comp  = min(N_PCA_COMPONENTS, X_tr_s.shape[0] - 1, X_tr_s.shape[1])
-    pca     = PCA(n_components=n_comp, random_state=42)
-    X_tr_p  = pca.fit_transform(X_tr_s)
-    print(f"    PCA : {n_comp} components, "
-          f"{pca.explained_variance_ratio_.sum()*100:.1f}% variance explained")
-    return selector, scaler, pca, X_tr_p
+    if len(sel_idx) < MIN_SELECTED_FEATURES or len(sel_idx) > MAX_SELECTED_FEATURES:
+        f_vals, p_vals = f_classif(X, y)
+        p_vals = np.nan_to_num(p_vals, nan=1.0)
+        order  = np.argsort(p_vals)   # most significant first
+
+        if len(sel_idx) < MIN_SELECTED_FEATURES:
+            k = min(MIN_SELECTED_FEATURES, n_features)
+            sel_idx = np.sort(order[:k])
+        else:
+            capped = set(sel_idx.tolist())
+            ranked = [i for i in order if i in capped]
+            sel_idx = np.sort(np.array(ranked[:MAX_SELECTED_FEATURES], dtype=int))
+
+    return sel_idx
 
 
-def _apply_preprocessor(selector, scaler, pca, X):
-    """Apply already-fitted VT → scaler → PCA to val or test data."""
-    return pca.transform(
-               scaler.transform(
-                   selector.transform(X)))
+def _prepare_features_for_fold(X_tr, y_tr, X_val, X_te, fold_id, foot_name):
+    """
+    Fit  VarianceThreshold → FRESH select → StandardScaler  on training
+    data only, producing a compact 'sel' feature space shared by Random
+    Forest / SVM-Linear / Logistic Regression. Additionally fit PCA on top
+    of that space for SVM-RBF ('pca' variant).
+
+    All fitting uses TRAINING data only; val/test are transformed with the
+    fitted transformers (no leakage).
+
+    Returns:
+      {
+        "sel": (X_tr_sel, X_val_sel, X_te_sel),
+        "pca": (X_tr_pca, X_val_pca, X_te_pca),
+        "n_selected": int, "n_pca": int,
+      }
+    """
+    n_raw = X_tr.shape[1]
+
+    # Step 1: drop exact-constant columns
+    vt      = VarianceThreshold(threshold=1e-10)
+    X_tr_vt = vt.fit_transform(X_tr)
+
+    # Step 2: FRESH supervised relevance filter
+    sel_idx      = _fresh_select_indices(X_tr_vt, y_tr)
+    X_tr_sel_raw = X_tr_vt[:, sel_idx]
+
+    # Step 3: scale (fit on training only)
+    scaler   = StandardScaler()
+    X_tr_sel = scaler.fit_transform(X_tr_sel_raw)
+
+    # Step 4: PCA on top, for SVM-RBF only
+    n_comp   = min(N_PCA_COMPONENTS, X_tr_sel.shape[0] - 1, X_tr_sel.shape[1])
+    n_comp   = max(n_comp, 1)
+    pca      = PCA(n_components=n_comp, random_state=42)
+    X_tr_pca = pca.fit_transform(X_tr_sel)
+
+    def _transform(X):
+        Xv = vt.transform(X)
+        Xs = Xv[:, sel_idx]
+        return scaler.transform(Xs)
+
+    X_val_sel = _transform(X_val)
+    X_te_sel  = _transform(X_te)
+    X_val_pca = pca.transform(X_val_sel)
+    X_te_pca  = pca.transform(X_te_sel)
+
+    print(f"    [Fold {fold_id} | {foot_name}] "
+          f"raw={n_raw}  VT→{X_tr_vt.shape[1]}  "
+          f"FRESH→{len(sel_idx)}  PCA→{n_comp} "
+          f"({pca.explained_variance_ratio_.sum()*100:.1f}% var)")
+
+    return dict(
+        sel=(X_tr_sel, X_val_sel, X_te_sel),
+        pca=(X_tr_pca, X_val_pca, X_te_pca),
+        n_selected=len(sel_idx),
+        n_pca=n_comp,
+    )
 
 
 def train_eval_classical_fold(clf_class, param_grid,
-                               X_tr, y_tr,
-                               X_val, y_val,
-                               X_te, y_te,
+                               X_tr_p, y_tr,
+                               X_val_p, y_val,
+                               X_te_p, y_te,
                                model_name, foot_name, fold_id) -> dict:
     """
-    One fold of the classical ML pipeline.
-    Preprocessor is fitted on training only; val used for HP selection;
-    test touched exactly once.
+    One fold of the classical ML pipeline, given ALREADY-PREPROCESSED
+    feature matrices (see _prepare_features_for_fold — VT → FRESH →
+    Scaler [→ PCA for SVM-RBF], fitted on training data only).
+
+    Steps:
+      1. HP search on validation AUC — classifier trained on training set.
+      2. Refit best classifier on train + val combined (the upstream
+         preprocessor is NOT refitted — it stays fitted on training data).
+      3. Evaluate once on test set.
     """
-    # ── Step 1: fit preprocessor on training set ──────────────────
-    selector, scaler, pca, X_tr_p = _fit_preprocessor(X_tr, y_tr)
-
-    # ── Step 2: transform val and test with the fitted preprocessor ─
-    X_val_p = _apply_preprocessor(selector, scaler, pca, X_val)
-    X_te_p  = _apply_preprocessor(selector, scaler, pca, X_te)
-
-    # ── Step 3: hyperparameter search on validation set ────────────
     best_auc    = float("-inf")
     best_params = list(ParameterGrid(param_grid))[0]
-    best_clf    = None
 
     for params in ParameterGrid(param_grid):
         try:
@@ -713,9 +863,18 @@ def train_eval_classical_fold(clf_class, param_grid,
         if val_auc > best_auc:
             best_auc    = val_auc
             best_params = params
-            best_clf    = clf   # already trained with best params on training set
 
-    # ── Step 4: evaluate best model on test set (once only) ────────
+    # ── Refit best classifier on train + val combined ──────────────
+    X_tv_p = np.vstack([X_tr_p, X_val_p])
+    y_tv   = np.concatenate([y_tr, y_val])
+    try:
+        best_clf = clf_class(**best_params)
+    except TypeError:
+        best_clf = clf_class(**{k: v for k, v in best_params.items()
+                                if k != "random_state"})
+    best_clf.fit(X_tv_p, y_tv)
+
+    # ── Evaluate once on test set ───────────────────────────────────
     y_pred_te = best_clf.predict(X_te_p)
     y_prob_te = _safe_prob(best_clf, X_te_p)
     test_m    = compute_metrics(y_te, y_pred_te, y_prob_te)
@@ -731,12 +890,13 @@ def train_eval_classical_fold(clf_class, param_grid,
 
 
 # ─────────────────────────────────────────────────────────────────
-# 6.  DL — PCA preprocessing (leakage-free, per fold)
+# 6b.  DL — PCA preprocessing (leakage-free, per fold)
+#       Only used when RUN_DL=True.
 # ─────────────────────────────────────────────────────────────────
 def _fit_pca(X_tr, n_components=N_PCA_COMPONENTS):
     """
     Fit StandardScaler + PCA on training-subject windows.
-    Input:  (N_subj, F, T)
+    Input  : (N_subj, F, T)
     Returns: (scaler, pca, n_comp)
     """
     N_tr, F, T = X_tr.shape
@@ -750,7 +910,7 @@ def _fit_pca(X_tr, n_components=N_PCA_COMPONENTS):
 
 
 def _apply_pca(scaler, pca, X):
-    """Project (N, F, T) using already-fitted scaler + PCA → (N, n_comp, T)."""
+    """Project (N, F, T) with fitted scaler + PCA → (N, n_comp, T)."""
     N, F, T = X.shape
     W       = X.transpose(0, 2, 1).reshape(-1, F)
     W       = np.nan_to_num(scaler.transform(W), nan=0.0, posinf=0.0, neginf=0.0)
@@ -759,7 +919,7 @@ def _apply_pca(scaler, pca, X):
 
 
 # ─────────────────────────────────────────────────────────────────
-# 7.  DEEP LEARNING MODELS
+# 7.  DEEP LEARNING MODELS  (only used when RUN_DL=True)
 # ─────────────────────────────────────────────────────────────────
 class ResBlock1D(nn.Module):
     def __init__(self, channels, kernel=3, dropout=0.3):
@@ -777,7 +937,7 @@ class ResBlock1D(nn.Module):
 
 
 class ResNet1D(nn.Module):
-    def __init__(self, f_in, num_classes=2, dropout=0.3, d_model=D_MODEL):
+    def __init__(self, f_in, num_classes=2, dropout=0.3, d_model=D_MODEL_SMALL):
         super().__init__()
         self.stem   = nn.Sequential(nn.Conv1d(f_in, d_model, 1, bias=False),
                                     nn.BatchNorm1d(d_model), nn.GELU())
@@ -786,12 +946,12 @@ class ResNet1D(nn.Module):
                                     ResBlock1D(d_model, 3, dropout))
         self.head   = nn.Sequential(nn.AdaptiveAvgPool1d(1), nn.Flatten(),
                                     nn.Dropout(dropout), nn.Linear(d_model, num_classes))
-        
+
     def forward(self, x): return self.head(self.blocks(self.stem(x)))
 
 
 class LSTMClassifier(nn.Module):
-    def __init__(self, f_in, num_classes=2, dropout=0.3, d_model=D_MODEL):
+    def __init__(self, f_in, num_classes=2, dropout=0.3, d_model=D_MODEL_SMALL):
         super().__init__()
         self.proj = nn.Linear(f_in, d_model)
         self.lstm = nn.LSTM(d_model, d_model, 2, batch_first=True,
@@ -804,7 +964,7 @@ class LSTMClassifier(nn.Module):
 
 
 class GRUClassifier(nn.Module):
-    def __init__(self, f_in, num_classes=2, dropout=0.3, d_model=D_MODEL):
+    def __init__(self, f_in, num_classes=2, dropout=0.3, d_model=D_MODEL_SMALL):
         super().__init__()
         self.proj = nn.Linear(f_in, d_model)
         self.gru  = nn.GRU(d_model, d_model, 2, batch_first=True,
@@ -818,19 +978,18 @@ class GRUClassifier(nn.Module):
 
 class PatchTST(nn.Module):
     """
-    PatchTST with a learnable positional encoding stored as nn.Parameter.
-
-    Bug fixed: previously `pe` was a local variable re-created and randomly
-    re-initialised inside forward() on every call, so the model never learned
-    position-dependent patterns (explains AUC collapsing to ~0.35 in fold 5).
-    Now pe is initialised once in __init__ and updated by the optimiser.
+    PatchTST with:
+      - Learnable positional encoding (nn.Parameter, fixed bug of per-call reinit).
+      - d_model as a constructor argument for the HP sweep.
+      - n_heads gracefully reduced to 1 when d_model is not divisible by n_heads.
     """
     def __init__(self, f_in, num_classes=2, patch_len=4, stride=2,
                  n_heads=4, n_layers=2, dropout=0.1, max_seq_len=512,
-                 d_model=D_MODEL):          # ← d_model now a parameter
+                 d_model=D_MODEL_SMALL):
         super().__init__()
         self.patch_len  = patch_len
         self.stride     = stride
+        self.d_model    = d_model
         self.input_proj = nn.Linear(f_in, d_model)
         self.patch_proj = nn.Linear(d_model * patch_len, d_model)
         self.pos_drop   = nn.Dropout(dropout)
@@ -839,8 +998,9 @@ class PatchTST(nn.Module):
         self.pe = nn.Parameter(torch.empty(1, max_patches, d_model))
         nn.init.trunc_normal_(self.pe, std=0.02)
 
+        n_heads_actual = n_heads if d_model % n_heads == 0 else 1
         enc_layer = nn.TransformerEncoderLayer(
-            d_model, n_heads, d_model * 4, dropout, "gelu",
+            d_model, n_heads_actual, d_model * 4, dropout, "gelu",
             batch_first=True, norm_first=True)
         self.transformer = nn.TransformerEncoder(enc_layer, n_layers)
         self.head = nn.Sequential(nn.Dropout(dropout),
@@ -849,13 +1009,15 @@ class PatchTST(nn.Module):
     def forward(self, x):
         B, F, T = x.shape
         x = self.input_proj(x.permute(0, 2, 1)).permute(0, 2, 1)
+
         patches, start = [], 0
         while start + self.patch_len <= T:
             patches.append(x[:, :, start:start + self.patch_len])
             start += self.stride
         if not patches:
-            pad = torch.zeros(B, x.shape[1], self.patch_len - T, device=x.device)
+            pad = torch.zeros(B, self.d_model, self.patch_len - T, device=x.device)
             patches.append(torch.cat([x, pad], dim=2))
+
         NP     = len(patches)
         tokens = self.patch_proj(torch.stack(patches, 1).reshape(B, NP, -1))
         tokens = self.pos_drop(tokens + self.pe[:, :NP, :])
@@ -864,7 +1026,7 @@ class PatchTST(nn.Module):
 
 
 # ─────────────────────────────────────────────────────────────────
-# 8.  DL TRAINING HELPERS
+# 8.  DL TRAINING HELPERS  (only used when RUN_DL=True)
 # ─────────────────────────────────────────────────────────────────
 def _make_loader(X, y, batch_size, shuffle):
     ds = TensorDataset(torch.tensor(X), torch.tensor(y))
@@ -874,37 +1036,52 @@ def _make_loader(X, y, batch_size, shuffle):
 def _class_weights(y: np.ndarray) -> torch.Tensor:
     """
     Compute inverse-frequency class weights from training labels.
-    Returns a float tensor of shape (n_classes,) on DEVICE.
-
-    With tiny, imbalanced splits a plain CrossEntropyLoss lets the model
-    collapse to the majority class.  Weighted CE gives each class equal
-    total gradient contribution, mirroring class_weight='balanced' in sklearn.
+    Both cls and w are cast to native Python scalars to avoid the
+    TypeError raised by PyTorch ≥ 2.0 when assigning numpy scalars
+    into a tensor via a numpy integer index.
     """
     classes, counts = np.unique(y, return_counts=True)
-    n_total   = len(y)
-    n_classes = len(classes)
-    weights   = n_total / (n_classes * counts.astype(np.float32))  # (n_classes,)
-    w_tensor  = torch.zeros(n_classes, dtype=torch.float32)
-    w_tensor[torch.from_numpy(classes.astype(np.int64))] = torch.from_numpy(weights)
+    n_total         = len(y)
+    n_classes       = len(classes)
+    weights         = n_total / (n_classes * counts.astype(np.float32))
+    w_tensor        = torch.zeros(n_classes, dtype=torch.float32)
+    for cls, w in zip(classes, weights):
+        w_tensor[int(cls)] = float(w)      # ← explicit cast avoids TypeError
     return w_tensor.to(DEVICE)
 
-def _augment_windows(x: torch.Tensor) -> torch.Tensor:
+
+def _augment_batch(x: torch.Tensor) -> torch.Tensor:
     """
-    In-batch augmentation applied every training step — never at val/test.
-      Gaussian noise   : σ=0.005 (small relative to VGRF amplitudes ~100–1000 N)
+    Window-level augmentation applied only during training — never at val/test.
+      Gaussian noise   : σ=0.005 (small relative to VGRF amplitude ~100–1000 N)
       Amplitude jitter : per-sample uniform scale U[0.9, 1.1]
-    With 60 subjects × ~47 windows, both augmentations effectively double the
-    diversity of training examples seen per epoch at zero extra data cost.
     """
-    x = x + 0.005 * torch.randn_like(x)
-    scale = 0.9 + 0.2 * torch.rand(x.size(0), 1, 1, device=x.device)
+    x     = x + 0.005 * torch.randn_like(x)
+    scale = 0.9 + 0.2 * torch.rand(x.shape[0], 1, 1, device=x.device)
     return x * scale
+
 
 def _train_model(model, train_loader, val_X_t, val_y,
                  n_epochs, lr, warmup_epochs, patience,
-                 class_weights: torch.Tensor = None, weight_decay: float = 1e-2):
-    opt  = torch.optim.AdamW(model.parameters(), lr=lr, weight_decay=1e-2)
-    crit = nn.CrossEntropyLoss(weight=class_weights)   # weighted if provided
+                 class_weights: torch.Tensor = None,
+                 weight_decay: float = 1e-2,
+                 augment: bool = False):
+    """
+    Train model and return (model, best_epoch).
+
+    Two modes depending on val_X_t:
+
+    HP-search mode (val_X_t is not None):
+      Uses validation loss for early stopping. Saves the best checkpoint.
+      Returns the epoch number at which the best validation loss was found.
+
+    Refit mode (val_X_t is None):
+      No early stopping. Trains for exactly n_epochs epochs.
+      Saves state every epoch so the final state is returned.
+      best_epoch equals n_epochs after the loop.
+    """
+    opt  = torch.optim.AdamW(model.parameters(), lr=lr, weight_decay=weight_decay)
+    crit = nn.CrossEntropyLoss(weight=class_weights)
 
     def lr_lambda(ep):
         if ep < warmup_epochs:
@@ -912,14 +1089,18 @@ def _train_model(model, train_loader, val_X_t, val_y,
         prog = (ep - warmup_epochs) / max(1, n_epochs - warmup_epochs)
         return 0.5 * (1.0 + np.cos(np.pi * prog))
 
-    sched = torch.optim.lr_scheduler.LambdaLR(opt, lr_lambda)
-    best_loss, best_state, no_improve = float("inf"), None, 0
+    sched      = torch.optim.lr_scheduler.LambdaLR(opt, lr_lambda)
+    best_loss  = float("inf")
+    best_state = None
+    no_improve = 0
+    best_epoch = 0
 
-    for _ in range(n_epochs):
+    for ep in range(n_epochs):
         model.train()
         for xb, yb in train_loader:
             xb, yb = xb.to(DEVICE), yb.to(DEVICE)
-            xb = _augment_windows(xb)   
+            if augment:
+                xb = _augment_batch(xb)
             opt.zero_grad()
             loss = crit(model(xb), yb)
             loss.backward()
@@ -927,22 +1108,29 @@ def _train_model(model, train_loader, val_X_t, val_y,
             opt.step()
         sched.step()
 
-        model.eval()
-        with torch.no_grad():
-            val_loss = crit(model(val_X_t.to(DEVICE)),
-                            torch.tensor(val_y, device=DEVICE)).item()
-        if val_loss < best_loss:
-            best_loss  = val_loss
-            best_state = {k: v.cpu().clone() for k, v in model.state_dict().items()}
-            no_improve = 0
+        if val_X_t is not None:
+            model.eval()
+            with torch.no_grad():
+                val_loss = crit(model(val_X_t.to(DEVICE)),
+                                torch.tensor(val_y, device=DEVICE)).item()
+            if val_loss < best_loss:
+                best_loss  = val_loss
+                best_state = {k: v.cpu().clone()
+                              for k, v in model.state_dict().items()}
+                no_improve = 0
+                best_epoch = ep + 1
+            else:
+                no_improve += 1
+                if no_improve >= patience:
+                    break
         else:
-            no_improve += 1
-            if no_improve >= patience:
-                break
+            best_state = {k: v.cpu().clone()
+                          for k, v in model.state_dict().items()}
+            best_epoch = ep + 1
 
     if best_state:
         model.load_state_dict(best_state)
-    return model
+    return model, best_epoch
 
 
 def _eval_dl(model, X_np):
@@ -960,70 +1148,83 @@ def train_eval_dl_fold(model_fn_factory, X_tr, y_tr, X_val, y_val, X_te, y_te,
                         n_epochs=200, batch_size=16,
                         warmup_epochs=10, patience=25) -> dict:
     """
-    One fold of the DL pipeline.
+    One fold of the DL pipeline. Only called when RUN_DL=True.
 
-    HP grid swept on the validation set (lr × dropout):
-      lr      : 3e-4, 1e-3
-      dropout : 0.2, 0.4
-
-    Class-weighted CrossEntropyLoss is computed from training labels and
-    passed to _train_model so the model cannot collapse to the majority class.
-    PCA is fitted on training subjects only; test touched exactly once.
+    Steps:
+      1. Fit PCA on training windows only; project all three splits.
+      2. Compute class weights from training labels.
+      3. HP grid search (lr × dropout × weight_decay × d_model = 24 combos)
+         evaluated by validation AUC. Record the stopping epoch of the best combo.
+      4. Refit the best model on train + val combined for exactly best_epoch
+         epochs with no early stopping. Class weights recomputed from combined
+         labels. Augmentation applied throughout.
+      5. Evaluate once on test set.
     """
-    # ── Step 1: fit PCA on training set only ──────────────────────
-    scaler, pca, n_comp = _fit_pca(X_tr)
+    scaler_pca, pca, n_comp = _fit_pca(X_tr)
+    X_tr_p  = _apply_pca(scaler_pca, pca, X_tr)
+    X_val_p = _apply_pca(scaler_pca, pca, X_val)
+    X_te_p  = _apply_pca(scaler_pca, pca, X_te)
 
-    # ── Step 2: project all three splits ──────────────────────────
-    X_tr_p  = _apply_pca(scaler, pca, X_tr)
-    X_val_p = _apply_pca(scaler, pca, X_val)
-    X_te_p  = _apply_pca(scaler, pca, X_te)
-
-    # ── Step 3: compute class weights from training labels ────────
     cw = _class_weights(y_tr)
 
-    # ── Step 4: HP grid search on validation AUC ──────────────────
-    lr_choices      = [1e-4, 3e-4, 1e-3]        # ← widened range
+    lr_choices      = [1e-4, 3e-4, 1e-3]
     dropout_choices = [0.2, 0.4]
     wd_choices      = [1e-3, 1e-2]
-    d_model_choices = [32, 64] 
+    dm_choices      = [D_MODEL_SMALL, D_MODEL_LARGE]
 
-    best_val_auc  = float("-inf")
-    best_hp       = {"lr": lr_choices[0], "dropout": dropout_choices[0],
-                    "weight_decay": wd_choices[-1], "d_model": d_model_choices[0]}
-    best_state    = None
+    best_val_auc        = float("-inf")
+    best_hp             = {"lr": 3e-4, "dropout": 0.2,
+                           "weight_decay": 1e-2, "d_model": D_MODEL_SMALL}
+    best_epoch_for_refit = 0
 
-    for d_model in d_model_choices:
-        for wd in wd_choices:
-            for lr in lr_choices:
-                for dropout in dropout_choices:
-                    model  = model_fn_factory(n_comp, dropout, d_model).to(DEVICE)
+    for lr in lr_choices:
+        for dropout in dropout_choices:
+            for wd in wd_choices:
+                for dm in dm_choices:
+                    model  = model_fn_factory(n_comp, dropout, dm).to(DEVICE)
                     loader = _make_loader(X_tr_p, y_tr, batch_size, shuffle=True)
-                    model  = _train_model(model, loader, torch.tensor(X_val_p), y_val,
-                                          n_epochs, lr, warmup_epochs, patience,
-                                          class_weights=cw, weight_decay=wd)
+                    model, epoch = _train_model(
+                        model, loader, torch.tensor(X_val_p), y_val,
+                        n_epochs, lr, warmup_epochs, patience,
+                        class_weights=cw, weight_decay=wd, augment=True)
                     _, probs_val = _eval_dl(model, X_val_p)
 
                     val_auc = (roc_auc_score(y_val, probs_val)
                                if len(np.unique(y_val)) == 2 else float("nan"))
 
                     if val_auc > best_val_auc:
-                        best_val_auc = val_auc
-                        best_hp      = {"lr": lr, "dropout": dropout,
-                                        "weight_decay": wd, "d_model": d_model}
-                        best_state   = {k: v.cpu().clone()
-                                        for k, v in model.state_dict().items()}
+                        best_val_auc        = val_auc
+                        best_hp             = {"lr": lr, "dropout": dropout,
+                                               "weight_decay": wd, "d_model": dm}
+                        best_epoch_for_refit = max(epoch, 1)
 
-    # ── Step 5: evaluate best model on test set (once only) ───────
-    best_model = model_fn_factory(n_comp, best_hp["dropout"], best_hp["d_model"]).to(DEVICE)
-    best_model.load_state_dict(best_state)
+    X_tv_p = np.vstack([X_tr_p, X_val_p])
+    y_tv   = np.concatenate([y_tr, y_val])
+    cw_tv  = _class_weights(y_tv)
+
+    best_model = model_fn_factory(
+        n_comp, best_hp["dropout"], best_hp["d_model"]).to(DEVICE)
+    tv_loader  = _make_loader(X_tv_p, y_tv, batch_size, shuffle=True)
+
+    best_model, _ = _train_model(
+        best_model, tv_loader,
+        val_X_t       = None,
+        val_y         = None,
+        n_epochs      = best_epoch_for_refit,
+        lr            = best_hp["lr"],
+        warmup_epochs = warmup_epochs,
+        patience      = best_epoch_for_refit + 1,
+        class_weights = cw_tv,
+        weight_decay  = best_hp["weight_decay"],
+        augment       = True)
+
     y_pred_te, y_prob_te = _eval_dl(best_model, X_te_p)
-
     test_m = compute_metrics(y_te, y_pred_te, y_prob_te)
     cm     = confusion_matrix(y_te, y_pred_te)
 
     print(f"  Fold {fold_id} | [{model_name}] foot={foot_name}  "
-          f"best={best_hp}  val_AUC={best_val_auc:.3f}  "
-          f"test_AUC={test_m['auc']:.3f}")
+          f"best={best_hp}  refit_epochs={best_epoch_for_refit}  "
+          f"val_AUC={best_val_auc:.3f}  test_AUC={test_m['auc']:.3f}")
 
     return dict(model=model_name, foot=foot_name, fold=fold_id,
                 best_params=best_hp, val_auc=best_val_auc,
@@ -1034,15 +1235,11 @@ def train_eval_dl_fold(model_fn_factory, X_tr, y_tr, X_val, y_val, X_te, y_te,
 # 9.  AGGREGATE FOLD RESULTS
 # ─────────────────────────────────────────────────────────────────
 def aggregate_folds(fold_results: list) -> dict:
-    """
-    Given a list of per-fold result dicts (same model + foot),
-    return mean ± std for each metric across folds.
-    """
     keys = ["accuracy", "sensitivity", "specificity", "auc"]
     agg  = {}
     for k in keys:
-        vals       = [r["test_metrics"][k] for r in fold_results]
-        agg[k]     = round(float(np.nanmean(vals)), 4)
+        vals          = [r["test_metrics"][k] for r in fold_results]
+        agg[k]        = round(float(np.nanmean(vals)), 4)
         agg[k+"_std"] = round(float(np.nanstd(vals)),  4)
     return agg
 
@@ -1097,7 +1294,6 @@ def plot_bar_comparison(summary_rows, foot_name):
 
 
 def plot_fold_auc(all_fold_results, foot_name):
-    """Box plots of per-fold test AUC for each model."""
     subset = {m: [] for m in dict.fromkeys(r["model"] for r in all_fold_results)}
     for r in all_fold_results:
         if r["foot"] == foot_name:
@@ -1126,42 +1322,33 @@ def main():
     print("=" * 65)
 
     # ══════════════════════════════════════════════════════════════
-    # DELIVERABLE #1 — Data Analysis
+    # DELIVERABLE #1 — Data Analysis  (gated by RUN_D1)
     # ══════════════════════════════════════════════════════════════
+    if RUN_D1:
+        print("\n── D1: Demographics ──")
+        all_split_dirs = [
+            DATA_ROOT / f"Fold_{fid}" / split
+            for fid in range(1, N_FOLDS + 1)
+            for split in ("training", "validation", "test")
+        ]
+        report_demographics(all_split_dirs)
 
-    # ── A. Demographics ───────────────────────────────────────────
-    print("\n── D1: Demographics ──")
-    # Collect every split directory across all folds to get the full cohort
-    all_split_dirs = [
-        DATA_ROOT / f"Fold_{fid}" / split
-        for fid in range(1, N_FOLDS + 1)
-        for split in ("training", "validation", "test")
-    ]
-    report_demographics(all_split_dirs)
+        print("\n── D1: Signal examples ──")
+        fold1_train = DATA_ROOT / "Fold_1" / "training"
+        subs_f1, y_f1, L_f1, R_f1 = load_split(fold1_train)
+        plot_signal_examples(L_f1, R_f1, y_f1, subs_f1)
 
-    # ── B. Signal examples (Fold 1 training set) ──────────────────
-    print("\n── D1: Signal examples ──")
-    fold1_train = DATA_ROOT / "Fold_1" / "training"
-    subs_f1, y_f1, L_f1, R_f1 = load_split(fold1_train)
-    plot_signal_examples(L_f1, R_f1, y_f1, subs_f1)
-
-    # ── C. PCA & t-SNE plots (Fold 1 training features) ──────────
-    print("\n── D1: PCA / t-SNE ──")
-    XL_f1, XR_f1, XB_f1 = build_feature_matrix(
-        L_f1, R_f1, fold1_train.parent, 1, "train")
-    plot_pca_tsne(XL_f1, XR_f1, XB_f1, y_f1, method="pca")
-    plot_pca_tsne(XL_f1, XR_f1, XB_f1, y_f1, method="tsne")
+        print("\n── D1: PCA / t-SNE ──")
+        XL_f1, XR_f1, XB_f1 = build_feature_matrix(subs_f1, L_f1, R_f1)
+        plot_pca_tsne(XL_f1, XR_f1, XB_f1, y_f1, method="pca")
+        plot_pca_tsne(XL_f1, XR_f1, XB_f1, y_f1, method="tsne")
+    else:
+        print("\n[RUN_D1=False] Skipping Deliverable #1 plots.")
 
     # ══════════════════════════════════════════════════════════════
     # DELIVERABLE #2 — Baseline Models
     # ══════════════════════════════════════════════════════════════
 
-    # ── Hyperparameter grids ───────────────────────────────────────
-    # class_weight='balanced' is added to all classifiers:
-    # With small, potentially unequal class splits per fold, an unweighted
-    # classifier collapses to the majority-class prior — causing Sens/Spec
-    # swings of 0.9/0.1.  Balanced weighting scales the loss so each class
-    # contributes equally regardless of sample count.
     rf_grid = {
         "n_estimators":     [200, 500, 1000],
         "max_depth":        [None, 10, 20],
@@ -1170,21 +1357,46 @@ def main():
         "class_weight":     ["balanced"],
         "random_state":     [42],
     }
-    svm_l_grid = {"C":           [0.001, 0.01, 0.1, 1, 10, 100],
-                  "kernel":      ["linear"],
-                  "probability": [True],
-                  "class_weight":["balanced"]}
-    svm_r_grid = {"C":           [0.01, 0.1, 1, 10, 100],
-                  "gamma":       ["scale", "auto", 0.1, 0.01, 0.001],
-                  "kernel":      ["rbf"],
-                  "probability": [True],
-                  "class_weight":["balanced"]}
+    svm_l_grid = {
+        "C":            [0.001, 0.01, 0.1, 1, 10, 100],
+        "kernel":       ["linear"],
+        "probability":  [True],
+        "class_weight": ["balanced"],
+    }
+    svm_r_grid = {
+        "C":            [0.01, 0.1, 1, 10, 100],
+        "gamma":        ["scale", "auto", 0.1, 0.01, 0.001],
+        "kernel":       ["rbf"],
+        "probability":  [True],
+        "class_weight": ["balanced"],
+    }
+    # NEW: Logistic Regression with ElasticNet — pairs well with FRESH-
+    # selected features (≤MAX_SELECTED_FEATURES dims): the l1_ratio mixes
+    # L1 (further sparsifies / does its own selection) and L2 (stability)
+    # penalties, often a very strong baseline for small-N / high-D
+    # biomedical tabular data.
+    logreg_grid = {
+        "C":            [0.001, 0.01, 0.1, 1, 10, 100],
+        "penalty":      ["elasticnet"],
+        "l1_ratio":     [0.1, 0.3, 0.5, 0.7, 0.9],
+        "solver":       ["saga"],
+        "max_iter":     [5000],
+        "class_weight": ["balanced"],
+        "random_state": [42],
+    }
 
+    # (clf_class, param_grid, use_pca)
+    #   use_pca=True  → trained on the PCA(N_PCA_COMPONENTS) variant of the
+    #                    FRESH-selected features (see _prepare_features_for_fold)
+    #   use_pca=False → trained directly on the FRESH-selected + scaled
+    #                    features (no PCA)
     classical_models = [
-        ("Random Forest", RandomForestClassifier, rf_grid),
-        ("SVM-Linear",    SVC,                   svm_l_grid),
-        ("SVM-RBF",       SVC,                   svm_r_grid),
+        ("Random Forest",      RandomForestClassifier, rf_grid,     False),
+        ("SVM-Linear",          SVC,                    svm_l_grid,  False),
+        ("SVM-RBF",             SVC,                    svm_r_grid,  True),
+        ("Logistic Regression", LogisticRegression,     logreg_grid, False),
     ]
+
     dl_model_fns = {
         "1D-ResNet": ResNet1D,
         "LSTM":      LSTMClassifier,
@@ -1193,12 +1405,10 @@ def main():
     }
     feet = ["Left", "Right", "Combined"]
 
-    # all_fold_results: list of per-fold dicts (one entry per fold×model×foot)
     all_fold_results = []
 
-    # ── Loop over the 5 pre-defined folds ─────────────────────────
     for fold_id in range(1, N_FOLDS + 1):
-        fold_dir = DATA_ROOT / f"Fold_{fold_id}"
+        fold_dir  = DATA_ROOT / f"Fold_{fold_id}"
         train_dir = fold_dir / "training"
         val_dir   = fold_dir / "validation"
         test_dir  = fold_dir / "test"
@@ -1206,21 +1416,21 @@ def main():
         print(f"\n{'='*65}")
         print(f"FOLD {fold_id}  —  loading splits …")
 
-        _, y_tr,  L_tr,  R_tr  = load_split(train_dir)
-        _, y_val, L_val, R_val = load_split(val_dir)
-        _, y_te,  L_te,  R_te  = load_split(test_dir)
+        subs_tr,  y_tr,  L_tr,  R_tr  = load_split(train_dir)
+        subs_val, y_val, L_val, R_val = load_split(val_dir)
+        subs_te,  y_te,  L_te,  R_te  = load_split(test_dir)
         print(f"  Train={len(y_tr)}  Val={len(y_val)}  Test={len(y_te)}")
 
         # ── Classical ML features ─────────────────────────────────
+        # build_feature_matrix uses the subject-level cache: any subject
+        # already extracted in a previous fold/split (or in D1 above) is
+        # retrieved instantly instead of re-running TSFresh.
         print(f"  Extracting classical features — training …")
-        XL_tr, XR_tr, XB_tr = build_feature_matrix(
-            L_tr,  R_tr,  fold_dir, fold_id, "train")
+        XL_tr, XR_tr, XB_tr = build_feature_matrix(subs_tr, L_tr, R_tr)
         print(f"  Extracting classical features — validation …")
-        XL_val, XR_val, XB_val = build_feature_matrix(
-            L_val, R_val, fold_dir, fold_id, "val")
+        XL_val, XR_val, XB_val = build_feature_matrix(subs_val, L_val, R_val)
         print(f"  Extracting classical features — test …")
-        XL_te, XR_te, XB_te = build_feature_matrix(
-            L_te,  R_te,  fold_dir, fold_id, "test")
+        XL_te, XR_te, XB_te = build_feature_matrix(subs_te, L_te, R_te)
 
         cl_splits = {
             "Left":     (XL_tr, XL_val, XL_te),
@@ -1228,54 +1438,62 @@ def main():
             "Combined": (XB_tr, XB_val, XB_te),
         }
 
-        # ── Classical ML training/validation/test ─────────────────
-        # for model_name, clf_class, param_grid in classical_models:
-        #     print(f"\n  ── {model_name} ──")
-        #     for foot in feet:
-        #         Xtr, Xval, Xte = cl_splits[foot]
-        #         res = train_eval_classical_fold(
-        #             clf_class, param_grid,
-        #             Xtr, y_tr, Xval, y_val, Xte, y_te,
-        #             model_name, foot, fold_id)
-        #         all_fold_results.append(res)
+        # ── Feature selection (FRESH) — once per (fold, foot) ───────
+        print(f"\n  ── Feature selection (FRESH) ──")
+        feature_preps = {}
+        for foot in feet:
+            Xtr, Xval, Xte = cl_splits[foot]
+            feature_preps[foot] = _prepare_features_for_fold(
+                Xtr, y_tr, Xval, Xte, fold_id, foot)
 
-        # ── DL features ───────────────────────────────────────────
-        print(f"\n  Extracting DL features — training …")
-        DL_XL_tr, DL_XR_tr, DL_XB_tr, DL_y_tr = build_dl_dataset(
-            L_tr,  R_tr,  y_tr,  fold_dir, fold_id, "train")
-        print(f"  Extracting DL features — validation …")
-        DL_XL_val, DL_XR_val, DL_XB_val, DL_y_val = build_dl_dataset(
-            L_val, R_val, y_val, fold_dir, fold_id, "val")
-        print(f"  Extracting DL features — test …")
-        DL_XL_te, DL_XR_te, DL_XB_te, DL_y_te = build_dl_dataset(
-            L_te,  R_te,  y_te,  fold_dir, fold_id, "test")
-
-        dl_splits = {
-            "Left":     (DL_XL_tr, DL_XL_val, DL_XL_te),
-            "Right":    (DL_XR_tr, DL_XR_val, DL_XR_te),
-            "Combined": (DL_XB_tr, DL_XB_val, DL_XB_te),
-        }
-        dl_labels = (DL_y_tr, DL_y_val, DL_y_te)
-
-        # ── DL training/validation/test ───────────────────────────
-        for model_name, model_cls in dl_model_fns.items():
+        # ── Classical models — reuse feature_preps across all models ─
+        for model_name, clf_class, param_grid, use_pca in classical_models:
             print(f"\n  ── {model_name} ──")
             for foot in feet:
-                Xtr, Xval, Xte = dl_splits[foot]
-                y_tr_dl, y_val_dl, y_te_dl = dl_labels
-                # factory takes (n_comp, dropout) — both set by HP sweep
-                factory = lambda nc, do, dm, mc=model_cls: mc(f_in=nc, dropout=do, d_model=dm)
-                res = train_eval_dl_fold(
-                    factory, Xtr, y_tr_dl, Xval, y_val_dl, Xte, y_te_dl,
+                prep = feature_preps[foot]
+                Xtr_p, Xval_p, Xte_p = prep["pca"] if use_pca else prep["sel"]
+                res = train_eval_classical_fold(
+                    clf_class, param_grid,
+                    Xtr_p, y_tr, Xval_p, y_val, Xte_p, y_te,
                     model_name, foot, fold_id)
                 all_fold_results.append(res)
+
+        # ── DL features + models — gated by RUN_DL ──────────────────
+        if RUN_DL:
+            print(f"\n  Extracting DL features — training …")
+            DL_XL_tr, DL_XR_tr, DL_XB_tr, DL_y_tr = build_dl_dataset(
+                subs_tr, L_tr, R_tr, y_tr)
+            print(f"  Extracting DL features — validation …")
+            DL_XL_val, DL_XR_val, DL_XB_val, DL_y_val = build_dl_dataset(
+                subs_val, L_val, R_val, y_val)
+            print(f"  Extracting DL features — test …")
+            DL_XL_te, DL_XR_te, DL_XB_te, DL_y_te = build_dl_dataset(
+                subs_te, L_te, R_te, y_te)
+
+            dl_splits = {
+                "Left":     (DL_XL_tr, DL_XL_val, DL_XL_te),
+                "Right":    (DL_XR_tr, DL_XR_val, DL_XR_te),
+                "Combined": (DL_XB_tr, DL_XB_val, DL_XB_te),
+            }
+            dl_labels = (DL_y_tr, DL_y_val, DL_y_te)
+
+            for model_name, model_cls in dl_model_fns.items():
+                print(f"\n  ── {model_name} ──")
+                for foot in feet:
+                    Xtr, Xval, Xte         = dl_splits[foot]
+                    y_tr_dl, y_val_dl, y_te_dl = dl_labels
+                    factory = lambda nc, do, dm, mc=model_cls: mc(
+                        f_in=nc, dropout=do, d_model=dm)
+                    res = train_eval_dl_fold(
+                        factory, Xtr, y_tr_dl, Xval, y_val_dl, Xte, y_te_dl,
+                        model_name, foot, fold_id)
+                    all_fold_results.append(res)
 
     # ── Aggregate across folds ─────────────────────────────────────
     print(f"\n{'='*65}")
     print("Aggregating results across 5 folds …")
 
     summary_rows = []
-    # Group by (model, foot)
     groups = {}
     for r in all_fold_results:
         key = (r["model"], r["foot"])
@@ -1292,32 +1510,28 @@ def main():
         ))
 
     # ── Confusion matrices ─────────────────────────────────────────
-    # Per the deliverable: show the best-performing model for each of
-    # Left / Right / Combined.  "Best" = highest mean test AUC across folds.
     print("Plotting confusion matrices …")
 
-    # 1. Best overall model per foot (averaged AUC across folds)
     for foot in feet:
         foot_groups = {(m, f): flist
                        for (m, f), flist in groups.items() if f == foot}
         best_key = max(foot_groups,
                        key=lambda k: np.nanmean(
                            [r["test_metrics"]["auc"] for r in foot_groups[k]]))
-        best_model_name = best_key[0]
-        # Use the fold with the highest test AUC from that model
         best_fold_res = max(foot_groups[best_key],
                             key=lambda r: r["test_metrics"]["auc"])
         plot_confusion_matrix(
-            best_fold_res["confusion_matrix"], best_model_name, foot,
+            best_fold_res["confusion_matrix"], best_key[0], foot,
             best_fold_res["test_metrics"],
             tag=f"_BEST_fold{best_fold_res['fold']}")
-        print(f"  Best for {foot}: {best_model_name}  "
+        print(f"  Best for {foot}: {best_key[0]}  "
               f"(fold {best_fold_res['fold']}, "
               f"AUC={best_fold_res['test_metrics']['auc']:.3f})")
 
-    # 2. All classical models (required by deliverable)
+    CLASSICAL_NAMES = ("Random Forest", "SVM-Linear", "SVM-RBF",
+                       "Logistic Regression")
     for (model_name, foot), fold_list in groups.items():
-        if model_name in ("Random Forest", "SVM-Linear", "SVM-RBF"):
+        if model_name in CLASSICAL_NAMES:
             best_fold_res = max(fold_list,
                                 key=lambda r: r["test_metrics"]["auc"])
             plot_confusion_matrix(
@@ -1325,7 +1539,6 @@ def main():
                 best_fold_res["test_metrics"],
                 tag=f"_fold{best_fold_res['fold']}")
 
-    # ── Summary bar charts & fold AUC box plots ───────────────────
     for foot in feet:
         plot_bar_comparison(summary_rows, foot)
         plot_fold_auc(all_fold_results, foot)
@@ -1340,7 +1553,6 @@ def main():
     print(f"\nResults → {OUT_DIR}/results_table.csv")
     print(f"Figures → {FIG_DIR}/")
 
-    # Also save per-fold detail
     fold_rows = []
     for r in all_fold_results:
         tm = r["test_metrics"]
