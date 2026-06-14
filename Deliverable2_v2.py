@@ -221,8 +221,8 @@ D_MODEL_SMALL    = 32
 D_MODEL_LARGE    = 64
 D_MODEL          = D_MODEL_SMALL    # default; swept per-model in DL HP grid
 DEVICE           = "cuda" if torch.cuda.is_available() else "cpu"
-print(f"Device: {DEVICE}")
-print(f"RUN_D1={RUN_D1}  RUN_DL={RUN_DL}")
+# print(f"Device: {DEVICE}")
+# print(f"RUN_D1={RUN_D1}  RUN_DL={RUN_DL}")
 
 FAU_BLUE = "#003865"
 FAU_TEAL = "#00b1eb"
@@ -1545,12 +1545,14 @@ def main():
 
     # ── Results CSV ───────────────────────────────────────────────
     df = pd.DataFrame(summary_rows)
-    df.to_csv(OUT_DIR / "results_table.csv", index=False)
+    filename_summary = "results_table_" + str(TRIM_SEC) + "_" + str(N_PCA_COMPONENTS) + ".csv"
+    df.to_csv(OUT_DIR / filename_summary, index=False)
 
     print(f"\n{'='*65}")
     print(df.to_string(index=False))
     print(f"{'='*65}")
-    print(f"\nResults → {OUT_DIR}/results_table.csv")
+    filename_summary = "results_table_" + str(TRIM_SEC) + "_" + str(N_PCA_COMPONENTS) + ".csv"
+    print(f"\nResults → {OUT_DIR / filename_summary}")
     print(f"Figures → {FIG_DIR}/")
 
     fold_rows = []
@@ -1565,8 +1567,9 @@ def main():
             Test_Spec=round(tm["specificity"], 4),
             Test_AUC=round(tm["auc"],         4),
         ))
-    pd.DataFrame(fold_rows).to_csv(OUT_DIR / "results_per_fold.csv", index=False)
-    print(f"Per-fold detail → {OUT_DIR}/results_per_fold.csv")
+    filename ="results_per_fold_" + str(TRIM_SEC) + "_" + str(N_PCA_COMPONENTS) + ".csv"
+    pd.DataFrame(fold_rows).to_csv(OUT_DIR /filename, index=False)
+    print(f"Per-fold detail → {filename}")
 
 
 if __name__ == "__main__":
