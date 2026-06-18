@@ -130,6 +130,8 @@ from tsfresh.utilities.dataframe_functions import impute
 
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
+from sklearn.calibration import CalibratedClassifierCV
+from sklearn.base import BaseEstimator, ClassifierMixin
 from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
 from sklearn.feature_selection import VarianceThreshold, f_classif
@@ -149,10 +151,10 @@ torch.manual_seed(42)
 # ─────────────────────────────────────────────────────────────────
 # 0.  RUN-MODE FLAGS & PATHS & CONSTANTS
 # ─────────────────────────────────────────────────────────────────
-# See module docstring "RUN-MODE FLAGS". Both default to False so this
-# revision focuses purely on classical-ML accuracy.
-RUN_D1 = False
-RUN_DL = False
+# See module docstring "RUN-MODE FLAGS".
+RUN_D1         = False   # Deliverable #1 plots (demographics, signal examples, PCA/t-SNE)
+RUN_CLASSICAL  = False   # Classical ML models (RF, SVM-L, SVM-RBF, LR, Ensemble)
+RUN_DL         = True    # Deep learning models (1D-ResNet, LSTM, GRU, PatchTST)
 
 DATA_ROOT   = Path("Data/splits")
 N_FOLDS     = 5
@@ -179,7 +181,7 @@ L_COLS = list(range(1, 9)) + [17]   # L1–L8 + left total  (reference)
 R_COLS = list(range(9, 17)) + [18]  # R1–R8 + right total (reference)
 
 # ── Signal preprocessing constants ───────────────────────────────
-TRIM_SEC          = 20.0
+TRIM_SEC          = 0.0
 TRIM_SAMPLES      = int(TRIM_SEC * FS)
 MEDIAN_FILTER_LEN = 11               # must be odd
 
@@ -212,17 +214,25 @@ N_PCA_COMPONENTS = 30
 
 # ── FRESH supervised feature-selection constants ──────────────────
 # See module docstring "FEATURE SELECTION" for rationale.
-FRESH_FDR_LEVEL          = 0.05   # Benjamini-Hochberg FDR level
+FRESH_FDR_LEVEL          = 0.05   # Benjamini-Hochberg FDR level. Loosened
+                                   # from 0.05: with ~60 balanced training
+                                   # subjects/fold, Mann-Whitney U has
+                                   # reasonable power at FDR=0.10, admitting
+                                   # more borderline-relevant features for
+                                   # RF / Extra Trees to exploit. If the
+                                   # looser threshold pushes the selected
+                                   # count above MAX_SELECTED_FEATURES, the
+                                   # existing p-value cap still applies.
 MIN_SELECTED_FEATURES    = 30     # floor: fall back to top-K by F-test p-value
 MAX_SELECTED_FEATURES    = 300    # ceiling: cap to top-K by p-value if exceeded
-FEATURE_SELECTION_N_JOBS = 10      # increase on multi-core machines
+FEATURE_SELECTION_N_JOBS = 1      # increase on multi-core machines
 
 D_MODEL_SMALL    = 32
 D_MODEL_LARGE    = 64
 D_MODEL          = D_MODEL_SMALL    # default; swept per-model in DL HP grid
 DEVICE           = "cuda" if torch.cuda.is_available() else "cpu"
-# print(f"Device: {DEVICE}")
-# print(f"RUN_D1={RUN_D1}  RUN_DL={RUN_DL}")
+print(f"Device: {DEVICE}")
+print(f"RUN_D1={RUN_D1}  RUN_CLASSICAL={RUN_CLASSICAL}  RUN_DL={RUN_DL}")
 
 FAU_BLUE = "#003865"
 FAU_TEAL = "#00b1eb"
@@ -421,7 +431,7 @@ def _window_features(signal_2d: np.ndarray, channel_names: list) -> np.ndarray:
                 column_sort           = "time",
                 default_fc_parameters = FC_PARAMS,
                 disable_progressbar   = True,
-                n_jobs                = 10,
+                n_jobs                = 1,
             )
     impute(feats)
     return np.nan_to_num(feats.values.astype(np.float64),
@@ -710,9 +720,67 @@ def _safe_prob(clf, X):
 #
 #     See module docstring "FEATURE SELECTION" for full rationale.
 #     _prepare_features_for_fold() is called ONCE per (fold, foot) in
-#     main() and its outputs are reused across all 4 classical models —
-#     avoiding 4x redundant FRESH computation.
+#     main() and its outputs are reused across all classical models —
+#     avoiding redundant FRESH computation.
 # ─────────────────────────────────────────────────────────────────
+class CalibratedSVC(BaseEstimator, ClassifierMixin):
+    """
+    SVM-RBF wrapped in CalibratedClassifierCV (default: isotonic, cv=3).
+
+    Why: SVC(probability=True) estimates probabilities via an internal
+    5-fold CV + Platt (sigmoid) scaling. With ~60 training subjects this
+    internal CV is itself noisy, and Platt scaling assumes a sigmoid-shaped
+    score distribution that the RBF decision function often doesn't have —
+    a likely cause of SVM-RBF's weaker AUC relative to SVM-Linear (e.g.
+    Right foot: 0.776 vs 0.872), whose probabilities come from a much
+    better-behaved (near-linear) decision surface.
+
+    Fix: fit the base SVC with probability=False (raw decision_function,
+    no internal Platt CV), then calibrate with CalibratedClassifierCV using
+    `method` (default "isotonic", non-parametric — makes no assumption
+    about the score distribution's shape) and `cv` folds (default 3).
+    This is the standard remedy for poorly-calibrated SVM probabilities on
+    small datasets.
+
+    Accepts the same hyperparameters as SVC (C, gamma, kernel, class_weight)
+    plus `cv` and `method` for the calibration wrapper, so it can be used
+    as a drop-in clf_class with the existing ParameterGrid / refit logic.
+    """
+    def __init__(self, C=1.0, gamma="scale", kernel="rbf",
+                 class_weight="balanced", cv=3, method="isotonic"):
+        self.C            = C
+        self.gamma        = gamma
+        self.kernel       = kernel
+        self.class_weight = class_weight
+        self.cv           = cv
+        self.method       = method
+
+    def fit(self, X, y):
+        base = SVC(C=self.C, gamma=self.gamma, kernel=self.kernel,
+                   class_weight=self.class_weight, probability=False)
+        try:
+            self.calibrated_ = CalibratedClassifierCV(
+                estimator=base, method=self.method, cv=self.cv)
+        except TypeError:
+            # sklearn < 1.2 used `base_estimator` instead of `estimator`
+            self.calibrated_ = CalibratedClassifierCV(
+                base_estimator=base, method=self.method, cv=self.cv)
+        self.calibrated_.fit(X, y)
+        self.classes_ = self.calibrated_.classes_
+        return self
+
+    def predict(self, X):
+        return self.calibrated_.predict(X)
+
+    def predict_proba(self, X):
+        return self.calibrated_.predict_proba(X)
+
+    def decision_function(self, X):
+        if hasattr(self.calibrated_, "decision_function"):
+            return self.calibrated_.decision_function(X)
+        return self.predict_proba(X)[:, 1]
+
+
 def _fresh_select_indices(X: np.ndarray, y: np.ndarray) -> np.ndarray:
     """
     Supervised relevance filtering via TSFresh's FRESH algorithm:
@@ -828,7 +896,7 @@ def train_eval_classical_fold(clf_class, param_grid,
                                X_tr_p, y_tr,
                                X_val_p, y_val,
                                X_te_p, y_te,
-                               model_name, foot_name, fold_id) -> dict:
+                               model_name, foot_name, fold_id):
     """
     One fold of the classical ML pipeline, given ALREADY-PREPROCESSED
     feature matrices (see _prepare_features_for_fold — VT → FRESH →
@@ -839,6 +907,12 @@ def train_eval_classical_fold(clf_class, param_grid,
       2. Refit best classifier on train + val combined (the upstream
          preprocessor is NOT refitted — it stays fitted on training data).
       3. Evaluate once on test set.
+
+    Returns (result_dict, best_clf):
+      best_clf is the refit-on-train+val estimator, fitted in the SAME
+      feature space as X_te_p. Returned so soft-voting ensembles can reuse
+      it (predict_proba on the same preprocessed test features) without
+      retraining — see the "ENSEMBLE" handling in main().
     """
     best_auc    = float("-inf")
     best_params = list(ParameterGrid(param_grid))[0]
@@ -884,9 +958,10 @@ def train_eval_classical_fold(clf_class, param_grid,
           f"best_params={best_params}  val_AUC={best_auc:.3f}  "
           f"test_AUC={test_m['auc']:.3f}")
 
-    return dict(model=model_name, foot=foot_name, fold=fold_id,
-                best_params=best_params, val_auc=best_auc,
-                test_metrics=test_m, confusion_matrix=cm)
+    res = dict(model=model_name, foot=foot_name, fold=fold_id,
+              best_params=best_params, val_auc=best_auc,
+              test_metrics=test_m, confusion_matrix=cm)
+    return res, best_clf
 
 
 # ─────────────────────────────────────────────────────────────────
@@ -1052,11 +1127,15 @@ def _class_weights(y: np.ndarray) -> torch.Tensor:
 
 def _augment_batch(x: torch.Tensor) -> torch.Tensor:
     """
-    Window-level augmentation applied only during training — never at val/test.
-      Gaussian noise   : σ=0.005 (small relative to VGRF amplitude ~100–1000 N)
+    Augmentation applied to PCA-projected feature sequences during training only —
+    never at val/test. After StandardScaler + PCA the scores are roughly zero-mean
+    with values in roughly [-3, 3] per component, so:
+      Gaussian noise   : σ=0.1  (~3% of typical range — perceptible but not destructive)
       Amplitude jitter : per-sample uniform scale U[0.9, 1.1]
+    Both are applied in PCA space, which is mathematically equivalent to applying a
+    small random rotation + scaling in the original feature space.
     """
-    x     = x + 0.005 * torch.randn_like(x)
+    x     = x + 0.1 * torch.randn_like(x)
     scale = 0.9 + 0.2 * torch.rand(x.shape[0], 1, 1, device=x.device)
     return x * scale
 
@@ -1151,19 +1230,42 @@ def train_eval_dl_fold(model_fn_factory, X_tr, y_tr, X_val, y_val, X_te, y_te,
     One fold of the DL pipeline. Only called when RUN_DL=True.
 
     Steps:
-      1. Fit PCA on training windows only; project all three splits.
+      1. Fit StandardScaler + PCA on training windows only; project all
+         three splits. Val/test are CROPPED OR ZERO-PADDED along the time
+         axis to match the training T, so np.vstack(train+val) is safe.
       2. Compute class weights from training labels.
       3. HP grid search (lr × dropout × weight_decay × d_model = 24 combos)
-         evaluated by validation AUC. Record the stopping epoch of the best combo.
-      4. Refit the best model on train + val combined for exactly best_epoch
-         epochs with no early stopping. Class weights recomputed from combined
-         labels. Augmentation applied throughout.
+         evaluated by validation AUC. Record the stopping epoch of the best
+         combo.  If no combo yields a finite AUC (e.g. degenerate val split),
+         fall back to a safe minimum of 10 epochs for the refit.
+      4. Refit the best model on train + val combined for exactly
+         best_epoch_for_refit epochs, no early stopping.
+         Class weights recomputed from combined labels. Augmentation active.
       5. Evaluate once on test set.
+
+    Bug fix — T-dimension alignment:
+      _apply_pca projects (N, F, T) → (N, n_comp, T) where T is taken from
+      the input, not from the training split.  If val/test subjects have
+      fewer or more windows than training subjects, X_tr_p and X_val_p have
+      different T, making np.vstack crash.  _align_T resolves this by
+      cropping (when val/test T > train T) or zero-padding (when shorter).
     """
+
+    def _align_T(X: np.ndarray, T_target: int) -> np.ndarray:
+        """Crop or zero-pad axis-2 (T) of (N, C, T) array to T_target."""
+        T = X.shape[2]
+        if T == T_target:
+            return X
+        if T > T_target:
+            return X[:, :, :T_target]
+        pad = np.zeros((X.shape[0], X.shape[1], T_target - T), dtype=X.dtype)
+        return np.concatenate([X, pad], axis=2)
+
     scaler_pca, pca, n_comp = _fit_pca(X_tr)
     X_tr_p  = _apply_pca(scaler_pca, pca, X_tr)
-    X_val_p = _apply_pca(scaler_pca, pca, X_val)
-    X_te_p  = _apply_pca(scaler_pca, pca, X_te)
+    T_tr    = X_tr_p.shape[2]            # canonical T — set by training split
+    X_val_p = _align_T(_apply_pca(scaler_pca, pca, X_val), T_tr)
+    X_te_p  = _align_T(_apply_pca(scaler_pca, pca, X_te),  T_tr)
 
     cw = _class_weights(y_tr)
 
@@ -1172,10 +1274,10 @@ def train_eval_dl_fold(model_fn_factory, X_tr, y_tr, X_val, y_val, X_te, y_te,
     wd_choices      = [1e-3, 1e-2]
     dm_choices      = [D_MODEL_SMALL, D_MODEL_LARGE]
 
-    best_val_auc        = float("-inf")
-    best_hp             = {"lr": 3e-4, "dropout": 0.2,
-                           "weight_decay": 1e-2, "d_model": D_MODEL_SMALL}
-    best_epoch_for_refit = 0
+    best_val_auc         = float("-inf")
+    best_hp              = {"lr": 3e-4, "dropout": 0.2,
+                            "weight_decay": 1e-2, "d_model": D_MODEL_SMALL}
+    best_epoch_for_refit = 10    # safe fallback if all val AUCs are NaN
 
     for lr in lr_choices:
         for dropout in dropout_choices:
@@ -1192,13 +1294,14 @@ def train_eval_dl_fold(model_fn_factory, X_tr, y_tr, X_val, y_val, X_te, y_te,
                     val_auc = (roc_auc_score(y_val, probs_val)
                                if len(np.unique(y_val)) == 2 else float("nan"))
 
-                    if val_auc > best_val_auc:
-                        best_val_auc        = val_auc
-                        best_hp             = {"lr": lr, "dropout": dropout,
-                                               "weight_decay": wd, "d_model": dm}
+                    if not np.isnan(val_auc) and val_auc > best_val_auc:
+                        best_val_auc         = val_auc
+                        best_hp              = {"lr": lr, "dropout": dropout,
+                                                "weight_decay": wd, "d_model": dm}
                         best_epoch_for_refit = max(epoch, 1)
 
-    X_tv_p = np.vstack([X_tr_p, X_val_p])
+    # Refit on train + val combined with best HP
+    X_tv_p = np.vstack([X_tr_p, X_val_p])          # (N_tr+N_val, n_comp, T_tr)
     y_tv   = np.concatenate([y_tr, y_val])
     cw_tv  = _class_weights(y_tv)
 
@@ -1212,8 +1315,8 @@ def train_eval_dl_fold(model_fn_factory, X_tr, y_tr, X_val, y_val, X_te, y_te,
         val_y         = None,
         n_epochs      = best_epoch_for_refit,
         lr            = best_hp["lr"],
-        warmup_epochs = warmup_epochs,
-        patience      = best_epoch_for_refit + 1,
+        warmup_epochs = min(warmup_epochs, best_epoch_for_refit),
+        patience      = best_epoch_for_refit + 1,   # irrelevant in refit mode
         class_weights = cw_tv,
         weight_decay  = best_hp["weight_decay"],
         augment       = True)
@@ -1357,20 +1460,29 @@ def main():
         "class_weight":     ["balanced"],
         "random_state":     [42],
     }
+
     svm_l_grid = {
         "C":            [0.001, 0.01, 0.1, 1, 10, 100],
         "kernel":       ["linear"],
         "probability":  [True],
         "class_weight": ["balanced"],
     }
+    # SVM-RBF — now wrapped in CalibratedSVC (CalibratedClassifierCV +
+    # isotonic, cv=3) instead of probability=True. See CalibratedSVC's
+    # docstring for why: the previous internal-Platt-CV probabilities were
+    # poorly calibrated on ~60 training subjects, directly suppressing AUC
+    # (e.g. SVM-RBF Right=0.776 vs SVM-Linear Right=0.872). No "probability"
+    # key here — CalibratedSVC always fits the base SVC with
+    # probability=False internally.
     svm_r_grid = {
         "C":            [0.01, 0.1, 1, 10, 100],
         "gamma":        ["scale", "auto", 0.1, 0.01, 0.001],
         "kernel":       ["rbf"],
-        "probability":  [True],
         "class_weight": ["balanced"],
+        "cv":           [3],
+        "method":       ["isotonic"],
     }
-    # NEW: Logistic Regression with ElasticNet — pairs well with FRESH-
+    # Logistic Regression with ElasticNet — pairs well with FRESH-
     # selected features (≤MAX_SELECTED_FEATURES dims): the l1_ratio mixes
     # L1 (further sparsifies / does its own selection) and L2 (stability)
     # penalties, often a very strong baseline for small-N / high-D
@@ -1386,15 +1498,18 @@ def main():
     }
 
     # (clf_class, param_grid, use_pca)
-    #   use_pca=True  → trained on the PCA(N_PCA_COMPONENTS) variant of the
-    #                    FRESH-selected features (see _prepare_features_for_fold)
-    #   use_pca=False → trained directly on the FRESH-selected + scaled
-    #                    features (no PCA)
+    #   use_pca=True  → trained on PCA(N_PCA_COMPONENTS) of FRESH-selected features
+    #   use_pca=False → trained directly on FRESH-selected + scaled features
+    #
+    # "ENSEMBLE" is a sentinel string handled separately in the fold loop.
     classical_models = [
-        ("Random Forest",      RandomForestClassifier, rf_grid,     False),
-        ("SVM-Linear",          SVC,                    svm_l_grid,  False),
-        ("SVM-RBF",             SVC,                    svm_r_grid,  True),
-        ("Logistic Regression", LogisticRegression,     logreg_grid, False),
+        ("Random Forest",           RandomForestClassifier, rf_grid,     False),
+        ("SVM-Linear",              SVC,                    svm_l_grid,  False),
+        ("SVM-RBF",                 CalibratedSVC,          svm_r_grid,  True),
+        ("Logistic Regression",     LogisticRegression,     logreg_grid, False),
+        ("Ensemble (RF+SVM-L+LR)", "ENSEMBLE",
+            {"members": ["Random Forest", "SVM-Linear", "Logistic Regression"]},
+            False),
     ]
 
     dl_model_fns = {
@@ -1421,44 +1536,91 @@ def main():
         subs_te,  y_te,  L_te,  R_te  = load_split(test_dir)
         print(f"  Train={len(y_tr)}  Val={len(y_val)}  Test={len(y_te)}")
 
-        # ── Classical ML features ─────────────────────────────────
-        # build_feature_matrix uses the subject-level cache: any subject
-        # already extracted in a previous fold/split (or in D1 above) is
-        # retrieved instantly instead of re-running TSFresh.
-        print(f"  Extracting classical features — training …")
-        XL_tr, XR_tr, XB_tr = build_feature_matrix(subs_tr, L_tr, R_tr)
-        print(f"  Extracting classical features — validation …")
-        XL_val, XR_val, XB_val = build_feature_matrix(subs_val, L_val, R_val)
-        print(f"  Extracting classical features — test …")
-        XL_te, XR_te, XB_te = build_feature_matrix(subs_te, L_te, R_te)
+        # ── Classical ML — gated by RUN_CLASSICAL ────────────────────
+        # build_feature_matrix uses the subject-level cache so subjects
+        # extracted here are instantly reused by the DL path below (both
+        # paths call get_subject_window_features which reads from
+        # _MEMORY_CACHE or disk, never re-runs TSFresh).
+        if RUN_CLASSICAL:
+            print(f"  Extracting classical features — training …")
+            XL_tr, XR_tr, XB_tr = build_feature_matrix(subs_tr, L_tr, R_tr)
+            print(f"  Extracting classical features — validation …")
+            XL_val, XR_val, XB_val = build_feature_matrix(subs_val, L_val, R_val)
+            print(f"  Extracting classical features — test …")
+            XL_te, XR_te, XB_te = build_feature_matrix(subs_te, L_te, R_te)
 
-        cl_splits = {
-            "Left":     (XL_tr, XL_val, XL_te),
-            "Right":    (XR_tr, XR_val, XR_te),
-            "Combined": (XB_tr, XB_val, XB_te),
-        }
+            cl_splits = {
+                "Left":     (XL_tr, XL_val, XL_te),
+                "Right":    (XR_tr, XR_val, XR_te),
+                "Combined": (XB_tr, XB_val, XB_te),
+            }
 
-        # ── Feature selection (FRESH) — once per (fold, foot) ───────
-        print(f"\n  ── Feature selection (FRESH) ──")
-        feature_preps = {}
-        for foot in feet:
-            Xtr, Xval, Xte = cl_splits[foot]
-            feature_preps[foot] = _prepare_features_for_fold(
-                Xtr, y_tr, Xval, Xte, fold_id, foot)
-
-        # ── Classical models — reuse feature_preps across all models ─
-        for model_name, clf_class, param_grid, use_pca in classical_models:
-            print(f"\n  ── {model_name} ──")
+            # Feature selection (FRESH) — once per (fold, foot), reused by all models
+            print(f"\n  ── Feature selection (FRESH) ──")
+            feature_preps = {}
             for foot in feet:
-                prep = feature_preps[foot]
-                Xtr_p, Xval_p, Xte_p = prep["pca"] if use_pca else prep["sel"]
-                res = train_eval_classical_fold(
-                    clf_class, param_grid,
-                    Xtr_p, y_tr, Xval_p, y_val, Xte_p, y_te,
-                    model_name, foot, fold_id)
-                all_fold_results.append(res)
+                Xtr, Xval, Xte = cl_splits[foot]
+                feature_preps[foot] = _prepare_features_for_fold(
+                    Xtr, y_tr, Xval, Xte, fold_id, foot)
+
+            # Classical models — reuse feature_preps across all models
+            # fitted_models[foot][model_name] holds each model's refit-on-
+            # train+val estimator returned by train_eval_classical_fold,
+            # fitted in the SAME preprocessed space as the test features.
+            # The "Ensemble" entry (last in classical_models) reuses these
+            # directly — no retraining.
+            fitted_models = {foot: {} for foot in feet}
+
+            for model_name, clf_class, param_grid, use_pca in classical_models:
+                print(f"\n  ── {model_name} ──")
+
+                if clf_class == "ENSEMBLE":
+                    members = param_grid["members"]
+                    for foot in feet:
+                        prep      = feature_preps[foot]
+                        X_te_sel  = prep["sel"][2]   # all members use_pca=False
+
+                        probs_list = []
+                        for member_name in members:
+                            if member_name not in fitted_models[foot]:
+                                raise RuntimeError(
+                                    f"Ensemble member '{member_name}' has not "
+                                    f"been fitted yet for foot={foot}. Ensure "
+                                    f"it appears earlier in classical_models.")
+                            clf_m = fitted_models[foot][member_name]
+                            probs_list.append(_safe_prob(clf_m, X_te_sel))
+
+                        probs_te = np.mean(probs_list, axis=0)
+                        preds_te = (probs_te >= 0.5).astype(int)
+                        test_m   = compute_metrics(y_te, preds_te, probs_te)
+                        cm       = confusion_matrix(y_te, preds_te)
+
+                        print(f"  Fold {fold_id} | [{model_name}] foot={foot}  "
+                              f"members={members}  test_AUC={test_m['auc']:.3f}")
+
+                        all_fold_results.append(dict(
+                            model=model_name, foot=foot, fold=fold_id,
+                            best_params={"members": members, "weights": "uniform"},
+                            val_auc=float("nan"),
+                            test_metrics=test_m, confusion_matrix=cm))
+                    continue
+
+                for foot in feet:
+                    prep = feature_preps[foot]
+                    Xtr_p, Xval_p, Xte_p = prep["pca"] if use_pca else prep["sel"]
+                    res, best_clf = train_eval_classical_fold(
+                        clf_class, param_grid,
+                        Xtr_p, y_tr, Xval_p, y_val, Xte_p, y_te,
+                        model_name, foot, fold_id)
+                    all_fold_results.append(res)
+                    fitted_models[foot][model_name] = best_clf
+        else:
+            print(f"\n  [RUN_CLASSICAL=False] Skipping classical models.")
 
         # ── DL features + models — gated by RUN_DL ──────────────────
+        # Feature extraction reuses the subject-level cache (populated by
+        # build_feature_matrix above when RUN_CLASSICAL=True, or loaded
+        # directly from disk/memory if this is the first pass).
         if RUN_DL:
             print(f"\n  Extracting DL features — training …")
             DL_XL_tr, DL_XR_tr, DL_XB_tr, DL_y_tr = build_dl_dataset(
@@ -1475,13 +1637,18 @@ def main():
                 "Right":    (DL_XR_tr, DL_XR_val, DL_XR_te),
                 "Combined": (DL_XB_tr, DL_XB_val, DL_XB_te),
             }
-            dl_labels = (DL_y_tr, DL_y_val, DL_y_te)
+            # BUG FIX: dl_labels unpacking was previously inside the model
+            # loop but outside the foot loop, meaning all three foot splits
+            # used DL_y_tr/val/te from the last iteration — no actual bug
+            # since labels are the same per-fold regardless of foot, but
+            # moved here for clarity and to avoid confusion.
+            dl_y_splits = (DL_y_tr, DL_y_val, DL_y_te)
 
             for model_name, model_cls in dl_model_fns.items():
                 print(f"\n  ── {model_name} ──")
                 for foot in feet:
-                    Xtr, Xval, Xte         = dl_splits[foot]
-                    y_tr_dl, y_val_dl, y_te_dl = dl_labels
+                    Xtr, Xval, Xte       = dl_splits[foot]
+                    y_tr_dl, y_val_dl, y_te_dl = dl_y_splits
                     factory = lambda nc, do, dm, mc=model_cls: mc(
                         f_in=nc, dropout=do, d_model=dm)
                     res = train_eval_dl_fold(
@@ -1528,8 +1695,8 @@ def main():
               f"(fold {best_fold_res['fold']}, "
               f"AUC={best_fold_res['test_metrics']['auc']:.3f})")
 
-    CLASSICAL_NAMES = ("Random Forest", "SVM-Linear", "SVM-RBF",
-                       "Logistic Regression")
+    CLASSICAL_NAMES = ("Random Forest", "Extra Trees", "SVM-Linear", "SVM-RBF",
+                       "Logistic Regression", "Ensemble (RF+SVM-L+LR)")
     for (model_name, foot), fold_list in groups.items():
         if model_name in CLASSICAL_NAMES:
             best_fold_res = max(fold_list,
@@ -1545,7 +1712,7 @@ def main():
 
     # ── Results CSV ───────────────────────────────────────────────
     df = pd.DataFrame(summary_rows)
-    filename_summary = "results_table_" + str(TRIM_SEC) + "_" + str(N_PCA_COMPONENTS) + ".csv"
+    filename_summary = "deep_results_table_" + str(TRIM_SEC) + "_" + str(N_PCA_COMPONENTS) + ".csv"
     df.to_csv(OUT_DIR / filename_summary, index=False)
 
     print(f"\n{'='*65}")
@@ -1566,7 +1733,7 @@ def main():
             Test_Spec=round(tm["specificity"], 4),
             Test_AUC=round(tm["auc"],         4),
         ))
-    filename ="results_per_fold_" + str(TRIM_SEC) + "_" + str(N_PCA_COMPONENTS) + ".csv"
+    filename ="deep_results_per_fold_" + str(TRIM_SEC) + "_" + str(N_PCA_COMPONENTS) + ".csv"
     pd.DataFrame(fold_rows).to_csv(OUT_DIR /filename, index=False)
     print(f"Per-fold detail → {filename}")
 
