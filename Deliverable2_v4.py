@@ -197,7 +197,7 @@ DEVICE           = "cuda" if torch.cuda.is_available() else "cpu"
 
 # ── DL training-improvement constants (this revision) ────────────
 TOP_K_DL_ENSEMBLE = 3     # refit + average this many top-val-AUC HP combos
-MIXUP_ALPHA       = 0.2   # Beta(alpha,alpha) mixing coeff; 0.0 disables mixup
+MIXUP_ALPHA       = 0.0  # Beta(alpha,alpha) mixing coeff; 0.0 disables mixup
 LABEL_SMOOTHING   = 0.1   # CrossEntropyLoss label_smoothing factor
 
 print(f"Device: {DEVICE}")
@@ -723,6 +723,73 @@ class CalibratedSVC(BaseEstimator, ClassifierMixin):
             return self.calibrated_.decision_function(X)
         return self.predict_proba(X)[:, 1]
 
+class CalibratedSVC(BaseEstimator, ClassifierMixin):
+    """
+    SVM-RBF wrapped in CalibratedClassifierCV (default: isotonic, cv=3).
+ 
+    Why: SVC(probability=True) estimates probabilities via an internal
+    5-fold CV + Platt (sigmoid) scaling. With ~60 training subjects this
+    internal CV is itself noisy, and Platt scaling assumes a sigmoid-shaped
+    score distribution that the RBF decision function often doesn't have —
+    a likely cause of SVM-RBF's weaker AUC relative to SVM-Linear (e.g.
+    Right foot: 0.776 vs 0.872), whose probabilities come from a much
+    better-behaved (near-linear) decision surface.
+ 
+    Fix: fit the base SVC with probability=False (raw decision_function,
+    no internal Platt CV), then calibrate with CalibratedClassifierCV using
+    `method` (default "isotonic", non-parametric — makes no assumption
+    about the score distribution's shape) and `cv` folds (default 3).
+    This is the standard remedy for poorly-calibrated SVM probabilities on
+    small datasets.
+ 
+    Accepts the same hyperparameters as SVC (C, gamma, kernel, class_weight)
+    plus `cv` and `method` for the calibration wrapper, so it can be used
+    as a drop-in clf_class with the existing ParameterGrid / refit logic.
+ 
+    random_state is accepted and passed through to the base SVC for
+    defense-in-depth: it's currently a no-op (sklearn ignores SVC's
+    random_state when probability=False, which is what this class always
+    uses internally), but pins behaviour explicitly in case `probability`
+    or `cv`'s shuffling is ever changed in a future edit — see svm_l_grid's
+    comment for the bug this class of issue causes when left unseeded.
+    """
+    def __init__(self, C=1.0, gamma="scale", kernel="rbf",
+                 class_weight="balanced", cv=3, method="isotonic",
+                 random_state=42):
+        self.C            = C
+        self.gamma        = gamma
+        self.kernel       = kernel
+        self.class_weight = class_weight
+        self.cv           = cv
+        self.method       = method
+        self.random_state = random_state
+ 
+    def fit(self, X, y):
+        base = SVC(C=self.C, gamma=self.gamma, kernel=self.kernel,
+                   class_weight=self.class_weight, probability=False,
+                   random_state=self.random_state)
+        try:
+            self.calibrated_ = CalibratedClassifierCV(
+                estimator=base, method=self.method, cv=self.cv)
+        except TypeError:
+            # sklearn < 1.2 used `base_estimator` instead of `estimator`
+            self.calibrated_ = CalibratedClassifierCV(
+                base_estimator=base, method=self.method, cv=self.cv)
+        self.calibrated_.fit(X, y)
+        self.classes_ = self.calibrated_.classes_
+        return self
+ 
+    def predict(self, X):
+        return self.calibrated_.predict(X)
+ 
+    def predict_proba(self, X):
+        return self.calibrated_.predict_proba(X)
+ 
+    def decision_function(self, X):
+        if hasattr(self.calibrated_, "decision_function"):
+            return self.calibrated_.decision_function(X)
+        return self.predict_proba(X)[:, 1]
+
 
 def _fresh_select_indices(X: np.ndarray, y: np.ndarray) -> np.ndarray:
     n_features = X.shape[1]
@@ -1121,7 +1188,7 @@ def _train_model(model, train_loader, val_X_t, val_y,
         return 0.5 * (1.0 + np.cos(np.pi * prog))
 
     sched      = torch.optim.lr_scheduler.LambdaLR(opt, lr_lambda)
-    best_loss  = float("inf")
+    best_auc = -1
     best_state = None
     no_improve = 0
     best_epoch = 0
@@ -1145,21 +1212,66 @@ def _train_model(model, train_loader, val_X_t, val_y,
             nn.utils.clip_grad_norm_(model.parameters(), 1.0)
             opt.step()
         sched.step()
+        # ===== TRAIN AUC LOGGING =====
+        model.eval()
+
+        train_probs = []
+        train_labels = []
+
+        with torch.no_grad():
+            for xb, yb in train_loader:
+                xb = xb.to(DEVICE)
+
+                probs = torch.softmax(model(xb), dim=1)[:, 1]
+
+                train_probs.extend(probs.cpu().numpy())
+                train_labels.extend(yb.numpy())
+
+        if len(np.unique(train_labels)) > 1:
+            train_auc = roc_auc_score(train_labels, train_probs)
+        else:
+            train_auc = float("nan")
 
         if val_X_t is not None:
             model.eval()
             with torch.no_grad():
-                val_loss = crit(model(val_X_t.to(DEVICE)),
-                                torch.tensor(val_y, device=DEVICE)).item()
-            if ep >= warmup_epochs:                       # ← warmup-aware fix
-                if val_loss < best_loss:
-                    best_loss  = val_loss
-                    best_state = {k: v.cpu().clone()
-                                  for k, v in model.state_dict().items()}
+                val_logits = model(val_X_t.to(DEVICE))
+
+                val_loss = crit(
+                    val_logits,
+                    torch.tensor(val_y, device=DEVICE)
+                ).item()
+
+                val_probs = torch.softmax(val_logits, dim=1)[:,1].cpu().numpy()
+
+            if len(np.unique(val_y)) > 1:
+                val_auc = roc_auc_score(val_y, val_probs)
+            else:
+                val_auc = float("nan")
+
+            # print(
+            #     f"Epoch {ep+1:03d} | "
+            #     f"TrainAUC={train_auc:.3f} | "
+            #     f"ValAUC={val_auc:.3f} | "
+            #     f"ValLoss={val_loss:.4f}"
+            # )
+            if ep >= warmup_epochs:
+
+                if not np.isnan(val_auc) and val_auc > best_auc + 0.005:
+
+                    best_auc = val_auc
+
+                    best_state = {
+                        k: v.cpu().clone()
+                        for k, v in model.state_dict().items()
+                    }
+
                     no_improve = 0
                     best_epoch = ep + 1
+
                 else:
                     no_improve += 1
+
                     if no_improve >= patience:
                         break
         else:
@@ -1186,8 +1298,8 @@ def _eval_dl(model, X_np):
 
 def train_eval_dl_fold(model_fn_factory, X_tr, y_tr, X_val, y_val, X_te, y_te,
                         model_name, foot_name, fold_id,
-                        n_epochs=200, batch_size=16,
-                        warmup_epochs=10, patience=25,
+                        n_epochs=100, batch_size=16,
+                        warmup_epochs=10, patience=10,
                         use_pca: bool = True) -> dict:
     """
     One fold of the DL pipeline.
@@ -1218,10 +1330,10 @@ def train_eval_dl_fold(model_fn_factory, X_tr, y_tr, X_val, y_val, X_te, y_te,
 
     cw = _class_weights(y_tr)
 
-    lr_choices      = [1e-4, 3e-4, 1e-3]
-    dropout_choices = [0.2, 0.4]
-    wd_choices      = [1e-3, 1e-2]
-    dm_choices      = [D_MODEL_SMALL, D_MODEL_LARGE]
+    lr_choices      = [3e-4, 1e-3]
+    dropout_choices = [0.3, 0.6]
+    wd_choices = [5e-2]
+    dm_choices      = [16, 32]
 
     combo_results = []   # list of {hp, val_auc, epoch}
 
@@ -1234,7 +1346,7 @@ def train_eval_dl_fold(model_fn_factory, X_tr, y_tr, X_val, y_val, X_te, y_te,
                     model, epoch = _train_model(
                         model, loader, torch.tensor(X_val_p), y_val,
                         n_epochs, lr, warmup_epochs, patience,
-                        class_weights=cw, weight_decay=wd, augment=True,
+                        class_weights=cw, weight_decay=wd, augment=False,
                         mixup_alpha=MIXUP_ALPHA, label_smoothing=LABEL_SMOOTHING)
                     _, probs_val = _eval_dl(model, X_val_p)
 
@@ -1246,7 +1358,7 @@ def train_eval_dl_fold(model_fn_factory, X_tr, y_tr, X_val, y_val, X_te, y_te,
                             hp={"lr": lr, "dropout": dropout,
                                "weight_decay": wd, "d_model": dm},
                             val_auc=val_auc,
-                            epoch=max(epoch, warmup_epochs)))   # epoch floor
+                            epoch=min(n_epochs, epoch + 15)))   # epoch floor
 
     if not combo_results:
         combo_results = [dict(
@@ -1254,6 +1366,15 @@ def train_eval_dl_fold(model_fn_factory, X_tr, y_tr, X_val, y_val, X_te, y_te,
             val_auc=float("nan"), epoch=warmup_epochs)]
 
     combo_results.sort(key=lambda c: c["val_auc"], reverse=True)
+    print("\n" + "="*80)
+    print(f"TOP 10 HP CONFIGS - Fold {fold_id} - {model_name} - {foot_name}")
+    print("="*80)
+
+    print("\nDEBUG FIRST RESULT:")
+    for i, c in enumerate(combo_results[:5], start=1):
+        print(i, c)
+
+    print("="*80)
     top_k = combo_results[:TOP_K_DL_ENSEMBLE]
 
     X_tv_p = np.vstack([X_tr_p, X_val_p])
@@ -1275,7 +1396,7 @@ def train_eval_dl_fold(model_fn_factory, X_tr, y_tr, X_val, y_val, X_te, y_te,
             patience      = combo["epoch"] + 1,
             class_weights = cw_tv,
             weight_decay  = hp["weight_decay"],
-            augment       = True,
+            augment       = False,
             mixup_alpha   = MIXUP_ALPHA,
             label_smoothing = LABEL_SMOOTHING)
         _, probs_te = _eval_dl(m, X_te_p)
@@ -1415,6 +1536,7 @@ def main():
     svm_l_grid = {
         "C": [0.001, 0.01, 0.1, 1, 10, 100], "kernel": ["linear"],
         "probability": [True], "class_weight": ["balanced"],
+        "random_state": [42]
     }
     svm_r_grid = {
         "C": [0.01, 0.1, 1, 10, 100], "gamma": ["scale", "auto", 0.1, 0.01, 0.001],
@@ -1457,6 +1579,9 @@ def main():
         subs_tr,  y_tr,  L_tr,  R_tr  = load_split(train_dir)
         subs_val, y_val, L_val, R_val = load_split(val_dir)
         subs_te,  y_te,  L_te,  R_te  = load_split(test_dir)
+        print("Train distribution:", np.bincount(y_tr))
+        print("Val distribution:", np.bincount(y_val))
+        print("Test distribution:", np.bincount(y_te))
         print(f"  Train={len(y_tr)}  Val={len(y_val)}  Test={len(y_te)}")
 
         if RUN_CLASSICAL:
@@ -1617,7 +1742,7 @@ def main():
         plot_fold_auc(all_fold_results, foot)
 
     df = pd.DataFrame(summary_rows)
-    filename_summary = "resnet_dl_improved_results_table_" + str(TRIM_SEC) + "_" + DL_INPUT_MODE + "_v1.csv"
+    filename_summary = "resnet_dl_improved_results_table_" + str(TRIM_SEC) + "_" + DL_INPUT_MODE + "_v2.csv"
     df.to_csv(OUT_DIR / filename_summary, index=False)
 
     print(f"\n{'='*65}")
@@ -1638,7 +1763,7 @@ def main():
             Test_Spec=round(tm["specificity"], 4),
             Test_AUC=round(tm["auc"],         4),
         ))
-    filename = "resnet_dl_improved_results_per_fold_" + str(TRIM_SEC) + "_" + DL_INPUT_MODE + "_v1.csv"
+    filename = "resnet_dl_improved_results_per_fold_" + str(TRIM_SEC) + "_" + DL_INPUT_MODE + "_v2.csv"
     pd.DataFrame(fold_rows).to_csv(OUT_DIR / filename, index=False)
     print(f"Per-fold detail → {filename}")
 
