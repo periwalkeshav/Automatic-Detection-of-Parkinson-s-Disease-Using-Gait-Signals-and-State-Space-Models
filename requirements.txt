@@ -1,11 +1,21 @@
-numpy
-pandas
-scipy
-scikit-learn
-matplotlib
-seaborn
-tsfresh
-xlrd
-openpyxl
-PyWavelets
-torch
+# Core scientific stack
+numpy>=1.23
+pandas>=1.5
+scipy>=1.9
+scikit-learn>=1.2
+matplotlib>=3.6
+seaborn>=0.12
+
+# Classical-branch feature extraction
+tsfresh>=0.20
+
+# Deep-learning branch (install the CUDA build that matches your GPU/driver,
+# e.g. from https://pytorch.org/get-started/locally/)
+torch>=2.0
+
+# Mamba / SSM (OPTIONAL but recommended on the GPU machine — the official fused
+# CUDA kernels are much faster). Needs a CUDA toolchain (nvcc):
+#     pip install causal-conv1d>=1.2.0
+#     pip install mamba-ssm
+# Without it the code automatically uses the pure-PyTorch S6 fallback in
+# src/mamba_block.py, which is equivalent but slower.
